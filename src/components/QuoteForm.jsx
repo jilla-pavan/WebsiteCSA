@@ -1,357 +1,145 @@
 import React, { useState } from 'react';
 
+const courses = [
+  'Web Development',
+  'Data Science',
+  'Mobile App Development',
+  'Cloud Computing',
+];
+
 function QuoteForm() {
   const [formData, setFormData] = useState({
     name: '',
-    mobile: '',
     email: '',
+    mobile: '',
     course: '',
-    receiveUpdates: true
+    receiveUpdates: true,
   });
+  const [errors, setErrors] = useState({});
+  const [submitted, setSubmitted] = useState(false);
 
-  const [focusedInput, setFocusedInput] = useState(null);
-  const [selectedCourse, setSelectedCourse] = useState(null);
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = 'Name is required.';
+    if (!formData.email.trim()) newErrors.email = 'Email is required.';
+    else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(formData.email)) newErrors.email = 'Enter a valid email.';
+    if (!formData.mobile.trim()) newErrors.mobile = 'Mobile number is required.';
+    else if (!/^\d{10}$/.test(formData.mobile)) newErrors.mobile = 'Enter a valid 10-digit mobile number.';
+    if (!formData.course) newErrors.course = 'Please select a course.';
+    return newErrors;
+  };
 
-  const handleInputChange = (e) => {
+  const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value
-    });
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData, 'Selected course:', selectedCourse);
-    // Update form data with the selected course
-    setFormData({
-      ...formData,
-      course: selectedCourse
-    });
-    setFormSubmitted(true);
-    // Add form submission logic here
+    const validationErrors = validate();
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length === 0) {
+      setSubmitted(true);
+      // Here you would send the form data to your backend
+    }
   };
 
-  const handleFocus = (inputName) => {
-    setFocusedInput(inputName);
-  };
-
-  const handleBlur = () => {
-    setFocusedInput(null);
-  };
-
-  const handleCourseSelect = (course) => {
-    setSelectedCourse(course);
-  };
-
-  // Updated styles for an educational academy
-  const sectionStyle = { 
-    padding: '2rem 0',
-    maxWidth: '1200px',
-    margin: '0 auto'
-  };
-  
-  const titleStyle = { 
-    fontSize: '1.5rem', 
-    fontWeight: '600', 
-    marginBottom: '1.5rem',
-    paddingLeft: '1rem',
-    color: '#3366ff'
-  };
-  
-  const containerStyle = { 
-    display: 'flex', 
-    flexDirection: 'row', 
-    gap: '5rem',
-    padding: '0 1rem'
-  };
-  
-  const gridStyle = { 
-    display: 'grid', 
-    gridTemplateColumns: 'repeat(2, 1fr)', 
-    gap: '1rem',
-    width: '45%'
-  };
-  
-  const courseLogoStyle = { 
-    fontSize: '1.25rem', 
-    fontWeight: '500',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: '0.5rem'
-  };
-  
-  const formContainerStyle = {
-    width: '55%'
-  };
-  
-  const formHeaderStyle = { marginBottom: '1.5rem' };
-  
-  const formHeaderTitleStyle = { 
-    fontSize: '1.3rem', 
-    marginBottom: '0.5rem',
-    fontWeight: '500',
-    color: '#333'
-  };
-  
-  const formGroupStyle = { marginBottom: '1.25rem' };
-  
-  const labelStyle = { 
-    display: 'block', 
-    marginBottom: '0.5rem', 
-    fontSize: '0.9rem',
-    transition: 'color 0.3s ease'
-  };
-  
-  const checkboxContainerStyle = { 
-    display: 'flex', 
-    alignItems: 'flex-start', 
-    gap: '0.5rem',
-    marginBottom: '1.5rem'
-  };
-  
-  const buttonStyle = {
-    width: '100%',
-    padding: '0.85rem',
-    backgroundColor: '#3366ff',
-    color: 'white',
-    border: 'none',
-    borderRadius: '4px',
-    fontSize: '1rem',
-    fontWeight: '500',
-    cursor: 'pointer',
-    height: '50px',
-    transition: 'background-color 0.3s ease, transform 0.1s ease'
-  };
-
-  const buttonHoverStyle = {
-    ...buttonStyle,
-    backgroundColor: '#2952cc',
-  };
-
-  const courseCardStyle = (course) => ({
-    border: selectedCourse === course ? '2px solid #3366ff' : '1px solid #ccc',
-    borderRadius: '0.5rem',
-    minHeight: '8rem',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    cursor: 'pointer',
-    transition: 'all 0.3s ease',
-    transform: selectedCourse === course ? 'scale(1.03)' : 'scale(1)',
-    boxShadow: selectedCourse === course ? '0 4px 8px rgba(0,0,0,0.1)' : 'none',
-    padding: '1rem'
-  });
-
-  const inputStyle = (inputName) => ({
-    width: '100%',
-    padding: '0.75rem',
-    border: focusedInput === inputName ? '2px solid #3366ff' : '1px solid #ccc',
-    borderRadius: '4px',
-    fontSize: '1rem',
-    height: '50px',
-    transition: 'all 0.3s ease',
-    outline: 'none',
-    boxShadow: focusedInput === inputName ? '0 0 5px rgba(51,102,255,0.3)' : 'none'
-  });
-
-  const successMessageStyle = {
-    padding: '1rem',
-    backgroundColor: '#e6f0ff',
-    border: '1px solid #b3d1ff',
-    borderRadius: '4px',
-    marginBottom: '1.5rem',
-    display: 'flex',
-    alignItems: 'center'
-  };
-
-  const checkIconStyle = {
-    fontSize: '1.5rem',
-    color: '#3366ff',
-    marginRight: '0.5rem'
-  };
-
-  const courseIconStyle = {
-    fontSize: '2rem',
-    marginBottom: '0.5rem'
-  };
-
-  return (
-    <section style={sectionStyle}>
-      <h2 style={titleStyle}>Course Registration</h2>
-      
-      <div style={containerStyle}>
-        <div style={gridStyle}>
-          <div 
-            style={courseCardStyle('Web Development')} 
-            className="company-card"
-            onClick={() => handleCourseSelect('Web Development')}
-          >
-            <div style={courseLogoStyle}>
-              <span style={courseIconStyle}>💻</span>
-              <div>Web Development</div>
-            </div>
-          </div>
-          <div 
-            style={courseCardStyle('Data Science')} 
-            className="company-card"
-            onClick={() => handleCourseSelect('Data Science')}
-          >
-            <div style={courseLogoStyle}>
-              <span style={courseIconStyle}>📊</span>
-              <div>Data Science</div>
-            </div>
-          </div>
-          <div 
-            style={courseCardStyle('Mobile App Dev')} 
-            className="company-card"
-            onClick={() => handleCourseSelect('Mobile App Dev')}
-          >
-            <div style={courseLogoStyle}>
-              <span style={courseIconStyle}>📱</span>
-              <div>Mobile App Dev</div>
-            </div>
-          </div>
-          <div 
-            style={courseCardStyle('Cloud Computing')} 
-            className="company-card"
-            onClick={() => handleCourseSelect('Cloud Computing')}
-          >
-            <div style={courseLogoStyle}>
-              <span style={courseIconStyle}>☁️</span>
-              <div>Cloud Computing</div>
-            </div>
-          </div>
-        </div>
-        
-        <div style={formContainerStyle}>
-          {formSubmitted ? (
-            <div style={successMessageStyle}>
-              <span style={checkIconStyle}>✓</span>
-              <span>Thank you for your interest in our {selectedCourse} course! Our team will contact you soon with more details.</span>
-            </div>
-          ) : (
-            <>
-              <div style={formHeaderStyle}>
-                <h3 style={formHeaderTitleStyle}>Start your tech career journey today!</h3>
-                <p style={{color: '#666', margin: 0}}>Select a course and register for a free counseling session</p>
-              </div>
-              
-              <form onSubmit={handleSubmit}>
-                <div style={formGroupStyle}>
-                  <label 
-                    style={{
-                      ...labelStyle, 
-                      color: focusedInput === 'name' ? '#3366ff' : '#333'
-                    }} 
-                    htmlFor="name"
-                  >
-                    Full Name
-                  </label>
-                  <input
-                    style={inputStyle('name')}
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    onFocus={() => handleFocus('name')}
-                    onBlur={handleBlur}
-                    required
-                    placeholder="Enter your full name"
-                  />
-                </div>
-                
-                <div style={formGroupStyle}>
-                  <label 
-                    style={{
-                      ...labelStyle, 
-                      color: focusedInput === 'email' ? '#3366ff' : '#333'
-                    }} 
-                    htmlFor="email"
-                  >
-                    Email Address
-                  </label>
-                  <input
-                    style={inputStyle('email')}
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    onFocus={() => handleFocus('email')}
-                    onBlur={handleBlur}
-                    required
-                    placeholder="Enter your email address"
-                  />
-                </div>
-                
-                <div style={formGroupStyle}>
-                  <label 
-                    style={{
-                      ...labelStyle, 
-                      color: focusedInput === 'mobile' ? '#3366ff' : '#333'
-                    }} 
-                    htmlFor="mobile"
-                  >
-                    Mobile Number
-                  </label>
-                  <input
-                    style={inputStyle('mobile')}
-                    type="tel"
-                    id="mobile"
-                    name="mobile"
-                    value={formData.mobile}
-                    onChange={handleInputChange}
-                    onFocus={() => handleFocus('mobile')}
-                    onBlur={handleBlur}
-                    required
-                    placeholder="Enter your mobile number"
-                  />
-                </div>
-                
-                <div style={checkboxContainerStyle}>
-                  <input
-                    type="checkbox"
-                    id="receiveUpdates"
-                    name="receiveUpdates"
-                    checked={formData.receiveUpdates}
-                    onChange={handleInputChange}
-                  />
-                  <label 
-                    htmlFor="receiveUpdates" 
-                    style={{fontSize: '0.85rem', lineHeight: '1.3'}}
-                  >
-                    I want to receive updates about courses, webinars and placement opportunities
-                  </label>
-                </div>
-                
-                <button 
-                  style={buttonStyle}
-                  type="submit" 
-                  onMouseOver={(e) => e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor}
-                  onMouseOut={(e) => e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor}
-                  onMouseDown={(e) => e.currentTarget.style.transform = 'scale(0.98)'}
-                  onMouseUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                  disabled={!selectedCourse}
-                >
-                  Register Now
-                </button>
-                
-                {!selectedCourse && (
-                  <p style={{color: '#ff4d4d', fontSize: '0.9rem', marginTop: '0.5rem', textAlign: 'center'}}>
-                    Please select a course to continue
-                  </p>
-                )}
-              </form>
-            </>
-          )}
+  if (submitted) {
+    return (
+      <div className="flex flex-col items-center justify-center py-12">
+        <div className="bg-green-50 border border-green-200 rounded-xl p-8 text-center shadow-md max-w-md w-full">
+          <svg className="mx-auto mb-4 w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+          <h2 className="text-2xl font-bold mb-2 text-green-700">Registration Successful!</h2>
+          <p className="text-green-700 mb-4">Thank you for enrolling. Our team will contact you soon.</p>
+          <button className="mt-2 px-6 py-2 bg-[#FF6B00] text-white rounded-lg font-semibold hover:bg-orange-600 transition">Back to Home</button>
         </div>
       </div>
-    </section>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto">
+      <div className="mb-8 text-center">
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">Enrollment Form</h2>
+        <p className="text-gray-500">Fill in your details and our team will reach out to you for the next steps.</p>
+      </div>
+      <div className="space-y-5">
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">Full Name <span className="text-red-500">*</span></label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className={`w-full px-4 py-3 rounded-lg border ${errors.name ? 'border-red-400' : 'border-gray-200'} focus:outline-none focus:ring-2 focus:ring-orange-200 transition`}
+            placeholder="Enter your name"
+          />
+          {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+        </div>
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">Email <span className="text-red-500">*</span></label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className={`w-full px-4 py-3 rounded-lg border ${errors.email ? 'border-red-400' : 'border-gray-200'} focus:outline-none focus:ring-2 focus:ring-orange-200 transition`}
+            placeholder="Enter your email"
+          />
+          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+        </div>
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">Mobile Number <span className="text-red-500">*</span></label>
+          <input
+            type="tel"
+            name="mobile"
+            value={formData.mobile}
+            onChange={handleChange}
+            className={`w-full px-4 py-3 rounded-lg border ${errors.mobile ? 'border-red-400' : 'border-gray-200'} focus:outline-none focus:ring-2 focus:ring-orange-200 transition`}
+            placeholder="10-digit mobile number"
+            maxLength={10}
+          />
+          {errors.mobile && <p className="text-red-500 text-sm mt-1">{errors.mobile}</p>}
+        </div>
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">Select Course <span className="text-red-500">*</span></label>
+          <select
+            name="course"
+            value={formData.course}
+            onChange={handleChange}
+            className={`w-full px-4 py-3 rounded-lg border ${errors.course ? 'border-red-400' : 'border-gray-200'} focus:outline-none focus:ring-2 focus:ring-orange-200 transition`}
+          >
+            <option value="">Choose a course</option>
+            {courses.map((course) => (
+              <option key={course} value={course}>{course}</option>
+            ))}
+          </select>
+          {errors.course && <p className="text-red-500 text-sm mt-1">{errors.course}</p>}
+        </div>
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            name="receiveUpdates"
+            checked={formData.receiveUpdates}
+            onChange={handleChange}
+            className="h-4 w-4 text-orange-500 focus:ring-orange-400 border-gray-300 rounded"
+            id="receiveUpdates"
+          />
+          <label htmlFor="receiveUpdates" className="ml-2 text-gray-600 text-sm">I want to receive updates about courses, webinars, and placement opportunities</label>
+        </div>
+        <button
+          type="submit"
+          className="w-full py-3 mt-2 bg-[#FF6B00] text-white font-bold rounded-lg shadow-lg hover:bg-orange-600 transition text-lg"
+        >
+          Register Now
+        </button>
+      </div>
+    </form>
   );
 }
 

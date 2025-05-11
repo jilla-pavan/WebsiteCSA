@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   // Handle scroll effect for sticky header
   useEffect(() => {
@@ -15,131 +18,145 @@ function Header() {
 
   const handleLinkClick = (e, sectionId) => {
     e.preventDefault();
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-      setMobileMenuOpen(false);
+    
+    // If we're on a different page, navigate to home first
+    if (location.pathname !== '/') {
+      navigate('/');
+      // Wait for navigation to complete before scrolling
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // If we're already on home page, just scroll
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
     }
+    setMobileMenuOpen(false);
   };
 
   return (
     <header 
       className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-white shadow-lg py-3 border-b border-gray-100' 
-          : 'bg-white/95 py-4'
+          ? 'bg-white/95 backdrop-blur-md shadow-lg py-2' 
+          : 'bg-white/80 backdrop-blur-sm py-3'
       }`}
     >
-      <div className="container mx-auto px-6 flex justify-between items-center max-w-7xl">
-        {/* Logo Section - Enhanced spacing and sizing */}
+      <div className="w-full flex justify-between items-center px-6">
+        {/* Logo Section */}
         <div className="flex items-center flex-shrink-0">
           <div 
-            className="text-2xl font-extrabold cursor-pointer text-[#FF6B00] hover:text-[#FF6B00]/90 transition-colors duration-200 flex items-center gap-2"
+            className="text-xl sm:text-2xl font-extrabold cursor-pointer text-[#FF6B00] hover:text-[#FF6B00]/90 transition-all duration-300 flex items-center gap-1.5 group"
             onClick={(e) => handleLinkClick(e, 'home')}
           >
-            {/* Logo text with better responsive behavior */}
-            <span className="hidden sm:inline">Career Sure</span>
-            <span className="sm:hidden">CSA</span>
-            <span className="hidden lg:inline">Academy</span>
+            <span className="hidden sm:inline tracking-tight group-hover:tracking-wider transition-all duration-300">Career Sure</span>
+            <span className="sm:hidden tracking-tight">CSA</span>
+            <span className="hidden lg:inline font-bold text-gray-700 tracking-tight group-hover:text-gray-900 transition-colors duration-300">Academy</span>
           </div>
         </div>
 
-        {/* Desktop Navigation - Improved spacing and hover effects */}
-        <nav className="hidden md:block mx-6 flex-grow">
-          <ul className="flex items-center justify-center gap-2">
+        {/* Desktop Navigation */}
+        <nav className="hidden md:block mx-4 lg:mx-6 flex-grow">
+          <ul className="flex items-center justify-center gap-1 lg:gap-2">
             {[
               { id: 'home', label: 'Home' },
               { id: 'about', label: 'About' },
-              { id: 'placements', label: 'Placements' },
+              { id: 'placements-preview', label: 'Placements' },
               { id: 'contact', label: 'Contact' }
             ].map(({ id, label }) => (
               <li key={id}>
                 <a 
                   href={`#${id}`}
                   onClick={(e) => handleLinkClick(e, id)}
-                  className="text-[#333333] font-semibold hover:text-[#FF6B00] px-5 py-2.5 rounded-md transition-all duration-200 text-sm relative group inline-block"
+                  className="text-gray-700 font-semibold hover:text-[#FF6B00] px-4 py-2 rounded-md transition-all duration-300 text-[15px] relative group inline-block tracking-wide"
                 >
                   {label}
-                  <span className="absolute bottom-1.5 left-0 w-full h-0.5 bg-[#FF6B00] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left"></span>
+                  <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-[#FF6B00] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
                 </a>
               </li>
             ))}
           </ul>
         </nav>
 
-        {/* Action Buttons (Desktop) - Enhanced spacing and visual hierarchy */}
-        <div className="hidden md:flex items-center gap-5 flex-shrink-0">
+        {/* Action Buttons (Desktop) */}
+        <div className="hidden md:flex items-center gap-3 lg:gap-4 flex-shrink-0">
           <button 
             onClick={(e) => handleLinkClick(e, 'login')}
-            className="text-[#333333] font-semibold hover:text-[#FF6B00] px-5 py-2.5 rounded-md transition-all duration-200 text-sm hover:bg-gray-50"
+            className="text-gray-700 font-semibold hover:text-[#FF6B00] px-4 py-2 rounded-md transition-all duration-300 text-[15px] hover:bg-gray-50/80 tracking-wide border border-transparent hover:border-gray-200"
           >
             Log In
           </button>
           <button 
-            onClick={(e) => handleLinkClick(e, 'enrollment')}
-            className="bg-[#FF6B00] text-white font-semibold py-2.5 px-6 rounded-md hover:bg-[#FF6B00]/90 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#FF6B00] focus:ring-offset-2 text-sm shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+            onClick={() => navigate('/enroll')}
+            className="bg-[#FF6B00] text-white font-semibold py-2 px-5 rounded-md hover:bg-[#FF6B00]/90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF6B00]/20 text-[15px] shadow-sm hover:shadow-md transform hover:-translate-y-0.5 tracking-wide"
           >
             Enroll Now
           </button>
         </div>
 
-        {/* Mobile Menu Button - Enhanced touch target and visual feedback */}
+        {/* Mobile Menu Button */}
         <button 
-          className="md:hidden p-2.5 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B00] focus:ring-offset-2 hover:bg-gray-50 transition-colors duration-200"
+          className="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B00]/20 hover:bg-gray-50/80 transition-all duration-300"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
-            className="h-6 w-6 text-[#FF6B00] transition-transform duration-300"
+            className="h-5 w-5 text-gray-700 transition-all duration-300"
             style={{ transform: mobileMenuOpen ? 'rotate(180deg)' : 'rotate(0)' }}
             fill="none" 
             viewBox="0 0 24 24" 
             stroke="currentColor"
+            strokeWidth={2.5}
           >
             {mobileMenuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             )}
           </svg>
         </button>
       </div>
 
-      {/* Mobile Menu - Enhanced spacing and transitions */}
+      {/* Mobile Menu */}
       <div 
-        className={`md:hidden bg-white border-t border-gray-100 shadow-lg transition-all duration-300 ease-in-out ${
+        className={`md:hidden bg-white/98 backdrop-blur-md border-t border-gray-100 shadow-lg transition-all duration-300 ease-in-out ${
           mobileMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
         }`}
       >
-        <div className="container mx-auto px-6 py-5">
-          <ul className="flex flex-col space-y-2">
+        <div className="w-full px-6 py-4">
+          <ul className="flex flex-col space-y-1">
             {[
               { id: 'home', label: 'Home' },
               { id: 'about', label: 'About' },
-              { id: 'placements', label: 'Placements' },
+              { id: 'placements-preview', label: 'Placements' },
               { id: 'contact', label: 'Contact' }
             ].map(({ id, label }) => (
               <li key={id}>
                 <a 
                   href={`#${id}`}
                   onClick={(e) => handleLinkClick(e, id)}
-                  className="block py-3 px-4 text-[#333333] font-semibold hover:text-[#FF6B00] rounded-md transition-all duration-200 hover:bg-gray-50/80"
+                  className="block py-2.5 px-4 text-gray-700 font-semibold hover:text-[#FF6B00] rounded-md transition-all duration-300 hover:bg-gray-50/80 tracking-wide"
                 >
                   {label}
                 </a>
               </li>
             ))}
-            <li className="pt-4 space-y-3">
+            <li className="pt-3 space-y-2">
               <button 
                 onClick={(e) => handleLinkClick(e, 'login')}
-                className="w-full text-[#333333] font-semibold hover:text-[#FF6B00] py-3 px-4 rounded-md transition-all duration-200 hover:bg-gray-50 border border-gray-200"
+                className="w-full text-gray-700 font-semibold hover:text-[#FF6B00] py-2.5 px-4 rounded-md transition-all duration-300 hover:bg-gray-50/80 border border-gray-200 tracking-wide"
               >
                 Log In
               </button>
               <button 
-                onClick={(e) => handleLinkClick(e, 'enrollment')}
-                className="w-full bg-[#FF6B00] text-white font-semibold py-3 px-4 rounded-md hover:bg-[#FF6B00]/90 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#FF6B00] focus:ring-offset-2 shadow-md"
+                onClick={() => navigate('/enroll')}
+                className="w-full bg-[#FF6B00] text-white font-semibold py-2.5 px-4 rounded-md hover:bg-[#FF6B00]/90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF6B00]/20 shadow-sm hover:shadow-md tracking-wide"
               >
                 Enroll Now
               </button>
