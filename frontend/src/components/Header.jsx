@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import logo from "../../public/assets/CSA_logo.png";
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -12,65 +13,62 @@ function Header() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleLinkClick = (e, sectionId) => {
     e.preventDefault();
-    
+
     // If we're on a different page, navigate to home first
-    if (location.pathname !== '/') {
-      navigate('/');
+    if (location.pathname !== "/") {
+      navigate("/");
       // Wait for navigation to complete before scrolling
       setTimeout(() => {
         const section = document.getElementById(sectionId);
         if (section) {
-          section.scrollIntoView({ behavior: 'smooth' });
+          section.scrollIntoView({ behavior: "smooth" });
         }
       }, 100);
     } else {
       // If we're already on home page, just scroll
       const section = document.getElementById(sectionId);
       if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
+        section.scrollIntoView({ behavior: "smooth" });
       }
     }
     setMobileMenuOpen(false);
   };
 
   return (
-    <header 
+    <header
       className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-lg py-2' 
-          : 'bg-white/80 backdrop-blur-sm py-3'
+        scrolled
+          ? "bg-white/95 backdrop-blur-md shadow-lg py-2"
+          : "bg-white/80 backdrop-blur-sm py-3"
       }`}
     >
       <div className="w-full flex justify-between items-center px-6">
         {/* Logo Section */}
         <div className="flex items-center flex-shrink-0">
-          <div 
-            className="text-xl sm:text-2xl font-extrabold cursor-pointer text-[#FF6B00] hover:text-[#FF6B00]/90 transition-all duration-300 flex items-center gap-1.5 group"
-            onClick={(e) => handleLinkClick(e, 'home')}
-          >
-            <span className="hidden sm:inline tracking-tight group-hover:tracking-wider transition-all duration-300">Career Sure</span>
-            <span className="sm:hidden tracking-tight">CSA</span>
-            <span className="hidden lg:inline font-bold text-gray-700 tracking-tight group-hover:text-gray-900 transition-colors duration-300">Academy</span>
-          </div>
+          <img
+            src={logo}
+            alt="CareerSure Academy Logo"
+            className="h-10 w-auto"
+          />
         </div>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:block mx-4 lg:mx-6 flex-grow">
           <ul className="flex items-center justify-center gap-1 lg:gap-2">
             {[
-              { id: 'home', label: 'Home' },
-              { id: 'about', label: 'About' },
-              { id: 'placements-preview', label: 'Placements' },
-              { id: 'contact', label: 'Contact' }
+              { id: "home", label: "Home" },
+              { id: "about", label: "About" },
+              { id: "placements-preview", label: "Placements" },
+              { id: "contact", label: "Contact" },
             ].map(({ id, label }) => (
               <li key={id}>
-                <a 
+                <a
                   href={`#${id}`}
                   onClick={(e) => handleLinkClick(e, id)}
                   className="text-gray-700 font-semibold hover:text-[#FF6B00] px-4 py-2 rounded-md transition-all duration-300 text-[15px] relative group inline-block tracking-wide"
@@ -85,14 +83,16 @@ function Header() {
 
         {/* Action Buttons (Desktop) */}
         <div className="hidden md:flex items-center gap-3 lg:gap-4 flex-shrink-0">
-          <button 
-            onClick={(e) => handleLinkClick(e, 'login')}
+          <button
+            onClick={() =>
+              (window.location.href = "https://csa-dashboard.vercel.app/")
+            }
             className="text-gray-700 font-semibold hover:text-[#FF6B00] px-4 py-2 rounded-md transition-all duration-300 text-[15px] hover:bg-gray-50/80 tracking-wide border border-transparent hover:border-gray-200"
           >
             Log In
           </button>
-          <button 
-            onClick={() => navigate('/enroll')}
+          <button
+            onClick={() => navigate("/enroll")}
             className="bg-[#FF6B00] text-white font-semibold py-2 px-5 rounded-md hover:bg-[#FF6B00]/90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF6B00]/20 text-[15px] shadow-sm hover:shadow-md transform hover:-translate-y-0.5 tracking-wide"
           >
             Enroll Now
@@ -100,45 +100,57 @@ function Header() {
         </div>
 
         {/* Mobile Menu Button */}
-        <button 
+        <button
           className="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B00]/20 hover:bg-gray-50/80 transition-all duration-300"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5 text-gray-700 transition-all duration-300"
-            style={{ transform: mobileMenuOpen ? 'rotate(180deg)' : 'rotate(0)' }}
-            fill="none" 
-            viewBox="0 0 24 24" 
+            style={{
+              transform: mobileMenuOpen ? "rotate(180deg)" : "rotate(0)",
+            }}
+            fill="none"
+            viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2.5}
           >
             {mobileMenuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
             ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             )}
           </svg>
         </button>
       </div>
 
       {/* Mobile Menu */}
-      <div 
+      <div
         className={`md:hidden bg-white/98 backdrop-blur-md border-t border-gray-100 shadow-lg transition-all duration-300 ease-in-out ${
-          mobileMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
+          mobileMenuOpen
+            ? "max-h-[400px] opacity-100"
+            : "max-h-0 opacity-0 overflow-hidden"
         }`}
       >
         <div className="w-full px-6 py-4">
           <ul className="flex flex-col space-y-1">
             {[
-              { id: 'home', label: 'Home' },
-              { id: 'about', label: 'About' },
-              { id: 'placements-preview', label: 'Placements' },
-              { id: 'contact', label: 'Contact' }
+              { id: "home", label: "Home" },
+              { id: "about", label: "About" },
+              { id: "placements-preview", label: "Placements" },
+              { id: "contact", label: "Contact" },
             ].map(({ id, label }) => (
               <li key={id}>
-                <a 
+                <a
                   href={`#${id}`}
                   onClick={(e) => handleLinkClick(e, id)}
                   className="block py-2.5 px-4 text-gray-700 font-semibold hover:text-[#FF6B00] rounded-md transition-all duration-300 hover:bg-gray-50/80 tracking-wide"
@@ -148,14 +160,16 @@ function Header() {
               </li>
             ))}
             <li className="pt-3 space-y-2">
-              <button 
-                onClick={(e) => handleLinkClick(e, 'login')}
+              <button
+                onClick={() =>
+                  (window.location.href = "https://csa-dashboard.vercel.app/")
+                }
                 className="w-full text-gray-700 font-semibold hover:text-[#FF6B00] py-2.5 px-4 rounded-md transition-all duration-300 hover:bg-gray-50/80 border border-gray-200 tracking-wide"
               >
                 Log In
               </button>
-              <button 
-                onClick={() => navigate('/enroll')}
+              <button
+                onClick={() => navigate("/enroll")}
                 className="w-full bg-[#FF6B00] text-white font-semibold py-2.5 px-4 rounded-md hover:bg-[#FF6B00]/90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF6B00]/20 shadow-sm hover:shadow-md tracking-wide"
               >
                 Enroll Now

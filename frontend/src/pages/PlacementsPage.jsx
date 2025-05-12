@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Placements from '../components/Placements';
 import Header from '../components/Header';
-import ThemeToggle from '../components/ThemeToggle';
 
 function PlacementsPage() {
   // Scroll to top when component mounts
@@ -15,9 +14,6 @@ function PlacementsPage() {
       <main className="pt-20">
         <Placements />
       </main>
-      <div className="fixed bottom-5 right-5 z-50">
-        <ThemeToggle />
-      </div>
     </div>
   );
 }

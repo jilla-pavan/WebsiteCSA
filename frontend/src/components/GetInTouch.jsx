@@ -8,15 +8,34 @@ function GetInTouch() {
   });
 
   const handleInputChange = (e) => {
+    console.log('Input changed:', e.target.id, e.target.value);
     setFormData({
       ...formData,
       [e.target.id]: e.target.value
     });
   };
 
-  const handleSubmit = (e) => {
+  console.log('Current form data:', formData);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
+    try {
+      // Here you would typically send the data to your backend
+      console.log('Form submitted:', formData);
+      
+      // Clear the form after successful submission
+      setFormData({
+        name: '',
+        email: '',
+        message: ''
+      });
+      
+      // You might want to show a success message to the user
+      alert('Message sent successfully!');
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Failed to send message. Please try again.');
+    }
   };
 
   return (
@@ -107,68 +126,57 @@ function GetInTouch() {
             <h3 className="text-2xl font-bold mb-8 text-gray-900">
               Send us a Message
             </h3>
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              <div className="space-y-6">
-                {/* Name Input */}
-                <div>
-                  <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder="Enter your name"
-                    className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B00] focus:border-transparent transition-colors"
-                  />
-                </div>
-
-                {/* Email Input */}
-                <div>
-                  <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="Enter your email"
-                    className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B00] focus:border-transparent transition-colors"
-                  />
-                </div>
-
-                {/* Message Input */}
-                <div>
-                  <label htmlFor="message" className="block text-gray-700 font-medium mb-2">
-                    Your Message
-                  </label>
-                  <textarea
-                    id="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    rows="4"
-                    placeholder="Type your message here..."
-                    className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B00] focus:border-transparent transition-colors resize-none"
-                  ></textarea>
-                </div>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                  Your Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Enter your name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none"
+                  required
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                  Your Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none"
+                  required
+                />
               </div>
 
-              {/* Submit Button */}
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  placeholder="Enter your message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  rows={4}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none resize-none"
+                  required
+                ></textarea>
+              </div>
+
               <button
                 type="submit"
-                className="w-full bg-[#FF6B00] text-white font-semibold py-3 px-6 rounded-md hover:bg-[#FF6B00]/90 transition-colors flex items-center justify-center"
+                className="w-full bg-[#FF6B00] text-white py-2 px-6 rounded-lg hover:bg-[#FF6B00]/90 transition-colors duration-200"
               >
                 Send Message
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="h-5 w-5 ml-2" 
-                  viewBox="0 0 20 20" 
-                  fill="currentColor"
-                >
-                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
               </button>
             </form>
           </div>

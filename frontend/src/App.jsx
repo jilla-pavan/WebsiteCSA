@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import AboutUs from './components/AboutUs';
-import ThemeToggle from './components/ThemeToggle';
 import GetInTouch from './components/GetInTouch';
 import PlacementsPage from './pages/PlacementsPage';
 import PlacementsPreview from './components/PlacementsPreview';
@@ -164,10 +163,6 @@ function App() {
             </div>
           </div>
         </footer>
-
-        <div className="fixed bottom-5 right-5 z-50">
-          <ThemeToggle />
-        </div>
       </div>
     </Router>
   );

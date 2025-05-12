@@ -730,11 +730,11 @@ function HeroSection() {
             {/* Enhanced CTA buttons */}
             <div className="flex flex-wrap gap-4">
               <button
-                onClick={() => navigate('/enroll')}
+                onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSf-TFPS1co0mS1lrmb-7-0Ffln-LLKDKN8UzXr6Y7XSG8l1vw/viewform?usp=header', '_blank')}
                 className="group relative inline-flex items-center justify-center bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold py-4 px-8 rounded-lg shadow-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:from-orange-600 hover:to-orange-700"
               >
                 <span className="relative flex items-center">
-                  Enroll Now
+                  Fill the form
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5 ml-2 transform transition-transform duration-300 group-hover:translate-x-1"
