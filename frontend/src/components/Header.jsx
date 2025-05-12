@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import logo from "../../public/assets/CSA_logo.png";
+import logo from "/assets/CSA_Logo.png";
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
