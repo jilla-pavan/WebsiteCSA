@@ -144,64 +144,64 @@ function QuoteForm() {
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto px-4 py-6">
       <div className="mb-6 text-center">
-        <h2 className="text-[2.5rem] font-black text-gray-900 mb-3 tracking-tight leading-tight">
-          Enrollment <span className="text-[#FF6B00]">Form</span>
+        <h2 className="text-4xl font-black text-gray-900 mb-3 tracking-tight leading-tight">
+          Enrollment <span className="text-primary">Form</span>
         </h2>
         <p className="text-gray-600 text-sm font-semibold">Fill in your details and our team will reach out to you</p>
       </div>
       <div className="space-y-3">
         <div className="group">
-          <label className="block text-gray-800 text-[0.925rem] font-bold mb-1.5 uppercase tracking-wide">
-            Full Name <span className="text-[#FF6B00]">*</span>
+          <label className="block text-gray-800 text-sm font-bold mb-1.5 uppercase tracking-wide">
+            Full Name <span className="text-primary">*</span>
           </label>
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className={`w-full px-3.5 py-2 rounded-lg border ${errors.name ? 'border-red-400' : 'border-gray-200'} focus:outline-none focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] transition-all duration-200 text-sm bg-white group-hover:border-gray-300`}
+            className={`w-full px-3.5 py-2 rounded-lg border ${errors.name ? 'border-red-400' : 'border-gray-200'} focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white group-hover:border-gray-300`}
             placeholder="Enter your full name"
           />
           {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
         </div>
         <div className="group">
-          <label className="block text-gray-800 text-[0.925rem] font-bold mb-1.5 uppercase tracking-wide">
-            Email <span className="text-[#FF6B00]">*</span>
+          <label className="block text-gray-800 text-sm font-bold mb-1.5 uppercase tracking-wide">
+            Email <span className="text-primary">*</span>
           </label>
           <input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full px-3.5 py-2 rounded-lg border ${errors.email ? 'border-red-400' : 'border-gray-200'} focus:outline-none focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] transition-all duration-200 text-sm bg-white group-hover:border-gray-300`}
+            className={`w-full px-3.5 py-2 rounded-lg border ${errors.email ? 'border-red-400' : 'border-gray-200'} focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white group-hover:border-gray-300`}
             placeholder="Enter your email address"
           />
           {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
         </div>
         <div className="group">
-          <label className="block text-gray-800 text-[0.925rem] font-bold mb-1.5 uppercase tracking-wide">
-            Mobile Number <span className="text-[#FF6B00]">*</span>
+          <label className="block text-gray-800 text-sm font-bold mb-1.5 uppercase tracking-wide">
+            Mobile Number <span className="text-primary">*</span>
           </label>
           <input
             type="tel"
             name="mobile"
             value={formData.mobile}
             onChange={handleChange}
-            className={`w-full px-3.5 py-2 rounded-lg border ${errors.mobile ? 'border-red-400' : 'border-gray-200'} focus:outline-none focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] transition-all duration-200 text-sm bg-white group-hover:border-gray-300`}
+            className={`w-full px-3.5 py-2 rounded-lg border ${errors.mobile ? 'border-red-400' : 'border-gray-200'} focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white group-hover:border-gray-300`}
             placeholder="Enter your 10-digit mobile number"
             maxLength={10}
           />
           {errors.mobile && <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>}
         </div>
         <div className="group">
-          <label className="block text-gray-800 text-[0.925rem] font-bold mb-1.5 uppercase tracking-wide">
-            Select Course <span className="text-[#FF6B00]">*</span>
+          <label className="block text-gray-800 text-sm font-bold mb-1.5 uppercase tracking-wide">
+            Select Course <span className="text-primary">*</span>
           </label>
           <select
             name="course"
             value={formData.course}
             onChange={handleChange}
-            className={`w-full px-3.5 py-2 rounded-lg border ${errors.course ? 'border-red-400' : 'border-gray-200'} focus:outline-none focus:ring-1 focus:ring-[#FF6B00] focus:border-[#FF6B00] transition-all duration-200 text-sm bg-white group-hover:border-gray-300 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20d%3D%22M6%208l4%204%204-4%22%20fill%3D%22none%22%20stroke%3D%22%23666%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E')] bg-[length:20px_20px] bg-[right_0.5rem_center] bg-no-repeat pr-8`}
+            className={`w-full px-3.5 py-2 rounded-lg border ${errors.course ? 'border-red-400' : 'border-gray-200'} focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white group-hover:border-gray-300 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20d%3D%22M6%208l4%204%204-4%22%20fill%3D%22none%22%20stroke%3D%22%23666%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E')] bg-[length:20px_20px] bg-[right_0.5rem_center] bg-no-repeat pr-8`}
           >
             <option value="">Choose a course</option>
             {courses.map((course) => (
@@ -210,13 +210,13 @@ function QuoteForm() {
           </select>
           {errors.course && <p className="text-red-500 text-xs mt-1">{errors.course}</p>}
         </div>
-        <div className="flex items-center bg-gray-50/70 p-2.5 rounded-lg border border-gray-100 hover:bg-gray-50/90 transition-colors duration-200">
+        <div className="flex items-center bg-gray-50/70 p-2.5 rounded-lg border border-gray-100 hover:bg-gray-50/90 transition-all">
           <input
             type="checkbox"
             name="receiveUpdates"
             checked={formData.receiveUpdates}
             onChange={handleChange}
-            className="h-4 w-4 text-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00] border-gray-300 rounded"
+            className="h-4 w-4 text-primary focus:ring-1 focus:ring-primary border-gray-300 rounded"
             id="receiveUpdates"
           />
           <label htmlFor="receiveUpdates" className="ml-2 text-gray-600 text-xs select-none cursor-pointer">
