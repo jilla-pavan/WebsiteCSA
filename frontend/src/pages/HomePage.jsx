@@ -15,9 +15,6 @@ function HomePage() {
           <AboutUs />
         </div>
       </section>
-      <section id="placements-preview" className="bg-white">
-        <PlacementsPreview />
-      </section>
       <section id="contact" className="py-20 bg-gradient-to-b from-primary to-primary-light text-white">
         <div className="mx-auto px-4">
           <div className="card bg-white/10 backdrop-blur-sm hover:shadow-2xl p-8 rounded-2xl transition-all">
