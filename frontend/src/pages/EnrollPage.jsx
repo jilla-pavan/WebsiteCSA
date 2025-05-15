@@ -8,7 +8,7 @@ export default function EnrollPage() {
         {/* Vertical Divider for Desktop */}
         <div className="hidden md:block absolute left-1/2 top-0 h-full w-0.5 bg-gradient-to-b from-orange-100 via-orange-200 to-pink-100 opacity-60 z-0" style={{transform: 'translateX(-50%)'}} />
         {/* Left Side: Heading, Description, Bullets */}
-        <div className="flex flex-col justify-center items-start z-10">
+        <div className="flex flex-col justify-center items-start">
           <h1 className="text-3xl md:text-4xl font-extrabold mb-2 text-gray-900 leading-tight">
             Talk to Our Advisor & <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-400">Unlock Your Career Potential!</span>
@@ -21,7 +21,7 @@ export default function EnrollPage() {
           </ul>
         </div>
         {/* Right Side: Form Card with Glassmorphism and Accent Bar */}
-        <div className="flex flex-col justify-center items-center h-full z-10">
+        <div className="flex flex-col justify-center items-center h-full">
           <div className="relative w-full max-w-md">
             {/* Accent Bar */}
             <div className="absolute -left-4 top-6 h-24 w-1.5 bg-gradient-to-b from-orange-500 to-orange-400 rounded-full shadow-lg hidden md:block" />

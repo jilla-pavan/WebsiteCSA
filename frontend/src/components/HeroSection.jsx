@@ -6,10 +6,36 @@ import CompaniesHire from "./CompaniesHire";
 import ExpertTrainers from "./ExpertTrainers";
 import { Testimonial } from "./Testimonial";
 import { FAQs } from "./FAQs";
+import AboutUs from "./AboutUs";
+import GetInTouch from "./GetInTouch";
+import CareerAdvisorModal from "./CareerAdvisorModal";
 
 function HeroSection() {
-  const scrollContainerRef = useRef(null);
-  const [scrollDirection, setScrollDirection] = useState("left");
+  const [showAdvisorModal, setShowAdvisorModal] = useState(false);
+  const intervalRef = useRef(null);
+  const timeoutRef = useRef(null);
+
+  // Show the modal after 5 seconds on first load
+  useEffect(() => {
+    timeoutRef.current = setTimeout(() => {
+      setShowAdvisorModal(true);
+    }, 5000);
+    return () => {
+      clearTimeout(timeoutRef.current);
+      clearInterval(intervalRef.current);
+    };
+  }, []);
+
+  // When modal is closed, set up interval to show it again after 30 seconds
+  const handleCloseModal = () => {
+    setShowAdvisorModal(false);
+    // Clear any existing interval to avoid stacking
+    clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setShowAdvisorModal(true);
+      clearInterval(intervalRef.current); // Only show once, reset on next close
+    }, 30000); // 30 seconds
+  };
 
   // Add custom CSS for auto-scrolling animations
   useEffect(() => {
@@ -205,6 +231,8 @@ function HeroSection() {
 
   return (
     <section id="home" className="pt-24 bg-gradient-to-b from-white to-gray-50">
+      {/* Career Advisor Modal */}
+      <CareerAdvisorModal isOpen={showAdvisorModal} onClose={handleCloseModal} />
       <div className="w-full">
         <TopPlacements />
         <CompaniesHire />
@@ -212,6 +240,8 @@ function HeroSection() {
         <Courses />
         <Testimonial />
         <FAQs />
+        <AboutUs />
+        <GetInTouch />
       </div>
     </section>
   );
