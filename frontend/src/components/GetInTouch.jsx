@@ -39,18 +39,18 @@ function GetInTouch() {
   };
 
   return (
-    <section id="contact" className="py-16 bg-gray-50 w-full">
+    <section id="contact" className="py-8 md:py-16 bg-gray-50 w-full">
       <div className="container mx-auto px-4 max-w-7xl">
-        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-6xl mx-auto">
           {/* Left Column - Contact Information */}
-          <div className="bg-white rounded-lg p-8 shadow-md">
-            <h3 className="text-2xl font-bold mb-8 text-gray-900">
+          <div className="bg-white rounded-lg p-4 md:p-8 shadow-md">
+            <h3 className="text-xl md:text-2xl font-bold mb-6 md:mb-8 text-gray-900">
               Contact Information
             </h3>
-            <div className="space-y-6">
+            <div className="space-y-4 md:space-y-6">
               {/* Address */}
               <div className="flex items-start">
-                <div className="w-10 h-10 bg-[#FF6B00]/10 rounded-lg flex items-center justify-center mr-4">
+                <div className="w-8 h-8 md:w-10 md:h-10 bg-[#FF6B00]/10 rounded-lg flex items-center justify-center mr-3 md:mr-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5 text-[#FF6B00]"
@@ -63,8 +63,8 @@ function GetInTouch() {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-base font-semibold text-gray-900 mb-1">Visit Us</h4>
-                  <p className="text-gray-600">
+                  <h4 className="text-sm md:text-base font-semibold text-gray-900 mb-1">Visit Us</h4>
+                  <p className="text-sm md:text-base text-gray-600">
                     123 Education Street,<br />
                     Tech City, TC 12345
                   </p>
@@ -73,7 +73,7 @@ function GetInTouch() {
 
               {/* Email */}
               <div className="flex items-start">
-                <div className="w-10 h-10 bg-[#FF6B00]/10 rounded-lg flex items-center justify-center mr-4">
+                <div className="w-8 h-8 md:w-10 md:h-10 bg-[#FF6B00]/10 rounded-lg flex items-center justify-center mr-3 md:mr-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5 text-[#FF6B00]"
@@ -84,12 +84,12 @@ function GetInTouch() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
-                <div>
-                  <h4 className="text-base font-semibold text-gray-900 mb-1">Email Us</h4>
-                  <a href="mailto:info@careersureacademy.com" className="text-gray-600 hover:text-[#FF6B00] block">
+                <div className="min-w-0">
+                  <h4 className="text-sm md:text-base font-semibold text-gray-900 mb-1">Email Us</h4>
+                  <a href="mailto:info@careersureacademy.com" className="text-sm md:text-base text-gray-600 hover:text-[#FF6B00] block break-all">
                     info@careersureacademy.com
                   </a>
-                  <a href="mailto:admissions@careersureacademy.com" className="text-gray-600 hover:text-[#FF6B00] block mt-1">
+                  <a href="mailto:admissions@careersureacademy.com" className="text-sm md:text-base text-gray-600 hover:text-[#FF6B00] block mt-1 break-all">
                     admissions@careersureacademy.com
                   </a>
                 </div>
@@ -97,7 +97,7 @@ function GetInTouch() {
 
               {/* Phone */}
               <div className="flex items-start">
-                <div className="w-10 h-10 bg-[#FF6B00]/10 rounded-lg flex items-center justify-center mr-4">
+                <div className="w-8 h-8 md:w-10 md:h-10 bg-[#FF6B00]/10 rounded-lg flex items-center justify-center mr-3 md:mr-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5 text-[#FF6B00]"
@@ -109,11 +109,11 @@ function GetInTouch() {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-base font-semibold text-gray-900 mb-1">Call Us</h4>
-                  <a href="tel:+911234567890" className="text-gray-600 hover:text-[#FF6B00] block">
+                  <h4 className="text-sm md:text-base font-semibold text-gray-900 mb-1">Call Us</h4>
+                  <a href="tel:+911234567890" className="text-sm md:text-base text-gray-600 hover:text-[#FF6B00] block">
                     +91 (123) 456-7890
                   </a>
-                  <a href="tel:+911234567891" className="text-gray-600 hover:text-[#FF6B00] block mt-1">
+                  <a href="tel:+911234567891" className="text-sm md:text-base text-gray-600 hover:text-[#FF6B00] block mt-1">
                     +91 (123) 456-7891
                   </a>
                 </div>
@@ -122,11 +122,11 @@ function GetInTouch() {
           </div>
 
           {/* Right Column - Contact Form */}
-          <div className="bg-white rounded-lg p-8 shadow-md">
-            <h3 className="text-2xl font-bold mb-8 text-gray-900">
+          <div className="bg-white rounded-lg p-4 md:p-8 shadow-md">
+            <h3 className="text-xl md:text-2xl font-bold mb-6 md:mb-8 text-gray-900">
               Send us a Message
             </h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                   Your Name
@@ -137,7 +137,7 @@ function GetInTouch() {
                   placeholder="Enter your name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none"
+                  className="w-full px-3 md:px-4 py-2 text-sm md:text-base border border-gray-300 rounded-lg focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none"
                   required
                 />
               </div>
@@ -152,7 +152,7 @@ function GetInTouch() {
                   placeholder="Enter your email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none"
+                  className="w-full px-3 md:px-4 py-2 text-sm md:text-base border border-gray-300 rounded-lg focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none"
                   required
                 />
               </div>
@@ -167,14 +167,14 @@ function GetInTouch() {
                   value={formData.message}
                   onChange={handleInputChange}
                   rows={4}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none resize-none"
+                  className="w-full px-3 md:px-4 py-2 text-sm md:text-base border border-gray-300 rounded-lg focus:ring-[#FF6B00] focus:border-[#FF6B00] outline-none resize-none"
                   required
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-[#FF6B00] text-white py-2 px-6 rounded-lg hover:bg-[#FF6B00]/90 transition-colors duration-200"
+                className="w-full bg-[#FF6B00] text-white py-2 px-4 md:px-6 text-sm md:text-base rounded-lg hover:bg-[#FF6B00]/90 transition-colors duration-200"
               >
                 Send Message
               </button>

@@ -41,6 +41,36 @@ function HeroSection() {
       logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png",
       color: "from-orange-500 to-orange-600",
     },
+    {
+      id: 4,
+      name: "Vikram Reddy",
+      position: "ML Engineer",
+      company: "Meta",
+      salary: "₹34 LPA",
+      image: "https://randomuser.me/api/portraits/men/42.jpg",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Meta_Platforms_Inc._logo.svg/1280px-Meta_Platforms_Inc._logo.svg.png",
+      color: "from-orange-500 to-orange-600",
+    },
+    {
+      id: 5,
+      name: "Anjali Gupta",
+      position: "DevOps Engineer",
+      company: "IBM",
+      salary: "₹26 LPA",
+      image: "https://randomuser.me/api/portraits/women/54.jpg",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/2560px-IBM_logo.svg.png",
+      color: "from-orange-500 to-orange-600",
+    },
+    {
+      id: 6,
+      name: "Karthik Nair",
+      position: "Cloud Architect",
+      company: "Oracle",
+      salary: "₹36 LPA",
+      image: "https://randomuser.me/api/portraits/men/62.jpg",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_logo.svg/2560px-Oracle_logo.svg.png",
+      color: "from-orange-500 to-orange-600",
+    }
   ];
 
   // First row of company logos
@@ -166,11 +196,31 @@ function HeroSection() {
       }
       
       .scroll-left {
-        animation: scrollLeft 30s linear infinite;
+        animation: scrollLeft 40s linear infinite;
+        will-change: transform;
       }
       
       .scroll-right {
-        animation: scrollRight 30s linear infinite;
+        animation: scrollRight 40s linear infinite;
+        will-change: transform;
+      }
+      
+      .animate-marquee {
+        animation: marquee 6s linear infinite;
+      }
+      .animate-marquee-reverse {
+        animation: marquee-reverse 6s linear infinite;
+      }
+      .animate-marquee-fast {
+        animation: marquee 4s linear infinite;
+      }
+      @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      @keyframes marquee-reverse {
+        0% { transform: translateX(-50%); }
+        100% { transform: translateX(0); }
       }
       
       .testimonial-container {
@@ -191,7 +241,9 @@ function HeroSection() {
       }
       
       .testimonial-slider-container:hover .scroll-left,
-      .testimonial-slider-container:hover .scroll-right {
+      .testimonial-slider-container:hover .scroll-right,
+      .scroll-left:hover,
+      .scroll-right:hover {
         animation-play-state: paused;
       }
       
@@ -582,9 +634,9 @@ function HeroSection() {
   return (
     <section id="home" className="pt-24 bg-gradient-to-b from-white to-gray-50">
       <div className="w-full">
-        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 mb-16 px-6">
+        <div className="w-full flex flex-col md:flex-row items-center gap-12 mb-16 px-6">
           {/* Left Side - Top Placement Boxes */}
-          <div className="lg:w-1/2">
+          <div className="md:w-1/2">
             <div
               className={`transition-all duration-700 ${
                 isLoaded
@@ -593,113 +645,210 @@ function HeroSection() {
               }`}
               aria-live="polite"
             >
-              {!isLoaded ? (
-                // Enhanced loading skeleton
-                <div className="animate-pulse grid grid-cols-3 gap-4">
-                  {[1, 2, 3].map((i) => (
-                    <div
-                      key={i}
-                      className="h-48 bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl"
-                    >
-                      <div className="h-full w-full animate-shimmer"></div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                // Enhanced placement cards
-                <div className="grid grid-cols-3 gap-5">
-                  {topPlacements.map((profile) => (
-                    <div
-                      key={profile.id}
-                      className="bg-white rounded-lg shadow-sm overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-100 group"
-                    >
-                      <div className="h-full flex flex-col">
-                        {/* Package banner */}
-                        <div className="bg-[#FF6B00] py-1.5 px-4 text-right">
-                          <span className="text-white text-sm font-bold">
-                            {profile.salary}
-                          </span>
-                        </div>
-
-                        {/* Profile info - Adjusted for better name visibility */}
-                        <div className="p-4">
-                          <div className="flex flex-col items-start">
-                            {/* Image and name in separate rows */}
-                            <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-100 mb-3">
+              {/* Enhanced placement cards with horizontal scrolling */}
+              <div className="relative overflow-hidden mb-8 w-full max-w-full md:max-w-none mx-auto" style={{ maxWidth: '100vw' }}>
+                {/* Left fade overlay */}
+                <div className="absolute left-0 top-0 bottom-0 w-8 md:w-12 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+                
+                {/* Right fade overlay */}
+                <div className="absolute right-0 top-0 bottom-0 w-8 md:w-12 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+                
+                <div className="flex whitespace-nowrap overflow-hidden w-full" style={{ minHeight: '100%' }}>
+                  <div className="inline-flex scroll-left whitespace-nowrap gap-4 md:gap-5 py-4 px-1 md:px-2" style={{ minHeight: '100%' }}>
+                    {/* First set of cards */}
+                    {topPlacements.map((profile) => (
+                      <div
+                        key={profile.id}
+                        className="bg-white rounded-lg shadow-sm overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-100 group w-60 md:w-64 flex-shrink-0 mx-1 md:mx-0"
+                        style={{ minWidth: '220px', maxWidth: '90vw' }}
+                      >
+                        <div className="h-full flex flex-col">
+                          {/* Package banner */}
+                          <div className="bg-[#FF6B00] py-1.5 px-4 text-right">
+                            <span className="text-white text-sm font-bold">
+                              {profile.salary}
+                            </span>
+                          </div>
+                          {/* Profile info - Adjusted for better name visibility */}
+                          <div className="p-4">
+                            <div className="flex flex-col items-start">
+                              {/* Image and name in separate rows */}
+                              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-100 mb-3">
+                                <img
+                                  src={profile.image}
+                                  alt={profile.name}
+                                  className="w-full h-full object-cover"
+                                  loading="lazy"
+                                />
+                              </div>
+                              <div className="w-full">
+                                <h3 className="font-bold text-gray-900 text-base mb-1 line-clamp-2">
+                                  {profile.name}
+                                </h3>
+                                <p className="text-[#FF6B00] font-medium text-sm mb-2">
+                                  {profile.position}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          {/* Company info */}
+                          <div className="px-4 pb-3">
+                            <div className="flex items-center gap-2 py-2 px-3 bg-gray-50 rounded-md">
                               <img
-                                src={profile.image}
-                                alt={profile.name}
-                                className="w-full h-full object-cover"
+                                src={profile.logo}
+                                alt={profile.company}
+                                className="w-5 h-5 object-contain"
                                 loading="lazy"
                               />
-                            </div>
-                            <div className="w-full">
-                              <h3 className="font-bold text-gray-900 text-base mb-1 line-clamp-2">
-                                {profile.name}
-                              </h3>
-                              <p className="text-[#FF6B00] font-medium text-sm mb-2">
-                                {profile.position}
-                              </p>
+                              <span className="text-sm font-medium text-gray-700">
+                                {profile.company}
+                              </span>
                             </div>
                           </div>
-                        </div>
-
-                        {/* Company info */}
-                        <div className="px-4 pb-3">
-                          <div className="flex items-center gap-2 py-2 px-3 bg-gray-50 rounded-md">
-                            <img
-                              src={profile.logo}
-                              alt={profile.company}
-                              className="w-5 h-5 object-contain"
-                              loading="lazy"
-                            />
-                            <span className="text-sm font-medium text-gray-700">
-                              {profile.company}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Verification badge */}
-                        <div className="mt-auto px-4 pb-3">
-                          <div className="flex items-center gap-1.5 text-green-600">
-                            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span className="text-xs font-medium">
-                              Verified Placement
-                            </span>
+                          {/* Verification badge */}
+                          <div className="mt-auto px-4 pb-3">
+                            <div className="flex items-center gap-1.5 text-green-600">
+                              <svg
+                                className="w-3.5 h-3.5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                              </svg>
+                              <span className="text-xs font-medium">
+                                Verified Placement
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                    {/* Duplicate cards for infinite scroll effect */}
+                    {topPlacements.map((profile) => (
+                      <div
+                        key={`dup-${profile.id}`}
+                        className="bg-white rounded-lg shadow-sm overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-100 group w-60 md:w-64 flex-shrink-0 mx-1 md:mx-0"
+                        style={{ minWidth: '220px', maxWidth: '90vw' }}
+                      >
+                        <div className="h-full flex flex-col">
+                          {/* Package banner */}
+                          <div className="bg-[#FF6B00] py-1.5 px-4 text-right">
+                            <span className="text-white text-sm font-bold">
+                              {profile.salary}
+                            </span>
+                          </div>
+                          {/* Profile info - Adjusted for better name visibility */}
+                          <div className="p-4">
+                            <div className="flex flex-col items-start">
+                              {/* Image and name in separate rows */}
+                              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-100 mb-3">
+                                <img
+                                  src={profile.image}
+                                  alt={profile.name}
+                                  className="w-full h-full object-cover"
+                                  loading="lazy"
+                                />
+                              </div>
+                              <div className="w-full">
+                                <h3 className="font-bold text-gray-900 text-base mb-1 line-clamp-2">
+                                  {profile.name}
+                                </h3>
+                                <p className="text-[#FF6B00] font-medium text-sm mb-2">
+                                  {profile.position}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          {/* Company info */}
+                          <div className="px-4 pb-3">
+                            <div className="flex items-center gap-2 py-2 px-3 bg-gray-50 rounded-md">
+                              <img
+                                src={profile.logo}
+                                alt={profile.company}
+                                className="w-5 h-5 object-contain"
+                                loading="lazy"
+                              />
+                              <span className="text-sm font-medium text-gray-700">
+                                {profile.company}
+                              </span>
+                            </div>
+                          </div>
+                          {/* Verification badge */}
+                          <div className="mt-auto px-4 pb-3">
+                            <div className="flex items-center gap-1.5 text-green-600">
+                              <svg
+                                className="w-3.5 h-3.5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                              </svg>
+                              <span className="text-xs font-medium">
+                                Verified Placement
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              )}
+              </div>
+
+              {/* Additional CSS for hover pause */}
+              <style jsx>{`
+                .scroll-left:hover {
+                  animation-play-state: paused;
+                }
+              `}</style>
 
               {/* Stats Section */}
               {isLoaded && (
-                <div className="grid grid-cols-3 gap-5 mt-8">
+                <div className="grid grid-cols-3 gap-5 mt-8 w-full">
                   <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm">
-                    <div className="text-2xl font-bold text-[#FF6B00] mb-1">95%</div>
-                    <p className="text-sm text-gray-600 font-medium">Placement Rate</p>
+                    <div className="text-2xl font-bold text-[#FF6B00] mb-1">
+                      95%
+                    </div>
+                    <p className="text-sm text-gray-600 font-medium">
+                      Placement Rate
+                    </p>
                   </div>
                   <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm">
-                    <div className="text-2xl font-bold text-[#FF6B00] mb-1">₹18L</div>
-                    <p className="text-sm text-gray-600 font-medium">Avg. Package</p>
+                    <div className="text-2xl font-bold text-[#FF6B00] mb-1">
+                      ₹18L
+                    </div>
+                    <p className="text-sm text-gray-600 font-medium">
+                      Avg. Package
+                    </p>
                   </div>
                   <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm">
-                    <div className="text-2xl font-bold text-[#FF6B00] mb-1">500+</div>
-                    <p className="text-sm text-gray-600 font-medium">Students Placed</p>
+                    <div className="text-2xl font-bold text-[#FF6B00] mb-1">
+                      500+
+                    </div>
+                    <p className="text-sm text-gray-600 font-medium">
+                      Students Placed
+                    </p>
                   </div>
                 </div>
               )}
-
               {/* View All Button */}
               {isLoaded && (
                 <div className="text-center mt-8">
                   <button
-                    onClick={() => navigate('/placements')}
-                    className="inline-flex items-center justify-center px-6 py-2.5 bg-[#FF6B00] text-white font-medium text-sm rounded-lg hover:bg-[#FF6B00]/90 transition-colors duration-200"
+                    onClick={() => navigate("/placements")}
+                    className="inline-flex font-bold items-center justify-center px-6 py-2.5 bg-[#FF6B00] text-white text-sm rounded-lg hover:bg-[#FF6B00]/90 transition-colors duration-200"
                   >
                     View All Placements
                     <svg
@@ -708,7 +857,12 @@ function HeroSection() {
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
                     </svg>
                   </button>
                 </div>
@@ -718,58 +872,32 @@ function HeroSection() {
 
           {/* Enhanced right side content */}
           <div className="lg:w-1/2">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-700">
-              Start Your Tech Career Journey Today
-            </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Join Career Sure Academy and gain the skills, knowledge, and
-              confidence to succeed in the tech industry. Transform your career
-              with our industry-leading programs.
-            </p>
-
-            {/* Enhanced CTA buttons */}
-            <div className="flex flex-wrap gap-4">
-              <button
-                onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSf-TFPS1co0mS1lrmb-7-0Ffln-LLKDKN8UzXr6Y7XSG8l1vw/viewform?usp=header', '_blank')}
-                className="group relative inline-flex items-center justify-center bg-gradient-to-r from-primary to-primary-light text-white font-bold py-4 px-8 rounded-xl shadow-lg transform transition-all hover:-translate-y-1 hover:shadow-xl"
-              >
-                <span className="relative flex items-center">
-                  Fill the form
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 ml-2 transform transition-all group-hover:translate-x-1"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </span>
-              </button>
-
-              <button
-                onClick={() => scrollToSection("about")}
-                className="group relative inline-flex items-center justify-center bg-white border-2 border-orange-500 text-orange-500 font-bold py-4 px-8 rounded-lg transition-all duration-300 hover:bg-orange-50"
-              >
-                <span className="relative flex items-center">
-                  Learn More
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 ml-2 transform transition-transform duration-300 group-hover:translate-x-1"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </span>
-              </button>
+            <div className="w-full max-w-xl mx-auto px-4 py-8">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 sm:mb-6">
+                Start Your Tech Career Journey Today
+              </h1>
+              <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 leading-relaxed">
+                Join Career Sure Academy and gain the skills, knowledge, and confidence to succeed in the tech industry. Transform your career with our industry-leading programs.
+              </p>
+              <div className="flex flex-col gap-4">
+                <button
+                  className="w-full bg-gradient-to-r from-primary to-primary-light text-white font-bold py-3 rounded-xl shadow-lg hover:-translate-y-1 hover:shadow-xl transition-all"
+                  onClick={() =>
+                    window.open(
+                      "https://docs.google.com/forms/d/e/1FAIpQLSf-TFPS1co0mS1lrmb-7-0Ffln-LLKDKN8UzXr6Y7XSG8l1vw/viewform?usp=header",
+                      "_blank"
+                    )
+                  }
+                >
+                  Fill the form &rarr;
+                </button>
+                <button
+                  className="w-full border-2 border-orange-500 text-orange-500 font-bold py-3 rounded-lg transition-all hover:bg-orange-50"
+                  onClick={() => scrollToSection("about")}
+                >
+                  Learn More &rarr;
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -874,22 +1002,22 @@ function HeroSection() {
           </div>
 
           {/* Statistics about hiring partners */}
-          <div className="grid grid-cols-3 gap-6 mt-10 px-6">
-            <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 flex flex-col items-center text-center">
-              <div className="text-3xl font-bold text-orange-500 mb-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mt-10 px-2 md:px-6">
+            <div className="bg-gray-800 border border-gray-700 rounded-xl p-4 md:p-6 flex flex-col items-center text-center">
+              <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">
                 100+
               </div>
-              <p className="text-gray-400 text-sm">Hiring Partners</p>
+              <p className="text-gray-400 text-sm md:text-base">Hiring Partners</p>
             </div>
-            <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 flex flex-col items-center text-center">
-              <div className="text-3xl font-bold text-orange-500 mb-2">85%</div>
-              <p className="text-gray-400 text-sm">Fortune 500 Companies</p>
+            <div className="bg-gray-800 border border-gray-700 rounded-xl p-4 md:p-6 flex flex-col items-center text-center">
+              <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">85%</div>
+              <p className="text-gray-400 text-sm md:text-base">Fortune 500 Companies</p>
             </div>
-            <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 flex flex-col items-center text-center">
-              <div className="text-3xl font-bold text-orange-500 mb-2">
+            <div className="bg-gray-800 border border-gray-700 rounded-xl p-4 md:p-6 flex flex-col items-center text-center">
+              <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">
                 1000+
               </div>
-              <p className="text-gray-400 text-sm">Open Positions</p>
+              <p className="text-gray-400 text-sm md:text-base">Open Positions</p>
             </div>
           </div>
         </div>
@@ -983,8 +1111,12 @@ function HeroSection() {
                       />
                     </h3>
                   </div>
-                  <p className="text-orange-500 text-sm mb-2 font-semibold">{trainer.role}</p>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">{trainer.description}</p>
+                  <p className="text-orange-500 text-sm mb-2 font-semibold">
+                    {trainer.role}
+                  </p>
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                    {trainer.description}
+                  </p>
                   {/* Skills */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {trainer.skills.map((skill, skillIndex) => (
@@ -1025,26 +1157,22 @@ function HeroSection() {
           </div>
 
           {/* Trainer Statistics */}
-          <div className="grid grid-cols-4 gap-6 mt-16">
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 text-center border border-gray-700/50">
-              <div className="text-3xl font-bold text-orange-500 mb-2">20+</div>
-              <p className="text-gray-400 text-sm">Years Experience</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-16">
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-6 text-center border border-gray-700/50">
+              <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">20+</div>
+              <p className="text-gray-400 text-sm md:text-base">Years Experience</p>
             </div>
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 text-center border border-gray-700/50">
-              <div className="text-3xl font-bold text-orange-500 mb-2">50+</div>
-              <p className="text-gray-400 text-sm">Industry Projects</p>
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-6 text-center border border-gray-700/50">
+              <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">50+</div>
+              <p className="text-gray-400 text-sm md:text-base">Industry Projects</p>
             </div>
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 text-center border border-gray-700/50">
-              <div className="text-3xl font-bold text-orange-500 mb-2">
-                3000+
-              </div>
-              <p className="text-gray-400 text-sm">Students Mentored</p>
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-6 text-center border border-gray-700/50">
+              <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">3000+</div>
+              <p className="text-gray-400 text-sm md:text-base">Students Mentored</p>
             </div>
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 text-center border border-gray-700/50">
-              <div className="text-3xl font-bold text-orange-500 mb-2">
-                100%
-              </div>
-              <p className="text-gray-400 text-sm">Expert Support</p>
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-6 text-center border border-gray-700/50">
+              <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">100%</div>
+              <p className="text-gray-400 text-sm md:text-base">Expert Support</p>
             </div>
           </div>
         </div>
@@ -1154,26 +1282,22 @@ function HeroSection() {
           </div>
 
           {/* Course Statistics */}
-          <div className="grid grid-cols-4 gap-6 mt-16">
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 text-center border border-gray-700/50">
-              <div className="text-3xl font-bold text-orange-400 mb-2">15+</div>
-              <p className="text-gray-400 text-sm">Industry Projects</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-16">
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-6 text-center border border-gray-700/50">
+              <div className="text-2xl md:text-3xl font-bold text-orange-400 mb-2">15+</div>
+              <p className="text-gray-400 text-sm md:text-base">Industry Projects</p>
             </div>
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 text-center border border-gray-700/50">
-              <div className="text-3xl font-bold text-orange-400 mb-2">
-                100%
-              </div>
-              <p className="text-gray-400 text-sm">Practical Learning</p>
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-6 text-center border border-gray-700/50">
+              <div className="text-2xl md:text-3xl font-bold text-orange-400 mb-2">100%</div>
+              <p className="text-gray-400 text-sm md:text-base">Practical Learning</p>
             </div>
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 text-center border border-gray-700/50">
-              <div className="text-3xl font-bold text-orange-400 mb-2">
-                24/7
-              </div>
-              <p className="text-gray-400 text-sm">Mentor Support</p>
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-6 text-center border border-gray-700/50">
+              <div className="text-2xl md:text-3xl font-bold text-orange-400 mb-2">24/7</div>
+              <p className="text-gray-400 text-sm md:text-base">Mentor Support</p>
             </div>
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 text-center border border-gray-700/50">
-              <div className="text-3xl font-bold text-orange-400 mb-2">1:1</div>
-              <p className="text-gray-400 text-sm">Career Guidance</p>
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-6 text-center border border-gray-700/50">
+              <div className="text-2xl md:text-3xl font-bold text-orange-400 mb-2">1:1</div>
+              <p className="text-gray-400 text-sm md:text-base">Career Guidance</p>
             </div>
           </div>
         </div>
@@ -1186,7 +1310,7 @@ function HeroSection() {
               <span className="text-[#FF6B00]">Student Testimonials</span>
             </h1>
           </div>
-          
+
           {/* Testimonials Carousel */}
           <div className="relative max-w-7xl mx-auto">
             <div className="overflow-hidden">
@@ -1264,24 +1388,22 @@ function HeroSection() {
         </div>
 
         {/* Testimonial Statistics */}
-        <div className="grid grid-cols-4 gap-4 mt-12 px-6">
-          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-5 border border-gray-700 text-center">
-            <div className="text-3xl font-bold text-orange-500 mb-2">4.9/5</div>
-            <p className="text-gray-400 text-sm">Average Student Rating</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-12 px-2 md:px-6">
+          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-5 border border-gray-700 text-center">
+            <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">4.9/5</div>
+            <p className="text-gray-400 text-sm md:text-base">Average Student Rating</p>
           </div>
-          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-5 border border-gray-700 text-center">
-            <div className="text-3xl font-bold text-orange-500 mb-2">
-              15,000+
-            </div>
-            <p className="text-gray-400 text-sm">Enrolled Students</p>
+          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-5 border border-gray-700 text-center">
+            <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">15,000+</div>
+            <p className="text-gray-400 text-sm md:text-base">Enrolled Students</p>
           </div>
-          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-5 border border-gray-700 text-center">
-            <div className="text-3xl font-bold text-orange-500 mb-2">92%</div>
-            <p className="text-gray-400 text-sm">Would Recommend Us</p>
+          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-5 border border-gray-700 text-center">
+            <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">92%</div>
+            <p className="text-gray-400 text-sm md:text-base">Would Recommend Us</p>
           </div>
-          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-5 border border-gray-700 text-center">
-            <div className="text-3xl font-bold text-orange-500 mb-2">250+</div>
-            <p className="text-gray-400 text-sm">Video Testimonials</p>
+          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-5 border border-gray-700 text-center">
+            <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">250+</div>
+            <p className="text-gray-400 text-sm md:text-base">Video Testimonials</p>
           </div>
         </div>
 
