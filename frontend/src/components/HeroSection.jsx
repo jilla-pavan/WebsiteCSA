@@ -196,23 +196,23 @@ function HeroSection() {
       }
       
       .scroll-left {
-        animation: scrollLeft 40s linear infinite;
+        animation: scrollLeft 60s linear infinite;
         will-change: transform;
       }
       
       .scroll-right {
-        animation: scrollRight 40s linear infinite;
+        animation: scrollRight 60s linear infinite;
         will-change: transform;
       }
       
       .animate-marquee {
-        animation: marquee 6s linear infinite;
+        animation: marquee 10s linear infinite;
       }
       .animate-marquee-reverse {
-        animation: marquee-reverse 6s linear infinite;
+        animation: marquee-reverse 10s linear infinite;
       }
       .animate-marquee-fast {
-        animation: marquee 4s linear infinite;
+        animation: marquee 10s linear infinite;
       }
       @keyframes marquee {
         0% { transform: translateX(0); }
