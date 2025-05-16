@@ -9,6 +9,7 @@ import { FAQs } from "./FAQs";
 import AboutUs from "./AboutUs";
 import GetInTouch from "./GetInTouch";
 import CareerAdvisorModal from "./CareerAdvisorModal";
+import RoadmapSection from "./RoadmapSection";
 
 function HeroSection() {
   const [showAdvisorModal, setShowAdvisorModal] = useState(false);
@@ -236,6 +237,7 @@ function HeroSection() {
       <div className="w-full">
         <TopPlacements />
         <CompaniesHire />
+        <RoadmapSection />
         <ExpertTrainers />
         <Courses />
         <Testimonial />
