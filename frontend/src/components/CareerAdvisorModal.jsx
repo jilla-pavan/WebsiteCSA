@@ -1,4 +1,5 @@
 import React from "react";
+import whatsappIcon from "../../public/assets/whatsApp-Icon.png";
 
 const CareerAdvisorModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -58,18 +59,16 @@ const CareerAdvisorModal = ({ isOpen, onClose }) => {
                 rel="noopener noreferrer"
                 className="btn btn-secondary flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto"
               >
-                <svg
-                  className="w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M20.52 3.48A12 12 0 0 0 3.48 20.52l-1.32 4.84a1 1 0 0 0 1.22 1.22l4.84-1.32A12 12 0 1 0 20.52 3.48ZM12 22a10 10 0 1 1 10-10A10 10 0 0 1 12 22Zm5.2-7.8c-.28-.14-1.65-.81-1.9-.9s-.44-.14-.62.14-.72.9-.88 1.08-.32.21-.6.07a8.18 8.18 0 0 1-2.4-1.48 9.06 9.06 0 0 1-1.68-2.08c-.18-.31 0-.48.13-.62.13-.13.28-.34.42-.51a.56.56 0 0 0 .08-.56c-.07-.14-.62-1.5-.85-2.06-.22-.53-.45-.46-.62-.47h-.53a1 1 0 0 0-.72.34A2.94 2.94 0 0 0 7 10.5a5.09 5.09 0 0 0 1.1 2.7c1.5 2 3.6 3.3 5.6 3.6a4.13 4.13 0 0 0 2.7-.7 2.2 2.2 0 0 0 .7-1.6c0-.23-.09-.33-.18-.37Z" />
-                </svg>
+                <img
+                  src={whatsappIcon}
+                  alt="WhatsApp"
+                  className="w-6 h-6 rounded-full"
+                />
                 WhatsApp Us
               </a>
               <button
                 className="btn btn-primary flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto"
-                onClick={() => (window.location.href = '/enroll')}
+                onClick={() => (window.location.href = "/enroll")}
               >
                 <svg
                   className="w-4 h-4"

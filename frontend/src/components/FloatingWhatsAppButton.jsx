@@ -23,6 +23,7 @@ const FloatingWhatsAppButton = () => {
         }
         .animate-fade-in-up {
           animation: fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+          will-change: opacity, transform;
         }
         @keyframes pulse-shadow {
           0%, 100% { box-shadow: 0 4px 24px 0 rgba(37, 211, 102, 0.25); }
@@ -30,6 +31,7 @@ const FloatingWhatsAppButton = () => {
         }
         .hover\:animate-pulse-shadow:hover {
           animation: pulse-shadow 1.2s infinite;
+          will-change: box-shadow;
         }
         @keyframes bounce {
           0%, 100% { transform: translateY(0); }
@@ -40,6 +42,7 @@ const FloatingWhatsAppButton = () => {
         }
         .animate-bounce-smooth {
           animation: bounce 2s infinite;
+          will-change: transform;
         }
         @keyframes ping {
           0% { transform: scale(1); opacity: 0.7; }
