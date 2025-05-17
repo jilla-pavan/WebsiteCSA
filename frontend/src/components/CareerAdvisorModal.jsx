@@ -1,7 +1,9 @@
 import React from "react";
 import whatsappIcon from "../../public/assets/whatsApp-Icon.png";
+import { useNavigate } from "react-router-dom";
 
 const CareerAdvisorModal = ({ isOpen, onClose }) => {
+  const navigate = useNavigate();
   if (!isOpen) return null;
 
   return (
@@ -68,7 +70,7 @@ const CareerAdvisorModal = ({ isOpen, onClose }) => {
               </a>
               <button
                 className="btn btn-primary flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto"
-                onClick={() => (window.location.href = "/enroll")}
+                onClick={() => navigate("/enroll")}
               >
                 <svg
                   className="w-4 h-4"
