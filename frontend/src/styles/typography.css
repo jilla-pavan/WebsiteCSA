@@ -1,0 +1,107 @@
+@layer components {
+  /* Headings */
+  .h1 {
+    @apply font-display text-5xl font-bold tracking-tight text-gray-900;
+  }
+  
+  .h2 {
+    @apply font-display text-4xl font-semibold tracking-tight text-gray-900;
+  }
+  
+  .h3 {
+    @apply font-display text-3xl font-semibold tracking-tight text-gray-900;
+  }
+  
+  .h4 {
+    @apply font-display text-2xl font-semibold tracking-tight text-gray-900;
+  }
+  
+  .h5 {
+    @apply font-display text-xl font-semibold tracking-tight text-gray-900;
+  }
+  
+  .h6 {
+    @apply font-display text-lg font-semibold tracking-tight text-gray-900;
+  }
+
+  /* Body Text */
+  .body-large {
+    @apply text-lg leading-relaxed text-gray-700;
+  }
+
+  .body {
+    @apply text-base leading-relaxed text-gray-700;
+  }
+
+  .body-small {
+    @apply text-sm leading-relaxed text-gray-700;
+  }
+
+  /* Special Text Styles */
+  .lead {
+    @apply text-xl leading-relaxed text-gray-700;
+  }
+
+  .caption {
+    @apply text-sm leading-normal text-gray-500;
+  }
+
+  .overline {
+    @apply text-xs font-medium uppercase tracking-widest text-gray-500;
+  }
+
+  /* Interactive Text */
+  .link {
+    @apply text-primary hover:text-primary-dark transition-colors duration-200;
+  }
+
+  .nav-link {
+    @apply text-gray-600 hover:text-primary transition-colors duration-200;
+  }
+
+  /* Utility Classes */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Font Weights */
+  .font-thin {
+    font-weight: 100;
+  }
+
+  .font-extralight {
+    font-weight: 200;
+  }
+
+  .font-light {
+    font-weight: 300;
+  }
+
+  .font-normal {
+    font-weight: 400;
+  }
+
+  .font-medium {
+    font-weight: 500;
+  }
+
+  .font-semibold {
+    font-weight: 600;
+  }
+
+  .font-bold {
+    font-weight: 700;
+  }
+
+  .font-extrabold {
+    font-weight: 800;
+  }
+
+  .font-black {
+    font-weight: 900;
+  }
+} 

@@ -275,25 +275,25 @@ const TopPlacements = () => {
           {/* Stats Section */}
           {isLoaded && (
             <div className="grid grid-cols-3 gap-5 mt-8 w-full">
-              <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm">
+              <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm transform hover:scale-105 transition-all duration-300">
                 <div className="text-2xl font-bold text-[#FF6B00] mb-1">
-                  95%
+                  97%
                 </div>
                 <p className="text-sm text-gray-600 font-medium">
                   Placement Rate
                 </p>
               </div>
-              <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm">
+              <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm transform hover:scale-105 transition-all duration-300">
                 <div className="text-2xl font-bold text-[#FF6B00] mb-1">
-                  ₹18L
+                  6LPA
                 </div>
                 <p className="text-sm text-gray-600 font-medium">
                   Avg. Package
                 </p>
               </div>
-              <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm">
+              <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm transform hover:scale-105 transition-all duration-300">
                 <div className="text-2xl font-bold text-[#FF6B00] mb-1">
-                  500+
+                  100+
                 </div>
                 <p className="text-sm text-gray-600 font-medium">
                   Students Placed
@@ -332,7 +332,7 @@ const TopPlacements = () => {
       <div className="lg:w-1/2">
         <div className="w-full max-w-xl mx-auto px-4 py-8">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 sm:mb-6">
-            Start Your Tech Career Journey Today
+            Start Your Tech <span className="text-primary">Career</span> Journey Today
           </h1>
           <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 leading-relaxed">
             Join Career Sure Academy and gain the skills, knowledge, and

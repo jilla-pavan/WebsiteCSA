@@ -39,7 +39,7 @@ const CareerAdvisorModal = ({ isOpen, onClose }) => {
                 />
               </svg>
             </button>
-            <h2 className="section-title gradient-text mb-3 text-xl sm:text-2xl md:text-3xl text-left leading-tight">
+            <h2 className="section-title gradient-text mb-3 text-xl sm:text-2xl md:text-3xl text-left leading-tight text-center">
               Talk to Our Advisor & Unlock Your Career Potential!
             </h2>
             <ul className="text-gray-700 space-y-2 mb-5 mt-2 list-disc list-inside text-sm sm:text-base text-left">

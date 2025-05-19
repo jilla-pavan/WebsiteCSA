@@ -71,7 +71,7 @@ function Header() {
                 <a
                   href={`#${id}`}
                   onClick={(e) => handleLinkClick(e, id)}
-                  className="text-gray-700 font-semibold hover:text-primary px-4 py-2 rounded-lg transition-all relative group inline-block tracking-wide"
+                  className="text-gray-700 font-bold hover:text-primary px-4 py-2 rounded-lg transition-all relative group inline-block tracking-wide"
                 >
                   {label}
                   <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-all origin-left"></span>
@@ -87,13 +87,13 @@ function Header() {
             onClick={() =>
               (window.location.href = "https://csa-dashboard.vercel.app/")
             }
-            className="text-gray-700 font-semibold hover:text-primary px-4 py-2 rounded-lg transition-all text-sm hover:bg-gray-50/80 tracking-wide border border-transparent hover:border-gray-200"
+            className="text-gray-700 font-bold hover:text-primary px-4 py-2 rounded-lg transition-all text-sm hover:bg-gray-50/80 tracking-wide border border-transparent hover:border-gray-200"
           >
             Log In
           </button>
           <button
             onClick={() => navigate("/enroll")}
-            className="bg-primary text-white font-semibold py-2 px-5 rounded-lg hover:bg-primary-dark transition-all focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm shadow-md hover:shadow-lg transform hover:-translate-y-0.5 tracking-wide"
+            className="bg-primary text-white font-extrabold py-2 px-5 rounded-lg hover:bg-primary-dark transition-all focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm shadow-md hover:shadow-lg transform hover:-translate-y-0.5 tracking-wide"
           >
             Enroll Now
           </button>
@@ -153,7 +153,7 @@ function Header() {
                 <a
                   href={`#${id}`}
                   onClick={(e) => handleLinkClick(e, id)}
-                  className="block py-2.5 px-4 text-gray-700 font-semibold hover:text-[#FF6B00] rounded-md transition-all duration-300 hover:bg-gray-50/80 tracking-wide"
+                  className="block py-2.5 px-4 text-gray-700 font-bold hover:text-[#FF6B00] rounded-md transition-all duration-300 hover:bg-gray-50/80 tracking-wide"
                 >
                   {label}
                 </a>
@@ -164,13 +164,13 @@ function Header() {
                 onClick={() =>
                   (window.location.href = "https://csa-dashboard.vercel.app/")
                 }
-                className="w-full text-gray-700 font-semibold hover:text-[#FF6B00] py-2.5 px-4 rounded-md transition-all duration-300 hover:bg-gray-50/80 border border-gray-200 tracking-wide"
+                className="w-full text-gray-700 font-bold hover:text-[#FF6B00] py-2.5 px-4 rounded-md transition-all duration-300 hover:bg-gray-50/80 border border-gray-200 tracking-wide"
               >
                 Log In
               </button>
               <button
                 onClick={() => navigate("/enroll")}
-                className="w-full bg-[#FF6B00] text-white font-semibold py-2.5 px-4 rounded-md hover:bg-[#FF6B00]/90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF6B00]/20 shadow-sm hover:shadow-md tracking-wide"
+                className="w-full bg-[#FF6B00] text-white font-extrabold py-2.5 px-4 rounded-md hover:bg-[#FF6B00]/90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF6B00]/20 shadow-sm hover:shadow-md tracking-wide"
               >
                 Enroll Now
               </button>
