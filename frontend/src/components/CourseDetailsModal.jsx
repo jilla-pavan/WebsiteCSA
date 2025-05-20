@@ -3,10 +3,6 @@ import React from 'react';
 const CourseDetailsModal = ({ isOpen, onClose, course }) => {
   if (!isOpen) return null;
 
-  const handleEnrollClick = () => {
-    window.open('https://docs.google.com/forms/d/e/1FAIpQLSf-TFPS1co0mS1lrmb-7-0Ffln-LLKDKN8UzXr6Y7XSG8l1vw/viewform?usp=header', '_blank');
-  };
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Backdrop */}
@@ -80,10 +76,9 @@ const CourseDetailsModal = ({ isOpen, onClose, course }) => {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <div className="text-2xl font-bold text-white">{course.price}</div>
-                  <div className="text-sm text-gray-400">EMI from {course.emi}/month</div>
                 </div>
                 <button 
-                  onClick={handleEnrollClick}
+                  onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSf-TFPS1co0mS1lrmb-7-0Ffln-LLKDKN8UzXr6Y7XSG8l1vw/viewform?usp=header', '_blank')}
                   className="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 transition-colors"
                 >
                   Enroll Now
