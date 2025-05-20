@@ -56,7 +56,7 @@ const CareerAdvisorModal = ({ isOpen, onClose }) => {
             </ul>
             <div className="flex flex-col sm:flex-row gap-3 mt-2 w-full">
               <a
-                href="https://wa.me/916301046346"
+                href="https://api.whatsapp.com/send/?phone=916301046346&text=Hi%21+I%E2%80%99m+very+interested+%E2%80%94+can+you+send+me+more+info+as+soon+as+possible%3F&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-secondary flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto"

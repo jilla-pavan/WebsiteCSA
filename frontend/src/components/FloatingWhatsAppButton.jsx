@@ -88,7 +88,7 @@ const FloatingWhatsAppButton = () => {
         <span className="whatsapp-label">Chat with us!</span>
         <a
           ref={btnRef}
-          href="https://wa.me/916301046346"
+          href="https://api.whatsapp.com/send/?phone=916301046346&text=Hi%21+I%E2%80%99m+very+interested+%E2%80%94+can+you+send+me+more+info+as+soon+as+possible%3F&type=phone_number&app_absent=0"
           target="_blank"
           rel="noopener noreferrer"
           className="relative bg-[#25D366] hover:bg-[#1ebe57] text-white rounded-full shadow-lg p-4 flex items-center justify-center transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#25D366]/40 hover:scale-105 hover:animate-pulse-shadow animate-bounce-smooth"
