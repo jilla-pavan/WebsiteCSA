@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import CourseDetailsModal from "./CourseDetailsModal";
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase/config';
-import mern from "../../public/assets/related_PDFs/mern-syllabus.pdf"
-import javafullstack from "../../public/assets/related_PDFs/java-full-stack-syllabus.pdf"
-import pythonfullstack from "../../public/assets/related_PDFs/python-full-stack-syllabus.pdf"
+import mernSyllabusUrl from "/assets/related_PDFs/mern-syllabus.pdf?url"
+import javafullstackSyllabusUrl from "/assets/related_PDFs/java-full-stack-syllabus.pdf?url"
+import pythonfullstackSyllabusUrl from "/assets/related_PDFs/python-full-stack-syllabus.pdf?url"
 
 const Courses = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
@@ -46,9 +46,9 @@ const Courses = () => {
       
       // Download the syllabus after successful enrollment
       const syllabusPaths = {
-        mern: mern,
-        java: javafullstack,
-        python: pythonfullstack
+        mern: mernSyllabusUrl,
+        java: javafullstackSyllabusUrl,
+        python: pythonfullstackSyllabusUrl
       };
 
       const syllabusPath = syllabusPaths[courseForDownload.id];

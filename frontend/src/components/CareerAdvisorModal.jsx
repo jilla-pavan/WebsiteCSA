@@ -1,5 +1,5 @@
 import React from "react";
-import whatsappIcon from "../../public/assets/whatsApp-Icon.png";
+import whatsappIcon from "/assets/whatsApp-Icon.png";
 import { useNavigate } from "react-router-dom";
 
 const CareerAdvisorModal = ({ isOpen, onClose }) => {

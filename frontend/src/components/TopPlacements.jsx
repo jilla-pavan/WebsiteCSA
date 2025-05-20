@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
-import BROCHURE_URL from "../../public/assets/related_PDFs/csa-brochure.pdf";
+import BROCHURE_URL from "/assets/related_PDFs/csa-brochure.pdf?url";
 
 
 const ENROLL_FORM_URL =

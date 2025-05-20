@@ -1,7 +1,7 @@
 import React from "react";
-import aditya from "../../public/assets/trainers/aditya.png";
-import ravi from "../../public/assets/trainers/ravi.png";
-import vamshi from "../../public/assets/trainers/vamshi.png";   
+import aditya from "/assets/trainers/aditya.png?url";
+import ravi from "/assets/trainers/ravi.png?url";
+import vamshi from "/assets/trainers/vamshi.png?url";   
 
 const trainers = [
   {
