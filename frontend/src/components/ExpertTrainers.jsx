@@ -67,7 +67,7 @@ const ExpertTrainers = () => {
             className="group bg-white rounded-2xl overflow-visible shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 min-h-[380px] flex flex-col justify-between relative pt-16"
           >
             {/* Avatar half out, half in */}
-            <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-10">
+            <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
               <div className="relative">
                 <img
                   src={trainer.image}
@@ -144,7 +144,7 @@ const ExpertTrainers = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-16">
         <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-6 text-center border border-gray-700/50 transform hover:scale-105 transition-all duration-300">
           <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">
-            20+
+            5+
           </div>
           <p className="text-gray-400 text-sm md:text-base">Years Experience</p>
         </div>
@@ -158,7 +158,7 @@ const ExpertTrainers = () => {
         </div>
         <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-6 text-center border border-gray-700/50 transform hover:scale-105 transition-all duration-300">
           <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">
-            3000+
+            500+
           </div>
           <p className="text-gray-400 text-sm md:text-base">
             Students Mentored
