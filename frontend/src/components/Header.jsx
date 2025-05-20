@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import logo from "/assets/csa_Logo.png";
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -52,7 +51,7 @@ function Header() {
         {/* Logo Section */}
         <div className="flex items-center flex-shrink-0">
           <img
-            src={logo}
+            src="/assets/csa_Logo.png"
             alt="CareerSure Academy Logo"
             className="h-10 w-auto"
           />
