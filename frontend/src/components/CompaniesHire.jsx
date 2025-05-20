@@ -49,7 +49,7 @@ const CompaniesHire = () => {
     },
     {
       name: "TCS",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Tata_Consultancy_Services_Logo.svg/2560px-Tata_Consultancy_Services_Logo.svg.png",
+      logo: "https://upload.wikimedia.org/wikipedia/en/thumb/b/b1/Tata_Consultancy_Services.svg/250px-Tata_Consultancy_Services.svg.png",
     },
     {
       name: "Wipro",
@@ -77,11 +77,11 @@ const CompaniesHire = () => {
   const companyLogosRow3 = [
     {
       name: "Capgemini",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Capgemini_logo.svg/2560px-Capgemini_logo.svg.png",
+      logo: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d8/Capgemini_logo.svg/250px-Capgemini_logo.svg.png",
     },
     {
       name: "Cognizant",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Cognizant_logo.svg/2560px-Cognizant_logo.svg.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Cognizant_logo_2022.svg/250px-Cognizant_logo_2022.svg.png",
     },
     {
       name: "Cisco",
@@ -93,7 +93,7 @@ const CompaniesHire = () => {
     },
     {
       name: "HP",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/HP_New_Logo_2D.svg/2048px-HP_New_Logo_2D.svg.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Hewlett-Packard_logo_1979_blue.svg/330px-Hewlett-Packard_logo_1979_blue.svg.png",
     },
     {
       name: "Nvidia",
