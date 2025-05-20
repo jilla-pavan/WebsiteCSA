@@ -221,12 +221,12 @@ const CompaniesHire = () => {
             85%
           </div>
           <p className="text-gray-400 text-sm md:text-base">
-            Fortune 500 Companies
+            Fortune 100 Companies
           </p>
         </div>
         <div className="bg-gray-800 border border-gray-700 rounded-xl p-4 md:p-6 flex flex-col items-center text-center transform hover:scale-105 transition-all duration-300">
           <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">
-            1000+
+            100+
           </div>
           <p className="text-gray-400 text-sm md:text-base">Open Positions</p>
         </div>

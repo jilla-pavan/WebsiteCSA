@@ -1,4 +1,52 @@
 import React from "react";
+import aditya from "../../public/assets/trainers/aditya.png";
+import ravi from "../../public/assets/trainers/ravi.png";
+import vamshi from "../../public/assets/trainers/vamshi.png";   
+
+const trainers = [
+  {
+    name: "Aditya Dasari",
+    role: "Senior Software Engineer",
+    company: "Google",
+    image: aditya,
+    logo: "https://cdn.cookielaw.org/logos/e284b633-79d3-4bca-a80b-44a064e50ed5/018fdf26-f19b-7589-94d3-5162bb5794f1/ab76e42b-078d-4600-85dd-3903270f08be/ic-mrc-logo.png",
+    description:
+      "MERN Stack expert with hands-on experience in building high-performance web applications.",
+    skills: ["MongoDB", "Express.js", "React.js", "Node.js"],
+    students: "200+",
+    rating: "4.9",
+    badge: "Tech Lead",
+    badgeColor: "from-blue-500 to-blue-600",
+  },
+  {
+    name: "Ravi Kumar",
+    role: "Python Full Stack Developer",
+    company: "Accenture",
+    image: ravi,
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/2560px-Accenture.svg.png",
+    description:
+      "Experienced Python Full Stack Developer with strong expertise in building scalable web applications. Skilled in both frontend and backend development",
+    skills: ["Python", "Django", "React", "REST APIs", "SQL"],
+    students: "500+",
+    rating: "4.8",
+    badge: "Full Stack Mentor",
+    badgeColor: "from-yellow-500 to-yellow-600",
+  },
+  {
+    name: "Vamshi",
+    role: "Lead Engineer",
+    company: "Infosys",
+    image: vamshi,
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Infosys_logo.svg/1280px-Infosys_logo.svg.png",
+    description:
+      "Experienced Java Full Stack Developer with 5+ years of expertise in building enterprise-grade web applications.",
+    skills: ["Java", "Spring Boot", "Angular", "REST APIs", "MySQL"],
+    students: "500+",
+    rating: "4.9",
+    badge: "Java Expert",
+    badgeColor: "from-orange-500 to-orange-600",
+  },
+];
 
 const ExpertTrainers = () => {
   return (
@@ -12,92 +60,49 @@ const ExpertTrainers = () => {
       </div>
 
       {/* Trainers Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {[
-          {
-            name: "Rajesh Kumar",
-            role: "Senior Software Engineer",
-            company: "Google",
-            image: "https://randomuser.me/api/portraits/men/32.jpg",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png",
-            description:
-              "Ex-Google tech lead with 12+ years of experience in scalable systems and cloud architecture. Specializes in distributed systems and microservices.",
-            skills: ["System Design", "Cloud Architecture", "Java"],
-            students: "1000+",
-            rating: "4.9",
-            badge: "Tech Lead",
-            badgeColor: "from-blue-500 to-blue-600",
-          },
-          {
-            name: "Priya Sharma",
-            role: "Data Science Lead",
-            company: "Amazon",
-            image: "https://randomuser.me/api/portraits/women/44.jpg",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png",
-            description:
-              "Former Amazon ML expert with 8+ years of experience in building production-scale AI/ML solutions. Published researcher in deep learning.",
-            skills: ["Machine Learning", "Python", "Deep Learning"],
-            students: "800+",
-            rating: "4.8",
-            badge: "ML Expert",
-            badgeColor: "from-green-500 to-green-600",
-          },
-          {
-            name: "Arun Patel",
-            role: "Full Stack Expert",
-            company: "Microsoft",
-            image: "https://randomuser.me/api/portraits/men/76.jpg",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png",
-            description:
-              "Microsoft veteran with 10+ years specializing in modern web technologies and cloud-native applications. Azure certified architect.",
-            skills: ["React", "Node.js", "Azure"],
-            students: "1200+",
-            rating: "4.9",
-            badge: "Senior Dev",
-            badgeColor: "from-purple-500 to-purple-600",
-          },
-        ].map((trainer, index) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {trainers.map((trainer, index) => (
           <div
             key={index}
-            className="group bg-white rounded-2xl overflow-visible shadow-lg hover:-translate-y-1 hover:shadow-xl transition-all duration-300 min-h-[380px] flex flex-col justify-between relative pt-16 border-2 border-orange-100"
+            className="group bg-white rounded-2xl overflow-visible shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 min-h-[380px] flex flex-col justify-between relative pt-16"
           >
-            {/* Avatar Overlap, centered on card */}
-            <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+            {/* Avatar half out, half in */}
+            <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-10">
               <div className="relative">
                 <img
                   src={trainer.image}
                   alt={trainer.name}
-                  className="w-24 h-24 rounded-full border-4 border-white shadow-lg object-cover object-center bg-gray-100"
+                  className="w-24 h-24 rounded-full border-4 border-white shadow-md object-cover object-center bg-gray-100 ring-2 ring-[#FF6B00]"
                 />
-                {/* Badge on Avatar, bottom center */}
+                {/* Minimal badge below avatar */}
                 <span
-                  className={`absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 text-xs font-semibold rounded-full text-white bg-gradient-to-r ${trainer.badgeColor} shadow-lg whitespace-nowrap`}
+                  className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-3 py-1 text-xs font-semibold rounded-full text-white bg-[#FF6B00] shadow whitespace-nowrap"
                 >
                   {trainer.badge}
                 </span>
               </div>
             </div>
             {/* Card Content */}
-            <div className="flex-1 flex flex-col px-4 pb-4 pt-2">
+            <div className="flex-1 flex flex-col px-6 pb-6 pt-2">
               {/* Name, Company Logo, Role */}
-              <div className="flex items-center gap-2 mb-1">
-                <h3 className="text-xl font-bold text-gray-900 group-hover:text-orange-500 transition-colors flex items-center">
+              <div className="flex items-center gap-2 mb-1 justify-center">
+                <h3 className="text-xl font-bold text-gray-900 flex items-center">
                   {trainer.name}
                   <img
                     src={trainer.logo}
                     alt={trainer.company}
-                    className="h-6 w-6 object-contain rounded bg-white border border-gray-100 shadow ml-2"
+                    className="h-6 w-6 object-contain rounded bg-white border border-gray-200 shadow ml-2"
                   />
                 </h3>
               </div>
-              <p className="text-orange-500 text-sm mb-2 font-semibold">
+              <p className="text-[#FF6B00] text-sm mb-2 font-semibold text-center">
                 {trainer.role}
               </p>
-              <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+              <p className="text-gray-600 text-sm mb-4 line-clamp-3 text-center">
                 {trainer.description}
               </p>
               {/* Skills */}
-              <div className="flex flex-wrap gap-2 mb-4">
+              <div className="flex flex-wrap gap-2 mb-4 justify-center">
                 {trainer.skills.map((skill, skillIndex) => (
                   <span
                     key={skillIndex}
@@ -108,8 +113,8 @@ const ExpertTrainers = () => {
                 ))}
               </div>
               {/* Stats */}
-              <div className="flex items-center justify-between text-sm border-t border-gray-100 pt-4 mt-auto">
-                <span className="flex items-center gap-1.5 text-gray-600">
+              <div className="flex items-center justify-between text-xs border-t border-gray-100 pt-4 mt-auto">
+                <span className="flex items-center gap-1.5 text-gray-500">
                   <svg
                     className="w-4 h-4"
                     fill="currentColor"
@@ -119,7 +124,7 @@ const ExpertTrainers = () => {
                   </svg>
                   {trainer.students} Students
                 </span>
-                <span className="flex items-center gap-1.5 text-gray-600">
+                <span className="flex items-center gap-1.5 text-gray-500">
                   <svg
                     className="w-4 h-4 text-yellow-400"
                     fill="currentColor"

@@ -20,7 +20,7 @@ const learningProcessData = [
     icon: <FaChalkboardTeacher size={24} />,
   },
   {
-    title: "Monitoring Classes",
+    title: "Daily Monitoring Classes",
     description: "Get regular feedback and progress checks.",
     icon: <FaEye size={24} />,
   },
@@ -30,7 +30,7 @@ const learningProcessData = [
     icon: <FaTasks size={24} />,
   },
   {
-    title: "Mocks",
+    title: "Weekly Mocks",
     description: "Practice with mock interviews and assessments.",
     icon: <FaUserTie size={24} />,
   },
@@ -38,12 +38,12 @@ const learningProcessData = [
 
 const roadmapData = [
   {
-    title: "Internships",
+    title: "Technical Skills",
     description:
-      "Our internships offer invaluable opportunities for career growth, providing hands-on experience and mentorship to develop essential skills and propel professional advancement.",
-    color: "from-blue-600 to-indigo-600",
-    icon: <FaUserGraduate size={20} />,
-    textColor: "text-blue-700",
+      "Develop cutting-edge technical skills in programming, data analysis, and software development. Master industry-relevant tools and technologies through hands-on projects.",
+    color: "from-rose-600 to-red-600",
+    icon: <FaLaptopCode size={20} />,
+    textColor: "text-rose-700",
   },
   {
     title: "Aptitude",
@@ -54,14 +54,6 @@ const roadmapData = [
     textColor: "text-indigo-700",
   },
   {
-    title: "Problem Solving in JS",
-    description:
-      "Problem solving in JavaScript entails using logical thinking and programming skills to address issues within code efficiently.",
-    color: "from-purple-600 to-pink-600",
-    icon: <FaCode size={20} />,
-    textColor: "text-purple-700",
-  },
-  {
     title: "Softskills",
     description:
       "Soft skills involve interpersonal, communication, problem-solving, leadership, and time management abilities critical for effective teamwork and professional success.",
@@ -70,12 +62,12 @@ const roadmapData = [
     textColor: "text-pink-700",
   },
   {
-    title: "Technical Skills",
+    title: "Problem Solving in JS",
     description:
-      "Develop cutting-edge technical skills in programming, data analysis, and software development. Master industry-relevant tools and technologies through hands-on projects.",
-    color: "from-rose-600 to-red-600",
-    icon: <FaLaptopCode size={20} />,
-    textColor: "text-rose-700",
+      "Problem solving in JavaScript entails using logical thinking and programming skills to address issues within code efficiently.",
+    color: "from-purple-600 to-pink-600",
+    icon: <FaCode size={20} />,
+    textColor: "text-purple-700",
   },
   {
     title: "Interview Preparation",
@@ -84,6 +76,14 @@ const roadmapData = [
     color: "from-red-600 to-orange-600",
     icon: <FaClipboardCheck size={20} />,
     textColor: "text-red-700",
+  },
+  {
+    title: "Internships",
+    description:
+      "Our internships offer invaluable opportunities for career growth, providing hands-on experience and mentorship to develop essential skills and propel professional advancement.",
+    color: "from-blue-600 to-indigo-600",
+    icon: <FaUserGraduate size={20} />,
+    textColor: "text-blue-700",
   },
   {
     title: "Placements",
@@ -179,11 +179,7 @@ const RoadmapSection = () => {
                     <div className="flex flex-col md:flex-row items-center">
                       <div
                         ref={(el) => (roadmapRefs.current[idx] = el)}
-                        className={`w-full md:w-1/2 text-center ${
-                          isLeft ? "order-2 md:order-1" : "order-2 md:order-3"
-                        } roadmap-item opacity-0 ${
-                          isLeft ? "translate-x-[-50px]" : "translate-x-[50px]"
-                        }`}
+                        className={`w-full md:w-1/2 text-center ${isLeft ? "order-2 md:order-1" : "order-2 md:order-3"} roadmap-item opacity-0 translate-y-8`}
                       >
                         <div className="bg-white rounded-xl border-2 border-[#FF6B00] shadow-lg p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 mx-auto max-w-2xl flex flex-col items-center relative">
                           <span className={`absolute -top-4 ${idx % 2 === 0 ? '-right-4' : '-left-4'} w-12 h-12 flex items-center justify-center rounded-full shadow-lg ring-4 ring-white/80 text-2xl font-extrabold z-10 bg-white text-[#FF6B00]`}>
@@ -222,7 +218,7 @@ const RoadmapSection = () => {
 
         .roadmap-item.animate-in, .process-item.animate-in {
           opacity: 1;
-          transform: translateX(0) translateY(0) !important;
+          transform: translateY(0) !important;
           filter: blur(0);
         }
 
@@ -230,7 +226,6 @@ const RoadmapSection = () => {
           .roadmap-item {
             transform: translateY(20px) !important;
           }
-          
           .roadmap-item.animate-in {
             transform: translateY(0) !important;
           }
