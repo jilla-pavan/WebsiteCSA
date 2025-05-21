@@ -3,7 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 import BROCHURE_URL from "/assets/related_PDFs/csa-brochure.pdf?url";
-
+import {
+  Udhay,
+  Teja,
+  Rambabu,
+  Dileep,
+  Jagadeesh,
+  Rushikesh,
+  Shahil,
+} from "../../public/assets/placements";
+import { Nova } from "../../public/assets/company_Logos";
 
 const ENROLL_FORM_URL =
   "https://docs.google.com/forms/d/e/1FAIpQLSf-TFPS1co0mS1lrmb-7-0Ffln-LLKDKN8UzXr6Y7XSG8l1vw/viewform?usp=header";
@@ -20,33 +29,6 @@ const TopPlacements = () => {
   useEffect(() => {
     setIsLoaded(true);
   }, []);
-
-  // Add smooth scroll behavior for navigation links
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  };
-
-  // Handle enroll & download
-  const handleEnrollAndDownload = () => {
-    if (!hasEnrolled) {
-      window.open(ENROLL_FORM_URL, "_blank");
-      setHasEnrolled(true);
-    } else {
-      // Download the brochure
-      const link = document.createElement("a");
-      link.href = BROCHURE_URL;
-      link.download = "CareerSure-Brochure.pdf";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  };
 
   // Handle form field changes
   const handleChange = (e) => {
@@ -94,63 +76,66 @@ const TopPlacements = () => {
   const topPlacements = [
     {
       id: 1,
-      name: "Priya Sharma",
-      position: "Software Engineer",
-      company: "Google",
-      salary: "₹32 LPA",
-      image: "https://randomuser.me/api/portraits/women/28.jpg",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png",
-      color: "from-orange-500 to-orange-600",
+      name: "Udhay Kaitha",
+      position: "Software Developer",
+      company: "Multiplier AI",
+      salary: "₹4.5 LPA",
+      image: Udhay,
+      logo: "https://multiplierai.co/wp-content/uploads/2022/06/multiplier_logo.png",
     },
     {
       id: 2,
-      name: "Rahul Singh",
-      position: "Data Scientist",
-      company: "Amazon",
-      salary: "₹28 LPA",
-      image: "https://randomuser.me/api/portraits/men/36.jpg",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png",
-      color: "from-orange-500 to-orange-600",
+      name: "Dileep",
+      position: "Testing",
+      company: "Wipro",
+      salary: "₹4 LPA",
+      image: Dileep,
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Wipro_new_logo.svg/330px-Wipro_new_logo.svg.png",
     },
     {
       id: 3,
-      name: "Neha Patel",
-      position: "Full Stack Developer",
-      company: "Microsoft",
-      salary: "₹30 LPA",
-      image: "https://randomuser.me/api/portraits/women/65.jpg",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png",
-      color: "from-orange-500 to-orange-600",
+      name: "Jagadeesh",
+      position: "Software Developer",
+      company: "Sconex Software",
+      salary: "₹4 LPA",
+      image: Jagadeesh,
+      logo: "https://media.licdn.com/dms/image/v2/D560BAQFnAOeChCHW-Q/company-logo_200_200/company-logo_200_200/0/1729242362993/sconexit_logo?e=2147483647&v=beta&t=lxiLsl70uulj0KYdk2B8tj9-8jxOZQDEZ8MKkuJ62zY",
     },
     {
       id: 4,
-      name: "Vikram Reddy",
-      position: "ML Engineer",
-      company: "Meta",
-      salary: "₹34 LPA",
-      image: "https://randomuser.me/api/portraits/men/42.jpg",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Meta_Platforms_Inc._logo.svg/1280px-Meta_Platforms_Inc._logo.svg.png",
-      color: "from-orange-500 to-orange-600",
+      name: "Rambabu",
+      position: "Data Analyst",
+      company: "Nova Web Innovations",
+      salary: "₹4 LPA",
+      image: Rambabu,
+      logo: Nova,
     },
     {
       id: 5,
-      name: "Anjali Gupta",
-      position: "DevOps Engineer",
-      company: "IBM",
-      salary: "₹26 LPA",
-      image: "https://randomuser.me/api/portraits/women/54.jpg",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/2560px-IBM_logo.svg.png",
-      color: "from-orange-500 to-orange-600",
+      name: "Tirumala Teja",
+      position: "Software Developer",
+      company: "Kapil Technogles",
+      salary: "₹3.5 LPA",
+      image: Teja,
+      logo: "https://kcs-tech.com/static/media/ptkcs%20logo%20png%20total.cf3b714d11854610e992.png",
     },
     {
       id: 6,
-      name: "Karthik Nair",
-      position: "Cloud Architect",
-      company: "Oracle",
-      salary: "₹36 LPA",
-      image: "https://randomuser.me/api/portraits/men/62.jpg",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_logo.svg/2560px-Oracle_logo.svg.png",
-      color: "from-orange-500 to-orange-600",
+      name: "Rushikesh",
+      position: "Software Developer",
+      company: "Stalcon",
+      salary: "₹3 LPA",
+      image: Rushikesh,
+      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvFJn_SHIfzEBfw5XjGGpFfF92PSHDbA4lanew_bnbDQ&s",
+    },
+    {
+      id: 7,
+      name: "Shahil",
+      position: "Software Developer",
+      company: "Stalcon",
+      salary: "₹3 LPA",
+      image: Shahil,
+      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvFJn_SHIfzEBfw5XjGGpFfF92PSHDbA4lanew_bnbDQ&s",
     },
   ];
 
@@ -187,21 +172,21 @@ const TopPlacements = () => {
                 {topPlacements.map((profile) => (
                   <div
                     key={profile.id}
-                    className="bg-white rounded-lg shadow-sm overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-100 group w-60 md:w-64 flex-shrink-0 mx-1 md:mx-0"
+                    className="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-100 group w-60 md:w-64 flex-shrink-0 mx-1 md:mx-0"
                     style={{ minWidth: "220px", maxWidth: "90vw" }}
                   >
                     <div className="h-full flex flex-col">
                       {/* Package banner */}
-                      <div className="bg-[#FF6B00] py-1.5 px-4 text-right">
+                      <div className="bg-primary py-1.5 px-4 text-right">
                         <span className="text-white text-sm font-bold">
                           {profile.salary}
                         </span>
                       </div>
                       {/* Profile info - Adjusted for better name visibility */}
-                      <div className="p-4">
+                      <div className="p-5 pb-4">
                         <div className="flex flex-col items-start">
                           {/* Image and name in separate rows */}
-                          <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-100 mb-3">
+                          <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-primary shadow-lg mb-3 transform transition-transform duration-300 group-hover:scale-105">
                             <img
                               src={profile.image}
                               alt={profile.name}
@@ -210,31 +195,31 @@ const TopPlacements = () => {
                             />
                           </div>
                           <div className="w-full">
-                            <h3 className="font-bold text-gray-900 text-base mb-1 line-clamp-2">
+                            <h3 className="font-bold text-gray-900 text-base mb-1 line-clamp-2 group-hover:text-primary transition-colors duration-300">
                               {profile.name}
                             </h3>
-                            <p className="text-[#FF6B00] font-medium text-sm mb-2">
+                            <p className="text-primary font-medium text-sm mb-2">
                               {profile.position}
                             </p>
                           </div>
                         </div>
                       </div>
                       {/* Company info */}
-                      <div className="px-4 pb-3">
-                        <div className="flex items-center gap-2 py-2 px-3 bg-gray-50 rounded-md">
+                      <div className="px-5 pb-4">
+                        <div className="flex items-center gap-2 py-2 px-3 bg-gray-50 rounded-md border border-gray-100 group-hover:border-primary/20 transition-colors duration-300">
                           <img
                             src={profile.logo}
                             alt={profile.company}
                             className="w-5 h-5 object-contain"
                             loading="lazy"
                           />
-                          <span className="text-sm font-medium text-gray-700">
+                          <span className="text-sm font-medium text-gray-700 group-hover:text-primary transition-colors duration-300">
                             {profile.company}
                           </span>
                         </div>
                       </div>
                       {/* Verification badge */}
-                      <div className="mt-auto px-4 pb-3">
+                      <div className="mt-auto px-5 pb-4">
                         <div className="flex items-center gap-1.5 text-green-600">
                           <svg
                             className="w-3.5 h-3.5"
@@ -261,21 +246,21 @@ const TopPlacements = () => {
                 {topPlacements.map((profile) => (
                   <div
                     key={`dup-${profile.id}`}
-                    className="bg-white rounded-lg shadow-sm overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-100 group w-60 md:w-64 flex-shrink-0 mx-1 md:mx-0"
+                    className="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-100 group w-60 md:w-64 flex-shrink-0 mx-1 md:mx-0"
                     style={{ minWidth: "220px", maxWidth: "90vw" }}
                   >
                     <div className="h-full flex flex-col">
                       {/* Package banner */}
-                      <div className="bg-[#FF6B00] py-1.5 px-4 text-right">
+                      <div className="bg-primary py-1.5 px-4 text-right">
                         <span className="text-white text-sm font-bold">
                           {profile.salary}
                         </span>
                       </div>
                       {/* Profile info - Adjusted for better name visibility */}
-                      <div className="p-4">
+                      <div className="p-5 pb-4">
                         <div className="flex flex-col items-start">
                           {/* Image and name in separate rows */}
-                          <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-100 mb-3">
+                          <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-primary shadow-lg mb-3 transform transition-transform duration-300 group-hover:scale-105">
                             <img
                               src={profile.image}
                               alt={profile.name}
@@ -284,31 +269,31 @@ const TopPlacements = () => {
                             />
                           </div>
                           <div className="w-full">
-                            <h3 className="font-bold text-gray-900 text-base mb-1 line-clamp-2">
+                            <h3 className="font-bold text-gray-900 text-base mb-1 line-clamp-2 group-hover:text-primary transition-colors duration-300">
                               {profile.name}
                             </h3>
-                            <p className="text-[#FF6B00] font-medium text-sm mb-2">
+                            <p className="text-primary font-medium text-sm mb-2">
                               {profile.position}
                             </p>
                           </div>
                         </div>
                       </div>
                       {/* Company info */}
-                      <div className="px-4 pb-3">
-                        <div className="flex items-center gap-2 py-2 px-3 bg-gray-50 rounded-md">
+                      <div className="px-5 pb-4">
+                        <div className="flex items-center gap-2 py-2 px-3 bg-gray-50 rounded-md border border-gray-100 group-hover:border-primary/20 transition-colors duration-300">
                           <img
                             src={profile.logo}
                             alt={profile.company}
                             className="w-5 h-5 object-contain"
                             loading="lazy"
                           />
-                          <span className="text-sm font-medium text-gray-700">
+                          <span className="text-sm font-medium text-gray-700 group-hover:text-primary transition-colors duration-300">
                             {profile.company}
                           </span>
                         </div>
                       </div>
                       {/* Verification badge */}
-                      <div className="mt-auto px-4 pb-3">
+                      <div className="mt-auto px-5 pb-4">
                         <div className="flex items-center gap-1.5 text-green-600">
                           <svg
                             className="w-3.5 h-3.5"
@@ -346,7 +331,7 @@ const TopPlacements = () => {
           {isLoaded && (
             <div className="grid grid-cols-3 gap-5 mt-8 w-full">
               <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm transform hover:scale-105 transition-all duration-300">
-                <div className="text-2xl font-bold text-[#FF6B00] mb-1">
+                <div className="text-2xl font-bold text-primary mb-1">
                   97%
                 </div>
                 <p className="text-sm text-gray-600 font-medium">
@@ -354,7 +339,7 @@ const TopPlacements = () => {
                 </p>
               </div>
               <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm transform hover:scale-105 transition-all duration-300">
-                <div className="text-2xl font-bold text-[#FF6B00] mb-1">
+                <div className="text-2xl font-bold text-primary mb-1">
                   6LPA
                 </div>
                 <p className="text-sm text-gray-600 font-medium">
@@ -362,7 +347,7 @@ const TopPlacements = () => {
                 </p>
               </div>
               <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm transform hover:scale-105 transition-all duration-300">
-                <div className="text-2xl font-bold text-[#FF6B00] mb-1">
+                <div className="text-2xl font-bold text-primary mb-1">
                   100+
                 </div>
                 <p className="text-sm text-gray-600 font-medium">
@@ -376,7 +361,7 @@ const TopPlacements = () => {
             <div className="text-center mt-8">
               <button
                 onClick={() => navigate("/placements")}
-                className="inline-flex font-bold items-center justify-center px-6 py-2.5 bg-[#FF6B00] text-white text-sm rounded-lg hover:bg-[#FF6B00]/90 transition-colors duration-200"
+                className="inline-flex font-bold items-center justify-center px-6 py-2.5 bg-primary text-white text-sm rounded-lg hover:bg-primary/90 transition-colors duration-200"
               >
                 View All Placements
                 <svg
@@ -443,7 +428,7 @@ const TopPlacements = () => {
             >
               &times;
             </button>
-            <h3 className="text-xl font-bold mb-4 text-center text-[#FF6B00]">
+            <h3 className="text-xl font-bold mb-4 text-center text-primary">
               Enroll to Download Brochure
             </h3>
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -453,7 +438,7 @@ const TopPlacements = () => {
                 placeholder="Your Name"
                 value={form.name}
                 onChange={handleChange}
-                className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FF6B00]"
+                className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
                 disabled={isSubmitting}
               />
               <input
@@ -462,7 +447,7 @@ const TopPlacements = () => {
                 placeholder="Your Email"
                 value={form.email}
                 onChange={handleChange}
-                className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FF6B00]"
+                className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
                 disabled={isSubmitting}
               />
               <input
@@ -471,7 +456,7 @@ const TopPlacements = () => {
                 placeholder="Your Phone Number"
                 value={form.phone}
                 onChange={handleChange}
-                className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FF6B00]"
+                className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
                 disabled={isSubmitting}
               />
               {formError && (
@@ -481,7 +466,7 @@ const TopPlacements = () => {
               )}
               <button
                 type="submit"
-                className="bg-[#FF6B00] text-white font-bold py-2 rounded-lg hover:bg-[#FF6B00]/90 transition-all disabled:opacity-60"
+                className="bg-primary text-white font-bold py-2 rounded-lg hover:bg-primary/90 transition-all disabled:opacity-60"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Registering..." : "Register & Download"}
