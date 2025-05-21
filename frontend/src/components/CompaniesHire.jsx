@@ -109,6 +109,78 @@ const CompaniesHire = () => {
     },
   ];
 
+  // Fourth row of company logos
+  const companyLogosRow4 = [
+    {
+      name: "HCL",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/HCLTech-new-logo.svg/375px-HCLTech-new-logo.svg.png",
+    },
+    {
+      name: "Tech Mahindra",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Logo-True-Colors-original.png/500px-Logo-True-Colors-original.png",
+    },
+    {
+      name: "L&T",
+      logo: "https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/Larsen%26Toubro_logo.svg/160px-Larsen%26Toubro_logo.svg.png",
+    },
+    {
+      name: "Qualcomm",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Qualcomm-Logo.svg/500px-Qualcomm-Logo.svg.png",
+    },
+    {
+      name: "AMD",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/AMD_Logo.svg/2560px-AMD_Logo.svg.png",
+    },
+    {
+      name: "VMware",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Vmware-by-broadcom.svg/500px-Vmware-by-broadcom.svg.png",
+    },
+    {
+      name: "SAP",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/SAP_2011_logo.svg/2560px-SAP_2011_logo.svg.png",
+    },
+    {
+      name: "Atlassian",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Atlassian-horizontal-blue-rgb.svg/500px-Atlassian-horizontal-blue-rgb.svg.png",
+    },
+  ];
+
+  // Fifth row of company logos
+  const companyLogosRow5 = [
+    {
+      name: "JPMorgan",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Logo_of_JPMorganChase_2024.svg/500px-Logo_of_JPMorganChase_2024.svg.png",
+    },
+    {
+      name: "Goldman Sachs",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Goldman_Sachs.svg/2560px-Goldman_Sachs.svg.png",
+    },
+    {
+      name: "Morgan Stanley",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Morgan_Stanley_Logo_2024.svg/500px-Morgan_Stanley_Logo_2024.svg.png",
+    },
+    {
+      name: "PayPal",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/2560px-PayPal.svg.png",
+    },
+    {
+      name: "Visa",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png",
+    },
+    {
+      name: "Mastercard",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/2560px-Mastercard-logo.svg.png",
+    },
+    {
+      name: "American Express",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/330px-American_Express_logo_%282018%29.svg.png",
+    },
+    {
+      name: "Citibank",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Citibank.svg/375px-Citibank.svg.png  ",
+    },
+  ];
+
   return (
     <div id="companies" className="w-full">
       <div className="text-center">
@@ -133,21 +205,20 @@ const CompaniesHire = () => {
         <div className="absolute top-0 right-0 bottom-0 w-12 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
 
         {/* Scrolling logos container */}
-        <div className="py-12 px-6">
-          {/* First row */}
-          <div className="relative overflow-hidden mb-8">
+        <div className="py-8 px-4">
+          {/* First row - Left */}
+          <div className="relative overflow-hidden mb-6">
             <div className="flex animate-marquee whitespace-nowrap items-center">
-              {/* Double the logos for continuous scrolling */}
               {[...companyLogosRow1, ...companyLogosRow1].map(
                 (company, index) => (
                   <div
                     key={index}
-                    className="mx-12 flex items-center justify-center opacity-80 hover:opacity-100 transition-all duration-300 transform hover:scale-105"
+                    className="mx-8 flex items-center justify-center opacity-80 hover:opacity-100 transition-all duration-300 transform hover:scale-105"
                   >
                     <img
                       src={company.logo}
                       alt={company.name}
-                      className="max-h-10 max-w-[160px] object-contain transition-all duration-300"
+                      className="max-h-8 max-w-[120px] object-contain transition-all duration-300"
                       loading="lazy"
                     />
                   </div>
@@ -157,22 +228,21 @@ const CompaniesHire = () => {
           </div>
 
           {/* Subtle divider */}
-          <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent opacity-30 my-6"></div>
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent opacity-30 my-4"></div>
 
-          {/* Second row */}
-          <div className="relative overflow-hidden mb-8">
+          {/* Second row - Right */}
+          <div className="relative overflow-hidden mb-6">
             <div className="flex animate-marquee-reverse whitespace-nowrap items-center">
-              {/* Double the logos for continuous scrolling */}
               {[...companyLogosRow2, ...companyLogosRow2].map(
                 (company, index) => (
                   <div
                     key={index}
-                    className="mx-12 flex items-center justify-center opacity-80 hover:opacity-100 transition-all duration-300 transform hover:scale-105"
+                    className="mx-8 flex items-center justify-center opacity-80 hover:opacity-100 transition-all duration-300 transform hover:scale-105"
                   >
                     <img
                       src={company.logo}
                       alt={company.name}
-                      className="max-h-10 max-w-[160px] object-contain transition-all duration-300"
+                      className="max-h-8 max-w-[120px] object-contain transition-all duration-300"
                       loading="lazy"
                     />
                   </div>
@@ -182,22 +252,69 @@ const CompaniesHire = () => {
           </div>
 
           {/* Subtle divider */}
-          <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent opacity-30 my-6"></div>
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent opacity-30 my-4"></div>
 
-          {/* Third row */}
-          <div className="relative overflow-hidden">
-            <div className="flex animate-marquee-fast whitespace-nowrap items-center">
-              {/* Double the logos for continuous scrolling */}
+          {/* Third row - Left */}
+          <div className="relative overflow-hidden mb-6">
+            <div className="flex animate-marquee whitespace-nowrap items-center">
               {[...companyLogosRow3, ...companyLogosRow3].map(
                 (company, index) => (
                   <div
                     key={index}
-                    className="mx-12 flex items-center justify-center opacity-80 hover:opacity-100 transition-all duration-300 transform hover:scale-105"
+                    className="mx-8 flex items-center justify-center opacity-80 hover:opacity-100 transition-all duration-300 transform hover:scale-105"
                   >
                     <img
                       src={company.logo}
                       alt={company.name}
-                      className="max-h-10 max-w-[160px] object-contain transition-all duration-300"
+                      className="max-h-8 max-w-[120px] object-contain transition-all duration-300"
+                      loading="lazy"
+                    />
+                  </div>
+                )
+              )}
+            </div>
+          </div>
+
+          {/* Subtle divider */}
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent opacity-30 my-4"></div>
+
+          {/* Fourth row - Right */}
+          <div className="relative overflow-hidden mb-6">
+            <div className="flex animate-marquee-reverse whitespace-nowrap items-center">
+              {[...companyLogosRow4, ...companyLogosRow4].map(
+                (company, index) => (
+                  <div
+                    key={index}
+                    className="mx-8 flex items-center justify-center opacity-80 hover:opacity-100 transition-all duration-300 transform hover:scale-105"
+                  >
+                    <img
+                      src={company.logo}
+                      alt={company.name}
+                      className="max-h-8 max-w-[120px] object-contain transition-all duration-300"
+                      loading="lazy"
+                    />
+                  </div>
+                )
+              )}
+            </div>
+          </div>
+
+          {/* Subtle divider */}
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent opacity-30 my-4"></div>
+
+          {/* Fifth row - Left */}
+          <div className="relative overflow-hidden">
+            <div className="flex animate-marquee whitespace-nowrap items-center">
+              {[...companyLogosRow5, ...companyLogosRow5].map(
+                (company, index) => (
+                  <div
+                    key={index}
+                    className="mx-8 flex items-center justify-center opacity-80 hover:opacity-100 transition-all duration-300 transform hover:scale-105"
+                  >
+                    <img
+                      src={company.logo}
+                      alt={company.name}
+                      className="max-h-8 max-w-[120px] object-contain transition-all duration-300"
                       loading="lazy"
                     />
                   </div>
@@ -212,13 +329,13 @@ const CompaniesHire = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mt-10 px-2 md:px-6">
         <div className="bg-gray-800 border border-gray-700 rounded-xl p-4 md:p-6 flex flex-col items-center text-center transform hover:scale-105 transition-all duration-300">
           <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">
-            100+
+            150+
           </div>
           <p className="text-gray-400 text-sm md:text-base">Hiring Partners</p>
         </div>
         <div className="bg-gray-800 border border-gray-700 rounded-xl p-4 md:p-6 flex flex-col items-center text-center transform hover:scale-105 transition-all duration-300">
           <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">
-            85%
+            90%
           </div>
           <p className="text-gray-400 text-sm md:text-base">
             Fortune 100 Companies
@@ -226,7 +343,7 @@ const CompaniesHire = () => {
         </div>
         <div className="bg-gray-800 border border-gray-700 rounded-xl p-4 md:p-6 flex flex-col items-center text-center transform hover:scale-105 transition-all duration-300">
           <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">
-            100+
+            200+
           </div>
           <p className="text-gray-400 text-sm md:text-base">Open Positions</p>
         </div>
