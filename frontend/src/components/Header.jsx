@@ -51,7 +51,7 @@ function Header() {
       className={`w-full fixed top-0 left-0 right-0 z-5 transition-all ${
         scrolled
           ? "bg-white/95 backdrop-blur-md shadow-lg py-2"
-          : "bg-white/80 backdrop-blur-sm py-3"
+          : "bg-white/90 backdrop-blur-sm py-3"
       }`}
     >
       <div className="w-full flex justify-between items-center px-6">
@@ -153,7 +153,6 @@ function Header() {
             {[
               { id: "home", label: "Home" },
               { id: "about", label: "About" },
-              { id: "courses", label: "Courses" },
               { id: "placements", label: "Placements" },
               { id: "contact", label: "Contact" },
             ].map(({ id, label }) => (
@@ -161,7 +160,7 @@ function Header() {
                 <a
                   href={`#${id}`}
                   onClick={(e) => handleLinkClick(e, id)}
-                  className="block py-2.5 px-4 text-gray-700 font-bold hover:text-primary rounded-md transition-all duration-300 hover:bg-gray-50/80 tracking-wide"
+                  className="block py-2.5 px-4 text-gray-700 font-bold hover:text-[#FF6B00] rounded-md transition-all duration-300 hover:bg-gray-50/80 tracking-wide"
                 >
                   {label}
                 </a>
