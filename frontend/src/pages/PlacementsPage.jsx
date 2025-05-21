@@ -9,7 +9,7 @@ function PlacementsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[var(--gray-50)] font-['Poppins',Arial,sans-serif]">
+    <div className="min-h-screen">
       <Header />
       <main className="pt-20">
         <Placements />

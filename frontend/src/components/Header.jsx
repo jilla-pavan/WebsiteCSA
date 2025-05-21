@@ -19,6 +19,13 @@ function Header() {
   const handleLinkClick = (e, sectionId) => {
     e.preventDefault();
 
+    // Special handling for placements page
+    if (sectionId === "placements") {
+      navigate("/placements");
+      setMobileMenuOpen(false);
+      return;
+    }
+
     // If we're on a different page, navigate to home first
     if (location.pathname !== "/") {
       navigate("/");
@@ -64,6 +71,7 @@ function Header() {
               { id: "home", label: "Home" },
               { id: "about", label: "About" },
               { id: "courses", label: "Courses" },
+              { id: "placements", label: "Placements" },
               { id: "contact", label: "Contact" },
             ].map(({ id, label }) => (
               <li key={id}>
@@ -145,14 +153,15 @@ function Header() {
             {[
               { id: "home", label: "Home" },
               { id: "about", label: "About" },
-              { id: "placements-preview", label: "Placements" },
+              { id: "courses", label: "Courses" },
+              { id: "placements", label: "Placements" },
               { id: "contact", label: "Contact" },
             ].map(({ id, label }) => (
               <li key={id}>
                 <a
                   href={`#${id}`}
                   onClick={(e) => handleLinkClick(e, id)}
-                  className="block py-2.5 px-4 text-gray-700 font-bold hover:text-[#FF6B00] rounded-md transition-all duration-300 hover:bg-gray-50/80 tracking-wide"
+                  className="block py-2.5 px-4 text-gray-700 font-bold hover:text-primary rounded-md transition-all duration-300 hover:bg-gray-50/80 tracking-wide"
                 >
                   {label}
                 </a>
