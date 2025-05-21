@@ -10,19 +10,19 @@ const CareerAdvisorModal = ({ isOpen, onClose }) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center font-poppins">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+        className="fixed inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       ></div>
 
       {/* Modal Container */}
-      <div className="relative w-full max-w-2xl m-2 z-10">
-        <div className="card flex flex-col sm:flex-row overflow-hidden p-0">
+      <div className="relative w-full max-w-3xl m-4 z-10">
+        <div className="card flex flex-col sm:flex-row overflow-hidden p-0 bg-white rounded-2xl shadow-2xl">
           {/* Content */}
-          <div className="flex-1 p-4 sm:p-6 flex flex-col justify-center relative min-h-[220px]">
+          <div className="flex-1 p-6 sm:p-8 flex flex-col justify-center relative min-h-[280px]">
             {/* Close button */}
             <button
               onClick={onClose}
-              className="absolute top-3 right-3 text-gray-400 hover:text-primary transition-colors"
+              className="absolute top-4 right-4 text-gray-500 hover:text-primary transition-colors bg-gray-100 hover:bg-gray-200 p-2 rounded-full"
               aria-label="Close"
             >
               <svg
@@ -39,41 +39,88 @@ const CareerAdvisorModal = ({ isOpen, onClose }) => {
                 />
               </svg>
             </button>
-            <h2 className="section-title gradient-text mb-3 text-xl sm:text-2xl md:text-3xl text-left leading-tight text-center">
-              Talk to Our Advisor & Unlock Your Career Potential!
+
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-gray-800 leading-tight">
+              Talk to Our Advisor &{" "}
+              <span className="text-[#FF6B00]">
+                Unlock Your Career Potential!
+              </span>
             </h2>
-            <ul className="text-gray-700 space-y-2 mb-5 mt-2 list-disc list-inside text-sm sm:text-base text-left">
-              <li>
-                Personalized Career Roadmap tailored to your skills & goals
+
+            <ul className="text-gray-600 space-y-3 mb-8 mt-2">
+              <li className="flex items-start gap-3">
+                <svg
+                  className="w-5 h-5 text-[#FF6B00] mt-1 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>
+                  Personalized Career Roadmap tailored to your skills & goals
+                </span>
               </li>
-              <li>
-                Free Career Counseling to help you make informed decisions
+              <li className="flex items-start gap-3">
+                <svg
+                  className="w-5 h-5 text-[#FF6B00] mt-1 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>
+                  Free Career Counseling to help you make informed decisions
+                </span>
               </li>
-              <li>
-                Dedicated Placement Support to ensure you land the right
-                opportunity
+              <li className="flex items-start gap-3">
+                <svg
+                  className="w-5 h-5 text-[#FF6B00] mt-1 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>
+                  Dedicated Placement Support to ensure you land the right
+                  opportunity
+                </span>
               </li>
             </ul>
-            <div className="flex flex-col sm:flex-row gap-3 mt-2 w-full">
+
+            <div className="flex flex-col sm:flex-row gap-4 mt-auto">
               <a
                 href="https://api.whatsapp.com/send/?phone=916301046346&text=Hi%21+I%E2%80%99m+very+interested+%E2%80%94+can+you+send+me+more+info+as+soon+as+possible%3F&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-secondary flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto"
+                className="btn bg-[#25D366] hover:bg-[#128C7E] text-white flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto px-6 py-3 transition-all duration-300 shadow-md hover:shadow-lg"
               >
-                <img
-                  src={whatsappIcon}
-                  alt="WhatsApp"
-                  className="w-6 h-6 rounded-full"
-                />
+                <img src={whatsappIcon} alt="WhatsApp" className="w-5 h-5 rounded-full" />
                 WhatsApp Us
               </a>
               <button
-                className="btn btn-primary flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto"
+                className="btn bg-[#FF6B00] hover:bg-[#E65C00] text-white flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto px-6 py-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
                 onClick={() => navigate("/enroll")}
               >
                 <svg
-                  className="w-4 h-4"
+                  className="w-5 h-5"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -81,6 +128,16 @@ const CareerAdvisorModal = ({ isOpen, onClose }) => {
                 </svg>
                 Request a Call Back
               </button>
+            </div>
+          </div>
+
+          {/* Cartoon Image Section */}
+          <div className="hidden sm:block w-[320px] bg-gradient-to-br from-orange-50 to-orange-100 relative overflow-hidden">
+            <div className="absolute inset-0 bg-[url('https://img.freepik.com/free-vector/career-counseling-concept-illustration_114360-1000.jpg')] bg-contain bg-center bg-no-repeat opacity-90"></div>
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white/90 to-transparent">
+              <p className="text-base text-gray-700 text-center font-medium">
+                Let's shape your future together!
+              </p>
             </div>
           </div>
         </div>
