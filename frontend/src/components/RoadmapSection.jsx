@@ -133,7 +133,6 @@ const RoadmapSection = () => {
           </h2>
           <div className="relative">
             {/* Connecting line for learning process */}
-            <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-rose-600 -translate-y-1/2"></div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {learningProcessData.map((item, idx) => (
@@ -169,7 +168,6 @@ const RoadmapSection = () => {
             Our Career <span className="text-[#FF6B00]">Roadmap</span>
           </h2>
           <div className="relative">
-            <div className="absolute left-1/2 top-0 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-blue-500 via-purple-500 to-orange-500"></div>
 
             <div className="space-y-8">
               {roadmapData.map((item, idx) => {
