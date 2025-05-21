@@ -1,71 +1,62 @@
 import React from "react";
+import { Udhay, Dileep, Rambabu, Jagadeesh, Teja } from "../../public/assets/placements";
 
 export const Testimonial = () => {
   const testimonials = [
     {
       id: 1,
-      name: "Ananya Verma",
-      role: "Full Stack Developer",
-      company: "Google",
-      image: "https://randomuser.me/api/portraits/women/1.jpg",
-      testimonial:
-        "Career Sure Academy transformed my career. The practical approach and industry-relevant curriculum helped me land my dream job.",
+      name: "Udhay Kaitha",
+      role: "Software Developer",
+      company: "Multiplier AI",
+      image: Udhay,
+      testimonial: "The comprehensive curriculum and hands-on projects at CSA helped me secure my dream role at Multiplier AI!",
       rating: 5,
       batch: "2023",
-      companyLogo:
-        "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png",
+      companyLogo: "https://multiplierai.co/wp-content/uploads/2022/06/multiplier_logo.png",
     },
     {
       id: 2,
-      name: "Rahul Sharma",
-      role: "Data Scientist",
-      company: "Microsoft",
-      image: "https://randomuser.me/api/portraits/men/2.jpg",
-      testimonial:
-        "The mentorship and guidance I received were exceptional. I went from a beginner to a confident data scientist.",
+      name: "Dileep",
+      role: "Testing Engineer",
+      company: "Wipro",
+      image: Dileep,
+      testimonial: "The practical training and industry exposure at CSA prepared me well for my role at Wipro.",
       rating: 5,
       batch: "2023",
-      companyLogo:
-        "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b?ver=5c31",
+      companyLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Wipro_new_logo.svg/330px-Wipro_new_logo.svg.png",
     },
     {
       id: 3,
-      name: "Priya Patel",
-      role: "ML Engineer",
-      company: "Amazon",
-      image: "https://randomuser.me/api/portraits/women/3.jpg",
-      testimonial:
-        "The hands-on projects and real-world applications made learning complex concepts much easier. Highly recommended!",
+      name: "Jagadeesh",
+      role: "Software Developer",
+      company: "Sconex Software",
+      image: Jagadeesh,
+      testimonial: "The mentorship and project-based learning approach at CSA was instrumental in my success.",
       rating: 5,
       batch: "2023",
-      companyLogo:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png",
+      companyLogo: "https://media.licdn.com/dms/image/v2/D560BAQFnAOeChCHW-Q/company-logo_200_200/company-logo_200_200/0/1729242362993/sconexit_logo?e=2147483647&v=beta&t=lxiLsl70uulj0KYdk2B8tj9-8jxOZQDEZ8MKkuJ62zY",
     },
     {
       id: 4,
-      name: "Vikram Singh",
-      role: "Cloud Architect",
-      company: "Netflix",
-      image: "https://randomuser.me/api/portraits/men/4.jpg",
-      testimonial:
-        "The cloud computing course was exactly what I needed to advance my career. The instructors were amazing!",
+      name: "Rambabu",
+      role: "Data Analyst",
+      company: "Nova Web Innovations",
+      image: Rambabu,
+      testimonial: "CSA's data science program provided me with the perfect foundation for my career in analytics.",
       rating: 5,
       batch: "2023",
-      companyLogo:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png",
+      companyLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png",
     },
     {
       id: 5,
-      name: "Neha Gupta",
-      role: "DevOps Engineer",
-      company: "Meta",
-      image: "https://randomuser.me/api/portraits/women/5.jpg",
-      testimonial:
-        "The DevOps course helped me understand modern deployment practices. I got multiple job offers after completion!",
+      name: "Tirumala Teja",
+      role: "Software Developer",
+      company: "Kapil Technogles",
+      image: Teja,
+      testimonial: "The industry-relevant curriculum and placement support at CSA helped me land my first tech role.",
       rating: 5,
       batch: "2023",
-      companyLogo:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Meta_Platforms_Inc._logo.svg/2560px-Meta_Platforms_Inc._logo.svg.png",
+      companyLogo: "https://kcs-tech.com/static/media/ptkcs%20logo%20png%20total.cf3b714d11854610e992.png",
     },
   ];
 
