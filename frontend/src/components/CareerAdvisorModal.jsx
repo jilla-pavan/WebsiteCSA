@@ -33,21 +33,34 @@ const CareerAdvisorModal = ({ isOpen, onClose }) => {
 
               <ul className="text-gray-700 space-y-2 md:space-y-3 mb-4 md:mb-6 mt-2 md:mt-3">
                 <li className="flex items-start gap-2 md:gap-3">
-                  <img src={CHECKED} className="w-4 h-4 flex-shrink-0 mt-1" alt="Checked" />
+                  <img
+                    src={CHECKED}
+                    className="w-4 h-4 flex-shrink-0 mt-1"
+                    alt="Checked"
+                  />
                   <span className="text-sm md:text-base text-gray-800 group-hover:text-gray-900 transition-colors">
                     Personalized Career Roadmap tailored to your skills & goals
                   </span>
                 </li>
                 <li className="flex items-start gap-2 md:gap-3">
-                  <img src={CHECKED} className="w-4 h-4 flex-shrink-0 mt-1" alt="Checked" />
+                  <img
+                    src={CHECKED}
+                    className="w-4 h-4 flex-shrink-0 mt-1"
+                    alt="Checked"
+                  />
                   <span className="text-sm md:text-base text-gray-800 group-hover:text-gray-900 transition-colors">
                     Free Career Counseling to help you make informed decisions
                   </span>
                 </li>
                 <li className="flex items-start gap-2 md:gap-3">
-                  <img src={CHECKED} className="w-4 h-4 flex-shrink-0 mt-1" alt="Checked" />
+                  <img
+                    src={CHECKED}
+                    className="w-4 h-4 flex-shrink-0 mt-1"
+                    alt="Checked"
+                  />
                   <span className="text-sm md:text-base text-gray-800 group-hover:text-gray-900 transition-colors">
-                    Dedicated Placement Support to ensure you land the right opportunity
+                    Dedicated Placement Support to ensure you land the right
+                    opportunity
                   </span>
                 </li>
               </ul>
