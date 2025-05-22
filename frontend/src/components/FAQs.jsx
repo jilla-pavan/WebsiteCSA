@@ -1,16 +1,25 @@
 import React from "react";
+import { useState } from "react";
+import CHECKED from "/assets/icons/checked.png";
 
 export const FAQs = () => {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const handleSummaryClick = (index, event) => {
+    event.preventDefault();
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
-    <div className="mt-16 px-6">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight">
+    <div className="mt-16 mb-16 px-6">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl md:text-5xl font-bold mb-6">
           <span className="text-gray-900">Our </span>
           <span className="text-[#FF6B00]">Frequently Asked Questions</span>
         </h1>
       </div>
 
-      <div className="max-w-3xl mx-auto space-y-4">
+      <div className="max-w-3xl mx-auto space-y-6">
         {[
           {
             question: "What are the prerequisites for joining the courses?",
@@ -18,84 +27,79 @@ export const FAQs = () => {
               "Basic computer knowledge and a strong willingness to learn are essential",
               "Web Development: Basic HTML/CSS knowledge required",
               "Data Science: Basic mathematics and statistics understanding needed",
-              "Other courses: No specific prerequisites, just enthusiasm to learn"
+              "Other courses: No specific prerequisites, just enthusiasm to learn",
             ],
           },
           {
             question: "How is the placement assistance provided?",
             answer: [
               "Comprehensive placement support including:",
-              "• Resume building and optimization",
-              "• Mock interviews and feedback sessions",
-              "• Soft skills training workshops",
-              "• Direct connections with 100+ hiring partners",
-              "• Lifetime placement assistance for alumni"
+              "Resume building and optimization",
+              "Mock interviews and feedback sessions",
+              "Soft skills training workshops",
+              "Direct connections with 100+ hiring partners",
+              "Lifetime placement assistance for alumni",
             ],
           },
           {
             question: "What is the course duration and schedule?",
             answer: [
-              "Course Duration:",
-              "• 16-24 weeks depending on the program",
-              "• Flexible scheduling options available",
+              "16-20 weeks depending on the program",
+              "Flexible scheduling options available",
               "Schedule Options:",
-              "• Weekday batches (Monday-Friday)",
-              "• Weekend batches (Saturday-Sunday)",
-              "• Live classes: 2-3 hours duration",
-              "• Additional hands-on practice sessions"
+              "batches (Monday-Saturday)",
+              "Live classes: 1-2 hours duration",
+              "additional doubt sessions, monitoring classes",
             ],
           },
           {
             question: "Is there an EMI or scholarship option available?",
             answer: [
-              "Payment Options:",
-              "• Flexible EMI options starting from ₹5,999/month",
-              "• Available through our banking partners",
-              "Scholarship Opportunities:",
-              "• Merit-based scholarships up to 50%",
-              "• Special discounts for women candidates",
-              "• Early bird discounts available"
+              "Payment Options are flexible",
+              "Flexible EMI options, pay in installements (two installements)",
+              "Discount through referals",
             ],
           },
           {
             question: "What kind of projects will I work on during the course?",
             answer: [
               "Real-world projects from industry partners including:",
-              "• E-commerce platforms",
-              "• Social media applications",
-              "• Data analytics dashboards",
-              "• Machine learning models",
-              "• All projects designed for practical experience",
-              "• Portfolio building opportunities"
+              "E-commerce platforms",
+              "Social media applications",
+              "Data analytics dashboards",
+              "Machine learning models",
+              "all projects designed for practical experience",
+              "Portfolio building opportunities",
             ],
           },
           {
             question: "Do you provide internship opportunities?",
             answer: [
-              "Internship Program Details:",
-              "• 2-3 month paid internships",
-              "• Available for top-performing students",
-              "• High conversion rate to full-time roles",
-              "Additional Support:",
-              "• Personalized internship matching",
-              "• Based on student interests and skills",
-              "• Industry partner connections"
+              "2-3 month paid internships",
+              "Available for top-performing students",
+              "High conversion rate to full-time roles",
+              "Personalized internship matching",
+              "Based on student interests and skills",
+              "Industry partner connections",
             ],
           },
         ].map((faq, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl overflow-hidden border border-gray-100 transition-all duration-300 hover:border-[#FF6B00]/30"
+            className="bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl border border-gray-100 hover:border-[#FF6B00]/30"
           >
-            <details className="group">
-              <summary className="flex items-center justify-between gap-6 w-full px-6 py-4 text-left cursor-pointer focus:outline-none">
-                <span className="text-lg font-bold text-gray-900 group-hover:text-[#FF6B00] tracking-wide">
+            <details className="group" open={openIndex === index}>
+              <summary
+                className="flex items-center justify-between gap-4 w-full px-6 py-5 text-left cursor-pointer focus:outline-none"
+                onClick={(event) => handleSummaryClick(index, event)}
+              >
+                <span className="text-lg font-bold text-gray-900 group-hover:text-[#FF6B00] transition-colors duration-300">
                   {faq.question}
                 </span>
-                <span className="relative flex-shrink-0 ml-1.5 w-5 h-5">
+                <span className="relative flex-shrink-0 w-5 h-5">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="absolute inset-0 w-5 h-5 opacity-100 group-open:opacity-0 transition-opacity duration-300 text-orange-400"
+                    className={`absolute inset-0 w-5 h-5 transition-opacity duration-300 text-orange-500 ${openIndex === index ? 'opacity-0' : 'opacity-100'}`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -109,7 +113,7 @@ export const FAQs = () => {
                   </svg>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="absolute inset-0 w-5 h-5 opacity-0 group-open:opacity-100 transition-opacity duration-300 text-orange-400"
+                    className={`absolute inset-0 w-5 h-5 transition-opacity duration-300 text-orange-500 ${openIndex === index ? 'opacity-100' : 'opacity-0'}`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -123,17 +127,25 @@ export const FAQs = () => {
                   </svg>
                 </span>
               </summary>
-              <div className="px-6 pb-4">
-                <ul className="text-gray-600 leading-relaxed font-medium space-y-1.5">
-                  {faq.answer.map((point, idx) => (
-                    <li key={idx} className="flex items-start">
-                      {point.startsWith('•') ? (
-                        <span className="mr-2 text-[#FF6B00]">•</span>
-                      ) : null}
-                      <span>{point.replace('•', '')}</span>
-                    </li>
-                  ))}
-                </ul>
+              {/* Animated Content Area */}
+              <div
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index ? 'max-h-screen opacity-100 delay-100' : 'max-h-0 opacity-0'}`}
+              >
+                {/* Actual Content Wrapper */}
+                <div className="px-6 pb-5 border-t border-gray-100 mt-1">
+                  <ul className="text-gray-700 leading-relaxed text-base space-y-2">
+                    {faq.answer.map((point, idx) => (
+                      <li key={idx} className="flex items-start">
+                        <img
+                          src={CHECKED}
+                          alt="Checked"
+                          className="w-4 h-4 mt-1 flex-shrink-0 mr-2 text-[#FF6B00]"
+                        />
+                        <span>{point.replace('•', '').trim()}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </details>
           </div>

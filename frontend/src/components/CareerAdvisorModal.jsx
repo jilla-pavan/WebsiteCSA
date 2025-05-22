@@ -1,6 +1,7 @@
 import React from "react";
 import whatsappIcon from "/assets/whatsApp-Icon.png";
 import { useNavigate } from "react-router-dom";
+import CHECKED from "/assets/icons/checked.png";
 
 const CareerAdvisorModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
@@ -49,55 +50,31 @@ const CareerAdvisorModal = ({ isOpen, onClose }) => {
 
             <ul className="text-gray-600 space-y-3 mb-8 mt-2">
               <li className="flex items-start gap-3">
-                <svg
-                  className="w-5 h-5 text-[#FF6B00] mt-1 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
+                <img
+                  src={CHECKED}
+                  alt="Checked"
+                  className="w-5 h-5 mt-1 flex-shrink-0 text-[#FF6B00]"
+                />
                 <span>
                   Personalized Career Roadmap tailored to your skills & goals
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <svg
-                  className="w-5 h-5 text-[#FF6B00] mt-1 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
+                <img
+                  src={CHECKED}
+                  alt="Checked"
+                  className="w-5 h-5 mt-1 flex-shrink-0 text-green-300"
+                />
                 <span>
                   Free Career Counseling to help you make informed decisions
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <svg
-                  className="w-5 h-5 text-[#FF6B00] mt-1 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
+                <img
+                  src={CHECKED}
+                  alt="Checked"
+                  className="w-5 h-5 mt-1 flex-shrink-0 text-[#FF6B00]"
+                />
                 <span>
                   Dedicated Placement Support to ensure you land the right
                   opportunity
@@ -112,7 +89,11 @@ const CareerAdvisorModal = ({ isOpen, onClose }) => {
                 rel="noopener noreferrer"
                 className="btn bg-[#25D366] hover:bg-[#128C7E] text-white flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto px-6 py-3 transition-all duration-300 shadow-md hover:shadow-lg"
               >
-                <img src={whatsappIcon} alt="WhatsApp" className="w-5 h-5 rounded-full" />
+                <img
+                  src={whatsappIcon}
+                  alt="WhatsApp"
+                  className="w-5 h-5 rounded-full"
+                />
                 WhatsApp Us
               </a>
               <button
