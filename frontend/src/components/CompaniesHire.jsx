@@ -191,19 +191,7 @@ const CompaniesHire = () => {
       </div>
 
       {/* Logos Container */}
-      <div className="relative rounded-xl overflow-hidden bg-white shadow-lg border border-gray-100">
-        {/* Top Gradient Fade */}
-        <div className="absolute top-0 left-0 right-0 h-12 z-10 bg-gradient-to-b from-white to-transparent pointer-events-none"></div>
-
-        {/* Bottom Gradient Fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-12 z-10 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
-
-        {/* Left Gradient Fade */}
-        <div className="absolute top-0 left-0 bottom-0 w-12 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
-
-        {/* Right Gradient Fade */}
-        <div className="absolute top-0 right-0 bottom-0 w-12 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
-
+      <div className="relative rounded-xl overflow-hidden">
         {/* Scrolling logos container */}
         <div className="py-8 px-4">
           {/* First row - Left */}

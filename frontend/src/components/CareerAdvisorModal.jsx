@@ -22,7 +22,7 @@ const CareerAdvisorModal = ({ isOpen, onClose }) => {
           {/* Grid container for two columns */}
           <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-0">
             {/* Content */}
-            <div className="flex flex-col justify-center relative min-h-[220px] px-4 py-2">
+            <div className="flex flex-col justify-center relative min-h-[220px] px-4 py-4">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 leading-tight text-center">
                 <span className="text-gray-800">Talk to Our Advisor &</span>
                 <br />
