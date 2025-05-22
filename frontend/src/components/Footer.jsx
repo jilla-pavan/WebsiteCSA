@@ -188,8 +188,8 @@ function Footer() {
                     </a>
                   ) : (
                     <span className="text-gray-400 text-sm sm:text-base group-hover:text-primary transition-all break-words leading-relaxed flex-1">
-                      {contact.text}
-                    </span>
+                  {contact.text}
+                </span>
                   )
                 }
               </div>
@@ -209,4 +209,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default Footer; 
