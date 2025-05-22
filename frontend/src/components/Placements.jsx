@@ -129,29 +129,29 @@ function Placements() {
         </div>
 
         {/* Placed Students Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {placedStudents.map((student) => (
-            <div key={student.id} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group border-2 border-gray-100 hover:border-primary/30">
+            <div key={student.id} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group border border-gray-100 hover:border-primary/30">
               {/* Student Image and Company Logo */}
-              <div className="relative h-48 flex items-center justify-center bg-gray-50 border-b border-gray-100">
-                <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg transform group-hover:scale-105 transition-transform duration-500">
+              <div className="relative h-52 flex items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100 border-b border-gray-100">
+                <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-xl transform group-hover:scale-105 transition-transform duration-500">
                   <img
                     src={student.image}
                     alt={student.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <div className="flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                    <div className="w-10 h-10 rounded-lg bg-white p-1 shadow-lg transform group-hover:scale-110 transition-transform duration-300 border border-gray-100">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <div className="flex items-center gap-3 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                    <div className="w-10 h-10 rounded-xl bg-white p-1.5 shadow-xl transform group-hover:scale-110 transition-transform duration-500 border border-gray-100">
                       <img
                         src={student.companyLogo}
                         alt={student.company}
                         className="w-full h-full object-contain"
                       />
                     </div>
-                    <span className="text-white font-semibold text-lg">{student.company}</span>
+                    <span className="bg-gradient-to-r from-orange-400 to-orange-500 bg-clip-text text-transparent font-extrabold text-xl drop-shadow-lg tracking-wide">{student.company}</span>
                   </div>
                 </div>
               </div>
@@ -159,17 +159,17 @@ function Placements() {
               {/* Student Details */}
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-1 group-hover:text-primary transition-colors duration-300">{student.name}</h3>
-                <p className="text-primary font-semibold mb-3">{student.role}</p>
-                <div className="flex flex-wrap items-center gap-2 mb-4">
-                  <span className="px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium border border-primary/20">
+                <p className="text-primary font-semibold text-base mb-3">{student.role}</p>
+                <div className="flex flex-wrap items-center gap-3 mb-4">
+                  <span className="px-6 py-2.5 bg-gradient-to-r from-orange-400 to-orange-500 text-white rounded-full text-xl font-extrabold shadow-lg transform hover:scale-105 transition-transform duration-300">
                     {student.package}
                   </span>
-                  <span className="px-4 py-1.5 bg-gray-100 text-gray-600 rounded-full text-sm border border-gray-200">
+                  <span className="px-3 py-1.5 bg-gray-100 text-gray-600 rounded-full text-xs font-medium border border-gray-200">
                     {student.course}
                   </span>
                 </div>
-                <div className="relative">
-                  <p className="text-gray-600 text-sm italic leading-relaxed">"{student.testimonial}"</p>
+                <div className="relative bg-gray-50 rounded-xl p-4 border border-gray-100">
+                  <p className="text-gray-600 text-xs leading-relaxed">"{student.testimonial}"</p>
                   <div className="absolute -top-2 -left-2 text-4xl text-primary/20 font-serif">"</div>
                 </div>
               </div>
