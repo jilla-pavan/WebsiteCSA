@@ -83,13 +83,13 @@ const CareerAdvisorModal = ({ isOpen, onClose }) => {
             </div>
 
             {/* Advisor Image Section */}
-            <div className="sm:block w-full relative overflow-hidden flex flex-col justify-end items-center bg-gray-50 py-4 md:py-6">
+            <div className="sm:block w-full relative overflow-hidden flex flex-col justify-end items-center">
               <div className="relative w-full h-full flex justify-center items-center">
-                <div className="absolute inset-0 bg-[#FF6B00] opacity-30 rounded-full filter blur-xl w-3/4 h-3/4 mx-auto my-auto"></div>
+                <div className="absolute inset-6  bg-[#FF6B00] opacity-20 rounded-full filter blur-xl w-3/4 h-3/4 md:w-full md:h-full mx-auto my-auto"></div>
                 <img
                   src={ADVISOR}
                   alt="Advisor Image"
-                  className="w-auto h-[180px] md:h-[250px] object-contain relative z-10"
+                  className="w-auto h-[180px] md:w-full md:h-full object-contain relative z-10"
                 />
               </div>
             </div>
