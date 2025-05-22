@@ -66,13 +66,18 @@ function GetInTouch() {
               <h4 className="text-lg font-semibold text-gray-900 mb-2">
                 Visit Us
               </h4>
-              <p className="text-gray-600 leading-relaxed max-w-sm text-sm">
+              <a
+                href="https://www.google.com/maps/@17.4735796,78.3881738,16z?entry=ttu&g_ep=EgoyMDUxNS4xIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-[#FF6B00] transition-colors duration-300 leading-relaxed max-w-sm text-sm hover:underline"
+              >
                 LIG-B/F-67/4, 4th Phase, KPHB,
                 <br />
                 K P H B Phase 4, Kukatpally,
                 <br />
                 Hyderabad, Telangana 500072, India
-              </p>
+              </a>
             </div>
 
             {/* Email */}
@@ -127,14 +132,18 @@ function GetInTouch() {
               </h4>
               <div className="space-y-1">
                 <a
-                  href="tel:+918919734391"
-                  className="text-gray-600 hover:text-[#FF6B00] transition-colors duration-300 block text-sm"
+                  href="https://api.whatsapp.com/send/?phone=918919734391&text=Hi%21+I%E2%80%99m+very+interested+%E2%80%94+can+you+send+me+more+info+as+soon+as+possible%3F&type=phone_number&app_absent=0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-[#FF6B00] transition-colors duration-300 block text-sm hover:underline"
                 >
                   +91 8919734391
                 </a>
                 <a
-                  href="tel:+916301046346"
-                  className="text-gray-600 hover:text-[#FF6B00] transition-colors duration-300 block text-sm"
+                  href="https://api.whatsapp.com/send/?phone=916301046346&text=Hi%21+I%E2%80%99m+very+interested+%E2%80%94+can+you+send+me+more+info+as+soon+as+possible%3F&type=phone_number&app_absent=0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-[#FF6B00] transition-colors duration-300 block text-sm hover:underline"
                 >
                   +91 6301046346
                 </a>
