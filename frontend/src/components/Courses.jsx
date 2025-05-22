@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import CourseDetailsModal from "./CourseDetailsModal";
-import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../firebase/config';
-import mernSyllabusUrl from "/assets/related_PDFs/mern-syllabus.pdf?url"
-import javafullstackSyllabusUrl from "/assets/related_PDFs/java-full-stack-syllabus.pdf?url"
-import pythonfullstackSyllabusUrl from "/assets/related_PDFs/python-full-stack-syllabus.pdf?url"
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase/config";
+import mernSyllabusUrl from "/assets/related_PDFs/mern-syllabus.pdf?url";
+import javafullstackSyllabusUrl from "/assets/related_PDFs/java-full-stack-syllabus.pdf?url";
+import pythonfullstackSyllabusUrl from "/assets/related_PDFs/python-full-stack-syllabus.pdf?url";
+import MERN from "/assets/related_Pics/mern.png";
+import JAVA from "/assets/related_Pics/java.png";
+import PYTHON from "/assets/related_Pics/python.png";
 
 const Courses = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
@@ -43,17 +46,17 @@ const Courses = () => {
       });
       setShowEnrollPrompt(false);
       setForm({ name: "", email: "", phone: "" });
-      
+
       // Download the syllabus after successful enrollment
       const syllabusPaths = {
         mern: mernSyllabusUrl,
         java: javafullstackSyllabusUrl,
-        python: pythonfullstackSyllabusUrl
+        python: pythonfullstackSyllabusUrl,
       };
 
       const syllabusPath = syllabusPaths[courseForDownload.id];
       if (syllabusPath) {
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = syllabusPath;
         link.download = `${courseForDownload.title}-Syllabus.pdf`;
         document.body.appendChild(link);
@@ -81,7 +84,7 @@ const Courses = () => {
   const courses = [
     {
       id: "mern",
-      title: "MERN Full Stack",
+      title: "MERN Full Stack with AI",
       description:
         "Master modern web development with MongoDB, Express.js, React.js, and Node.js",
       price: "₹30,000",
@@ -118,7 +121,7 @@ const Courses = () => {
     },
     {
       id: "java",
-      title: "Java Full Stack",
+      title: "Java Full Stack with AI",
       description:
         "Enterprise-grade development with Java, Spring Boot, and MySQL",
       price: "₹30,000",
@@ -152,7 +155,7 @@ const Courses = () => {
     },
     {
       id: "python",
-      title: "Python Full Stack",
+      title: "Python Full Stack with AI",
       description:
         "Modern Python development with Django, React, and PostgreSQL",
       price: "₹30,000",
@@ -207,20 +210,20 @@ const Courses = () => {
             className="group bg-white rounded-xl overflow-hidden shadow-lg hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex flex-col h-full min-h-[480px]"
           >
             {/* Course Image */}
-            <div className="relative h-48 overflow-hidden">
+            <div className="relative h-44 flex items-center justify-center overflow-hidden bg-black">
               <div className="absolute inset-0 from-gray-900/90 via-gray-900/50 to-transparent z-10"></div>
               <img
                 src={
                   course.id === "mern"
-                    ? "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/MERN-logo.png/330px-MERN-logo.png"
+                    ? MERN
                     : course.id === "java"
-                    ? "https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/121px-Java_programming_language_logo.svg.png"
+                    ? JAVA
                     : course.id === "python"
-                    ? "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/150px-Python-logo-notext.svg.png"
+                    ? PYTHON
                     : "https://cdn.pixabay.com/photo/2018/09/18/11/19/artificial-intelligence-3685928_1280.png"
                 }
                 alt={course.title}
-                className="w-full h-full object-contain object-center bg-black transform group-hover:scale-105 transition-transform duration-300"
+                className="w-24 h-24 object-contain transform group-hover:scale-105 transition-transform duration-300"
               />
               {/* Course Badge */}
               <div className="absolute top-3 right-3">
@@ -314,8 +317,18 @@ const Courses = () => {
                     onClick={() => handleDownloadSyllabus(course)}
                     className="px-3 py-2 bg-gray-600 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-all duration-300 flex items-center gap-1"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                      />
                     </svg>
                     Syllabus
                   </button>
@@ -374,7 +387,10 @@ const Courses = () => {
       {/* Enrollment Form Modal */}
       {showEnrollPrompt && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center">
-          <div className="fixed inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setShowEnrollPrompt(false)}></div>
+          <div
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm"
+            onClick={() => setShowEnrollPrompt(false)}
+          ></div>
           <div className="relative bg-white rounded-xl p-8 w-full max-w-md mx-4 z-10">
             <button
               className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold"
