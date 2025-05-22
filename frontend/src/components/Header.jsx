@@ -54,7 +54,7 @@ function Header() {
           : "bg-white/90 backdrop-blur-sm py-3"
       }`}
     >
-      <div className="w-full flex justify-between items-center px-6">
+      <div className="w-full flex justify-between items-center px-4 sm:px-6 lg:px-8">
         {/* Logo Section */}
         <div className="flex items-center flex-shrink-0">
           <img
@@ -65,8 +65,8 @@ function Header() {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:block mx-4 lg:mx-6 flex-grow">
-          <ul className="flex items-center justify-center gap-1 lg:gap-2">
+        <nav className="hidden md:block mx-auto flex-grow max-w-2xl">
+          <ul className="flex items-center justify-center gap-4">
             {[
               { id: "home", label: "Home" },
               { id: "about", label: "About" },
@@ -78,10 +78,10 @@ function Header() {
                 <a
                   href={`#${id}`}
                   onClick={(e) => handleLinkClick(e, id)}
-                  className="text-gray-700 font-bold hover:text-primary px-4 py-2 rounded-lg transition-all relative group inline-block tracking-wide"
+                  className="text-gray-700 font-bold hover:text-primary px-2 py-2 rounded-lg transition-all relative group inline-block tracking-wide text-sm"
                 >
                   {label}
-                  <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-all origin-left"></span>
+                  <span className="absolute bottom-1 left-2 right-2 h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-all origin-left"></span>
                 </a>
               </li>
             ))}
@@ -89,18 +89,18 @@ function Header() {
         </nav>
 
         {/* Action Buttons (Desktop) */}
-        <div className="hidden md:flex items-center gap-3 lg:gap-4 flex-shrink-0">
+        <div className="hidden md:flex items-center gap-3 flex-shrink-0">
           <button
             onClick={() =>
               (window.location.href = "https://csa-dashboard.vercel.app/")
             }
-            className="text-gray-700 font-bold hover:text-primary px-4 py-2 rounded-lg transition-all text-sm hover:bg-gray-50/80 tracking-wide border border-transparent hover:border-gray-200"
+            className="text-gray-700 font-bold hover:text-primary px-3 py-1.5 rounded-lg transition-all text-sm hover:bg-gray-50/80 tracking-wide border border-transparent hover:border-gray-200"
           >
             Log In
           </button>
           <button
             onClick={() => navigate("/enroll")}
-            className="bg-primary text-white font-extrabold py-2 px-5 rounded-lg hover:bg-primary-dark transition-all focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm shadow-md hover:shadow-lg transform hover:-translate-y-0.5 tracking-wide"
+            className="bg-primary text-white font-extrabold py-1.5 px-4 rounded-lg hover:bg-primary-dark transition-all focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm shadow-md hover:shadow-lg transform hover:-translate-y-0.5 tracking-wide"
           >
             Enroll Now
           </button>
@@ -148,7 +148,7 @@ function Header() {
             : "max-h-0 opacity-0 overflow-hidden"
         }`}
       >
-        <div className="w-full px-6 py-4">
+        <div className="w-full px-4 sm:px-6 py-4">
           <ul className="flex flex-col space-y-1">
             {[
               { id: "home", label: "Home" },
