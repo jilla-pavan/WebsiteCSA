@@ -16,22 +16,22 @@ import {
 const learningProcessData = [
   {
     title: "Daily Technical Classes",
-    description: "Learn core concepts and programming daily.",
+    description: "Master programming fundamentals through daily interactive sessions.",
     icon: <FaChalkboardTeacher size={24} />,
   },
   {
     title: "Daily Monitoring Classes",
-    description: "Get regular feedback and progress checks.",
+    description: "Track your progress with regular feedback sessions.",
     icon: <FaEye size={24} />,
   },
   {
     title: "Tasks and Projects",
-    description: "Apply skills with hands-on tasks and projects.",
+    description: "Build real-world projects to apply your learning.",
     icon: <FaTasks size={24} />,
   },
   {
     title: "Weekly Mocks",
-    description: "Practice with mock interviews and assessments.",
+    description: "Prepare for interviews with weekly mock assessments.",
     icon: <FaUserTie size={24} />,
   },
 ];
@@ -39,56 +39,49 @@ const learningProcessData = [
 const roadmapData = [
   {
     title: "Technical Skills",
-    description:
-      "Develop cutting-edge technical skills in programming, data analysis, and software development. Master industry-relevant tools and technologies through hands-on projects.",
+    description: "Master programming, data analysis, and software development through hands-on projects.",
     color: "from-rose-600 to-red-600",
     icon: <FaLaptopCode size={50} />,
     textColor: "text-rose-700",
   },
   {
     title: "Aptitude",
-    description:
-      "Our course integrates aptitude training to equip students with essential problem-solving and critical thinking skills, enhancing their overall academic and professional success.",
+    description: "Develop problem-solving and critical thinking skills for academic and professional success.",
     color: "from-indigo-600 to-purple-600",
     icon: <FaBrain size={50} />,
     textColor: "text-indigo-700",
   },
   {
     title: "Softskills",
-    description:
-      "Soft skills involve interpersonal, communication, problem-solving, leadership, and time management abilities critical for effective teamwork and professional success.",
+    description: "Enhance communication, leadership, and teamwork abilities for professional growth.",
     color: "from-pink-600 to-rose-600",
     icon: <FaComments size={50} />,
     textColor: "text-pink-700",
   },
   {
     title: "Problem Solving in JS",
-    description:
-      "Problem solving in JavaScript entails using logical thinking and programming skills to address issues within code efficiently.",
+    description: "Master JavaScript problem-solving techniques and logical thinking.",
     color: "from-purple-600 to-pink-600",
     icon: <FaCode size={50} />,
     textColor: "text-purple-700",
   },
   {
     title: "Interview Preparation",
-    description:
-      "Interview preparation involves practicing problem-solving questions, refining communication skills, and researching potential employers to effectively showcase one's qualifications.",
+    description: "Prepare for technical interviews with mock sessions and problem-solving practice.",
     color: "from-red-600 to-orange-600",
     icon: <FaClipboardCheck size={50} />,
     textColor: "text-red-700",
   },
   {
     title: "Internships",
-    description:
-      "Our internships offer invaluable opportunities for career growth, providing hands-on experience and mentorship to develop essential skills and propel professional advancement.",
+    description: "Gain real-world experience through industry internships and mentorship.",
     color: "from-blue-600 to-indigo-600",
     icon: <FaUserGraduate size={50} />,
     textColor: "text-blue-700",
   },
   {
     title: "Placements",
-    description:
-      "At the culmination of our course, students secure placements through our comprehensive support system, ensuring successful transitions into their desired careers.",
+    description: "Secure your dream job with our comprehensive placement support.",
     color: "from-orange-600 to-amber-600",
     icon: <FaBriefcase size={50} />,
     textColor: "text-orange-700",
@@ -245,6 +238,45 @@ const RoadmapSection = () => {
         @media (max-width: 768px) {
           .roadmap-item.opacity-0 {
             transform: translateY(20px) scale(1.2) !important;
+          }
+          
+          .roadmap-item h4,
+          .process-item p {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            padding: 0 0.5rem;
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+          }
+
+          .roadmap-item h3 {
+            font-size: 2rem;
+            line-height: 2.5rem;
+            padding: 0 0.5rem;
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+          }
+
+          .process-item h3 {
+            font-size: 1.125rem;
+            line-height: 1.5rem;
+            padding: 0 0.5rem;
+          }
+
+          h2.text-4xl {
+            font-size: 2rem;
+            line-height: 2.5rem;
+          }
+
+          .roadmap-item {
+            padding: 1rem 0.5rem;
+          }
+
+          .process-item {
+            padding: 0.5rem;
           }
         }
 
