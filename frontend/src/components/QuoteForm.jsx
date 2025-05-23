@@ -19,13 +19,31 @@ const courses = [
   'Cloud Computing',
 ];
 
+const educationLevels = [
+  'High School',
+  'Diploma',
+  'Bachelor\'s Degree',
+  'Master\'s Degree',
+  'PhD',
+  'Other'
+];
+
+const statusOptions = [
+  'Student',
+  'Working Professional',
+  'Fresher',
+  'Other'
+];
+
 function QuoteForm() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     mobile: '',
-    course: '',
     receiveUpdates: true,
+    status: '',
+    educationLevel: '',
+    degreeDetails: '',
   });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -38,7 +56,10 @@ function QuoteForm() {
     else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(formData.email)) newErrors.email = 'Enter a valid email.';
     if (!formData.mobile.trim()) newErrors.mobile = 'Mobile number is required.';
     else if (!/^\d{10}$/.test(formData.mobile)) newErrors.mobile = 'Enter a valid 10-digit mobile number.';
-    if (!formData.course) newErrors.course = 'Please select a course.';
+    if (!formData.status) newErrors.status = 'Please select your current status.';
+    if (!formData.educationLevel) newErrors.educationLevel = 'Please select your education level.';
+    if (!formData.degreeDetails.trim()) newErrors.degreeDetails = 'Degree details are required.';
+    
     return newErrors;
   };
 
@@ -58,12 +79,23 @@ function QuoteForm() {
     if (Object.keys(validationErrors).length === 0) {
       setIsSubmitting(true);
       try {
-        // Create submission data with timestamp
+        // Create submission data with timestamp and additional metadata
         const submissionData = {
           ...formData,
           timestamp: new Date(),
-          status: 'new',
+          // Keeping user's selected status from formData
+          // Adding a separate field for the processing status of the enrollment
+          processingStatus: 'new',
           submittedAt: new Date().toISOString(),
+          lastUpdated: new Date().toISOString(),
+          formVersion: '1.0',
+          source: 'web_form',
+          // Add additional metadata
+          metadata: {
+            userAgent: navigator.userAgent,
+            screenResolution: `${window.screen.width}x${window.screen.height}`,
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          }
         };
         
         // Save to Firebase and get the document reference
@@ -81,12 +113,14 @@ function QuoteForm() {
           type: 'USER_CONFIRMATION',
           data: {
             name: formData.name,
-            course: formData.course
+            course: formData.course,
+            enrollmentId: docRef.id
           }
         });
 
         if (!userEmailResult.success) {
-          throw new Error(`Failed to send confirmation email: ${userEmailResult.error}`);
+          console.error('Failed to send confirmation email:', userEmailResult.error);
+          // Continue with the process even if email fails
         }
 
         // Send detailed notification to admin only if admin email is configured
@@ -97,7 +131,8 @@ function QuoteForm() {
             data: {
               ...enrollmentData,
               submittedAt: new Date(enrollmentData.submittedAt).toLocaleString(),
-              timestamp: new Date(enrollmentData.timestamp).toLocaleString()
+              timestamp: new Date(enrollmentData.timestamp).toLocaleString(),
+              enrollmentId: docRef.id
             }
           });
 
@@ -109,10 +144,20 @@ function QuoteForm() {
           console.warn('Admin notification email not sent: VITE_ADMIN_EMAIL not configured');
         }
 
+        // Log successful submission
+        console.log('Form submitted successfully:', {
+          enrollmentId: docRef.id,
+          timestamp: submissionData.timestamp
+        });
+
         setSubmitted(true);
       } catch (error) {
         console.error('Error submitting form:', error);
-        alert('There was an error submitting your form. Please try again.');
+        // Show more specific error message to user
+        const errorMessage = error.code === 'permission-denied' 
+          ? 'Unable to submit form. Please try again later.'
+          : 'There was an error submitting your form. Please try again.';
+        alert(errorMessage);
       } finally {
         setIsSubmitting(false);
       }
@@ -142,16 +187,16 @@ function QuoteForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto px-4 py-6">
-      <div className="mb-6 text-center">
-        <h2 className="text-4xl font-black text-gray-900 mb-3 tracking-tight leading-tight">
+    <form onSubmit={handleSubmit} className="w-full mx-auto p-6 sm:p-8 bg-white rounded-lg shadow-lg">
+      <div className="mb-8 text-center">
+        <h2 className="text-2xl font-bold text-gray-900 mb-2 tracking-tight">
           Enrollment <span className="text-primary">Form</span>
         </h2>
-        <p className="text-gray-600 text-sm font-semibold">Fill in your details and our team will reach out to you</p>
+        <p className="text-gray-600 text-sm">Fill in your details and our team will reach out to you</p>
       </div>
-      <div className="space-y-3">
+      <div className="space-y-5">
         <div className="group">
-          <label className="block text-gray-800 text-sm font-bold mb-1.5 uppercase tracking-wide">
+          <label className="block text-gray-700 text-sm font-medium mb-1.5">
             Full Name <span className="text-primary">*</span>
           </label>
           <input
@@ -159,13 +204,61 @@ function QuoteForm() {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className={`w-full px-3.5 py-2 rounded-lg border ${errors.name ? 'border-red-400' : 'border-gray-200'} focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white group-hover:border-gray-300`}
+            className={`w-full px-3 py-2.5 border ${errors.name ? 'border-red-400' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white`}
             placeholder="Enter your full name"
           />
           {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
         </div>
         <div className="group">
-          <label className="block text-gray-800 text-sm font-bold mb-1.5 uppercase tracking-wide">
+          <label className="block text-gray-700 text-sm font-medium mb-1.5">
+            Current Status <span className="text-primary">*</span>
+          </label>
+          <select
+            name="status"
+            value={formData.status}
+            onChange={handleChange}
+            className={`w-full px-3 py-2.5 border ${errors.status ? 'border-red-400' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20d%3D%22M6%208l4%204%204-4%22%20fill%3D%22none%22%20stroke%3D%22%23666%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E')] bg-[length:20px_20px] bg-[right_0.5rem_center] bg-no-repeat pr-8`}
+          >
+            <option value="">Select your current status</option>
+            {statusOptions.map((status) => (
+              <option key={status} value={status}>{status}</option>
+            ))}
+          </select>
+          {errors.status && <p className="text-red-500 text-xs mt-1">{errors.status}</p>}
+        </div>
+        <div className="group">
+          <label className="block text-gray-700 text-sm font-medium mb-1.5">
+            Education Level <span className="text-primary">*</span>
+          </label>
+          <select
+            name="educationLevel"
+            value={formData.educationLevel}
+            onChange={handleChange}
+            className={`w-full px-3 py-2.5 border ${errors.educationLevel ? 'border-red-400' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20d%3D%22M6%208l4%204%204-4%22%20fill%3D%22none%22%20stroke%3D%22%23666%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E')] bg-[length:20px_20px] bg-[right_0.5rem_center] bg-no-repeat pr-8`}
+          >
+            <option value="">Select your education level</option>
+            {educationLevels.map((level) => (
+              <option key={level} value={level}>{level}</option>
+            ))}
+          </select>
+          {errors.educationLevel && <p className="text-red-500 text-xs mt-1">{errors.educationLevel}</p>}
+        </div>
+        <div className="group">
+          <label className="block text-gray-700 text-sm font-medium mb-1.5">
+            Degree Details <span className="text-primary">*</span>
+          </label>
+          <input
+            type="text"
+            name="degreeDetails"
+            value={formData.degreeDetails}
+            onChange={handleChange}
+            className={`w-full px-3 py-2.5 border ${errors.degreeDetails ? 'border-red-400' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white`}
+            placeholder="Enter your recent qualification"
+          />
+          {errors.degreeDetails && <p className="text-red-500 text-xs mt-1">{errors.degreeDetails}</p>}
+        </div>
+        <div className="group">
+          <label className="block text-gray-700 text-sm font-medium mb-1.5">
             Email <span className="text-primary">*</span>
           </label>
           <input
@@ -173,13 +266,13 @@ function QuoteForm() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full px-3.5 py-2 rounded-lg border ${errors.email ? 'border-red-400' : 'border-gray-200'} focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white group-hover:border-gray-300`}
+            className={`w-full px-3 py-2.5 border ${errors.email ? 'border-red-400' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white`}
             placeholder="Enter your email address"
           />
           {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
         </div>
         <div className="group">
-          <label className="block text-gray-800 text-sm font-bold mb-1.5 uppercase tracking-wide">
+          <label className="block text-gray-700 text-sm font-medium mb-1.5">
             Mobile Number <span className="text-primary">*</span>
           </label>
           <input
@@ -187,30 +280,13 @@ function QuoteForm() {
             name="mobile"
             value={formData.mobile}
             onChange={handleChange}
-            className={`w-full px-3.5 py-2 rounded-lg border ${errors.mobile ? 'border-red-400' : 'border-gray-200'} focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white group-hover:border-gray-300`}
+            className={`w-full px-3 py-2.5 border ${errors.mobile ? 'border-red-400' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white`}
             placeholder="Enter your 10-digit mobile number"
             maxLength={10}
           />
           {errors.mobile && <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>}
         </div>
-        <div className="group">
-          <label className="block text-gray-800 text-sm font-bold mb-1.5 uppercase tracking-wide">
-            Select Course <span className="text-primary">*</span>
-          </label>
-          <select
-            name="course"
-            value={formData.course}
-            onChange={handleChange}
-            className={`w-full px-3.5 py-2 rounded-lg border ${errors.course ? 'border-red-400' : 'border-gray-200'} focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white group-hover:border-gray-300 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20d%3D%22M6%208l4%204%204-4%22%20fill%3D%22none%22%20stroke%3D%22%23666%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E')] bg-[length:20px_20px] bg-[right_0.5rem_center] bg-no-repeat pr-8`}
-          >
-            <option value="">Choose a course</option>
-            {courses.map((course) => (
-              <option key={course} value={course}>{course}</option>
-            ))}
-          </select>
-          {errors.course && <p className="text-red-500 text-xs mt-1">{errors.course}</p>}
-        </div>
-        <div className="flex items-center bg-gray-50/70 p-2.5 rounded-lg border border-gray-100 hover:bg-gray-50/90 transition-all">
+        <div className="flex items-center bg-gray-50/70 p-3 rounded-md border border-gray-100 hover:bg-gray-50/90 transition-all">
           <input
             type="checkbox"
             name="receiveUpdates"
@@ -219,21 +295,20 @@ function QuoteForm() {
             className="h-4 w-4 text-primary focus:ring-1 focus:ring-primary border-gray-300 rounded"
             id="receiveUpdates"
           />
-          <label htmlFor="receiveUpdates" className="ml-2 text-gray-600 text-xs select-none cursor-pointer">
+          <label htmlFor="receiveUpdates" className="ml-2 text-gray-600 text-sm select-none cursor-pointer">
             I want to receive updates about courses, webinars, and placement opportunities
           </label>
         </div>
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`w-full py-3.5 mt-4 bg-gradient-to-r from-[#FF6B00] to-[#FF8533] text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-[1.05rem] relative overflow-hidden group ${
-            isSubmitting 
-              ? 'opacity-75 cursor-not-allowed' 
-              : 'hover:scale-[1.02] active:scale-[0.99] hover:from-[#FF8533] hover:to-[#FF6B00]'
+          className={`w-full py-3 mt-6 bg-[#FF6B00] text-white font-semibold rounded-md shadow hover:shadow-md transition-all duration-300 text-sm relative overflow-hidden ${
+            isSubmitting
+              ? 'opacity-75 cursor-not-allowed'
+              : 'hover:bg-orange-600 active:scale-[0.98]'
           }`}
         >
-          <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
-          <span className="relative inline-flex items-center">
+          <span className="relative inline-flex items-center justify-center">
             {isSubmitting ? (
               <>
                 <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

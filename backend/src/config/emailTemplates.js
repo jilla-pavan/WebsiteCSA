@@ -3,17 +3,22 @@ export const createAdminNotificationEmail = (enrollmentData) => {
     name,
     email,
     mobile,
-    course,
-    submittedAt
+    status,
+    educationLevel,
+    degreeDetails,
+    submittedAt,
+    enrollmentId
   } = enrollmentData;
 
   return {
-    subject: `New Enrollment: ${course}`,
+    subject: `New Enrollment`,
     text: `
 New Course Enrollment
 
+Enrollment ID: ${enrollmentId}
 Name: ${name}
-Course: ${course}
+Status: ${status}
+Education: ${educationLevel} - ${degreeDetails}
 Contact: ${email} | ${mobile}
 Date: ${new Date(submittedAt).toLocaleString()}
 `,
@@ -26,31 +31,27 @@ Date: ${new Date(submittedAt).toLocaleString()}
 </head>
 <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #444; max-width: 500px; margin: 0 auto; padding: 20px;">
   <div style="background: #fff; border: 1px solid #e1e1e1; border-radius: 5px; padding: 25px;">
-    <div style="border-left: 4px solid #FF6B00; padding-left: 15px; margin-bottom: 20px;">
-      <h2 style="margin: 0; color: #333; font-size: 20px;">New Course Enrollment</h2>
-    </div>
-
     <div style="margin-bottom: 25px;">
       <p style="margin: 0 0 15px 0;">
-        <strong style="color: #FF6B00; display: inline-block; width: 80px;">Course:</strong>
-        <span style="color: #333;">${course}</span>
-      </p>
-      <p style="margin: 0 0 15px 0;">
-        <strong style="color: #FF6B00; display: inline-block; width: 80px;">Name:</strong>
+        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Name:</strong>
         <span style="color: #333;">${name}</span>
       </p>
       <p style="margin: 0 0 15px 0;">
-        <strong style="color: #FF6B00; display: inline-block; width: 80px;">Email:</strong>
+        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Current Status:</strong>
+        <span style="color: #333;">${status}</span>
+      </p>
+      <p style="margin: 0 0 15px 0;">
+        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Education:</strong>
+        <span style="color: #333;">${educationLevel} - ${degreeDetails}</span>
+      </p>
+      <p style="margin: 0 0 15px 0;">
+        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Email:</strong>
         <a href="mailto:${email}" style="color: #FF6B00; text-decoration: none;">${email}</a>
       </p>
       <p style="margin: 0;">
-        <strong style="color: #FF6B00; display: inline-block; width: 80px;">Mobile:</strong>
+        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Mobile:</strong>
         <span style="color: #333;">${mobile}</span>
       </p>
-    </div>
-
-    <div style="font-size: 14px; color: #666; border-top: 1px solid #eee; padding-top: 15px;">
-      Submitted on ${new Date(submittedAt).toLocaleString()}
     </div>
   </div>
 </body>
@@ -60,14 +61,21 @@ Date: ${new Date(submittedAt).toLocaleString()}
 };
 
 export const createUserConfirmationEmail = (userData) => {
-  const { name, course } = userData;
+  const { name, enrollmentId, status, educationLevel, degreeDetails, email, mobile } = userData;
   
   return {
-    subject: `Welcome to ${course} - CSA`,
+    subject: `Welcome to CSA`,
     text: `
 Dear ${name},
 
-Thank you for enrolling in our ${course} course. We're excited to have you join us!
+Thank you for enrolling with us. We're excited to have you join us!
+
+Enrollment ID: ${enrollmentId}
+
+Your Details:
+Status: ${status}
+Education: ${educationLevel} - ${degreeDetails}
+Contact: ${email} | ${mobile}
 
 About CSA:
 • Industry-experienced instructors
@@ -98,9 +106,28 @@ CSA Team
     <p style="margin-bottom: 20px;">Dear ${name},</p>
     
     <p style="margin-bottom: 20px;">
-      Thank you for enrolling in our <strong style="color: #FF6B00;">${course}</strong> course. 
-      We're excited to have you join us!
+      Thank you for enrolling with us. We're excited to have you join us!
     </p>
+
+    <div style="margin-bottom: 20px;">
+        <h3 style="color: #333; margin: 0 0 15px 0; font-size: 18px;">Your Details</h3>
+        <p style="margin: 0 0 10px 0;">
+          <strong style="color: #FF6B00; display: inline-block; width: 120px;">Status:</strong>
+          <span style="color: #333;">${status}</span>
+        </p>
+        <p style="margin: 0 0 10px 0;">
+          <strong style="color: #FF6B00; display: inline-block; width: 120px;">Education:</strong>
+          <span style="color: #333;">${educationLevel} - ${degreeDetails}</span>
+        </p>
+        <p style="margin: 0 0 10px 0;">
+          <strong style="color: #FF6B00; display: inline-block; width: 120px;">Email:</strong>
+          <a href="mailto:${email}" style="color: #FF6B00; text-decoration: none;">${email}</a>
+        </p>
+        <p style="margin: 0;">
+          <strong style="color: #FF6B00; display: inline-block; width: 120px;">Mobile:</strong>
+          <span style="color: #333;">${mobile}</span>
+        </p>
+    </div>
 
     <div style="background-color: #f9f9f9; border-radius: 5px; padding: 20px; margin: 25px 0;">
       <h3 style="color: #333; margin: 0 0 15px 0; font-size: 18px;">Why Choose CSA?</h3>
@@ -134,6 +161,7 @@ CSA Team
 
     <p style="margin-bottom: 25px;">
       Our team will contact you shortly with further details about your course schedule.
+      Please keep your Enrollment ID (${enrollmentId}) for future reference.
     </p>
 
     <div style="margin-top: 25px;">

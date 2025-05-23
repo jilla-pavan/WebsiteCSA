@@ -87,7 +87,7 @@ const Courses = () => {
       title: "MERN Full Stack with AI",
       description:
         "Master modern web development with MongoDB, Express.js, React.js, and Node.js",
-      price: "₹30,000",
+      price: "₹40,000",
       score: 4.8,
       features: [
         "Build full-stack applications from scratch",
@@ -124,7 +124,7 @@ const Courses = () => {
       title: "Java Full Stack with AI",
       description:
         "Enterprise-grade development with Java, Spring Boot, and MySQL",
-      price: "₹30,000",
+      price: "₹40,000",
       score: 4.6,
       features: [
         "Enterprise application development",
@@ -158,7 +158,7 @@ const Courses = () => {
       title: "Python Full Stack with AI",
       description:
         "Modern Python development with Django, React, and PostgreSQL",
-      price: "₹30,000",
+      price: "₹40,000",
       score: 4.5,
       features: [
         "Python programming mastery",
@@ -309,7 +309,7 @@ const Courses = () => {
                     {course.price}
                   </div>
                   <div className="text-xs text-gray-500">
-                    Pay in two installments
+                    Discounts available
                   </div>
                 </div>
                 <div className="flex gap-2">
