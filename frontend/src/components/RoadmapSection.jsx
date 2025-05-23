@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   FaUserGraduate,
   FaBrain,
@@ -91,15 +91,23 @@ const roadmapData = [
 const RoadmapSection = () => {
   const roadmapRefs = useRef([]);
   const processRefs = useRef([]);
+  const [isScrollingDown, setIsScrollingDown] = useState(true);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsScrollingDown(currentScrollY > lastScrollY.current);
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && isScrollingDown) {
             entry.target.classList.add("animate-in");
-          } else {
-            entry.target.classList.remove("animate-in");
           }
         });
       },
@@ -113,8 +121,11 @@ const RoadmapSection = () => {
       if (ref) observer.observe(ref);
     });
 
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isScrollingDown]);
 
   return (
     <section className="bg-gradient-to-b from-white to-gray-50 mt-10 py-8 sm:py-12 lg:py-16">
