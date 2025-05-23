@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const StudentReels = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -9,15 +9,16 @@ const StudentReels = () => {
   const [currentY, setCurrentY] = useState(0);
   const containerRef = useRef(null);
   const autoplayRef = useRef(null);
+  const [iframeLoading, setIframeLoading] = useState(true);
 
-  // Sample data for student video testimonials (keeping existing data for now, can be replaced later)
+  // Updated video testimonials with more professional data structure
   const videoTestimonials = [
     {
       id: 1,
       name: "Priya Sharma",
       role: "Senior Software Engineer",
       company: "Google",
-      videoUrl: "https://www.youtube.com/embed/VIDEO_ID_1", // Replace with actual YouTube ID
+      videoUrl: "https://www.youtube.com/embed/VIDEO_ID_1",
       thumbnail: "https://randomuser.me/api/portraits/women/28.jpg",
       course: "Full Stack Development",
       batch: "2023",
@@ -32,6 +33,8 @@ const StudentReels = () => {
       project: "Built scalable microservices architecture",
       interviewRounds: "5 rounds cleared",
       preparationTime: "4 months",
+      testimonial:
+        "The structured learning path and industry-focused curriculum helped me transition from a frontend role to a full-stack position. The mock interviews and system design sessions were particularly valuable.",
     },
     {
       id: 2,
@@ -77,43 +80,43 @@ const StudentReels = () => {
     },
   ];
 
-  // Animated blocks data (updated to match image content)
+  // Updated animated blocks with more relevant metrics
   const animatedBlocks = [
     {
       id: 1,
-      count: "1600+",
+      count: "100+",
       label: "Hiring Partners",
-      color: "from-yellow-300/70 to-yellow-400/70",
-      textColor: "text-black",
+      color: "from-blue-500/80 to-blue-600/80",
+      textColor: "text-white",
       delay: 0.2,
-      shape: "rounded-tr-[4rem] rounded-bl-[4rem]",
+      shape: "rounded-2xl",
     },
     {
       id: 2,
-      count: "2500+",
+      count: "100+",
       label: "Placements",
-      color: "from-purple-500/70 to-purple-600/70",
-      textColor: "text-black",
+      color: "from-emerald-500/80 to-emerald-600/80",
+      textColor: "text-white",
       delay: 0.4,
-      shape: "rounded-tl-[4rem] rounded-br-[4rem]",
+      shape: "rounded-2xl",
     },
     {
       id: 3,
       count: "Dedicated",
       label: "Placement Teams",
-      color: "from-orange-300/70 to-orange-400/70",
-      textColor: "text-black",
+      color: "from-violet-500/80 to-violet-600/80",
+      textColor: "text-white",
       delay: 0.6,
-      shape: "rounded-bl-[4rem] rounded-tr-[4rem]",
+      shape: "rounded-2xl",
     },
     {
       id: 4,
-      count: "4.2",
+      count: "6 LPA",
       label: "Avg. Package",
-      color: "from-green-500/70 to-green-600/70",
-      textColor: "text-black",
+      color: "from-rose-500/80 to-rose-600/80",
+      textColor: "text-white",
       delay: 0.8,
-      shape: "rounded-br-[4rem] rounded-tl-[4rem]",
+      shape: "rounded-2xl",
     },
   ];
 
@@ -130,12 +133,13 @@ const StudentReels = () => {
     },
   };
 
-  // Existing drag handlers and effects
+  // Updated drag handlers for smoother reel-like experience
   const handleDragStart = (e) => {
     setIsDragging(true);
     setStartY(e.type === "mousedown" ? e.clientY : e.touches[0].clientY);
     setCurrentY(e.type === "mousedown" ? e.clientY : e.touches[0].clientY);
     setIsPlaying(false);
+    setIframeLoading(true);
   };
 
   const handleDragMove = (e) => {
@@ -150,7 +154,7 @@ const StudentReels = () => {
     setIsDragging(false);
 
     const dragDistance = currentY - startY;
-    const threshold = 100;
+    const threshold = 80; // Adjusted threshold for smoother navigation
 
     if (Math.abs(dragDistance) > threshold) {
       if (dragDistance > 0 && currentIndex > 0) {
@@ -161,20 +165,46 @@ const StudentReels = () => {
       ) {
         setCurrentIndex(currentIndex + 1);
       } else if (dragDistance > 0 && currentIndex === 0) {
-        // Loop to last video
         setCurrentIndex(videoTestimonials.length - 1);
       } else if (
         dragDistance < 0 &&
         currentIndex === videoTestimonials.length - 1
       ) {
-        // Loop to first video
         setCurrentIndex(0);
       }
     }
 
     setCurrentY(startY);
-    setIsPlaying(true);
+    // setIsPlaying(true); // Re-enable autoplay after a short delay if needed
   };
+
+  // Add useEffect for currentIndex change to manage loading state and autoplay
+  useEffect(() => {
+    setIframeLoading(true);
+    const timer = setTimeout(() => {
+      setIframeLoading(false);
+    }, 500); // Simulate loading delay
+
+    if (autoplayRef.current) {
+        clearInterval(autoplayRef.current);
+      }
+
+    if (isPlaying) {
+      autoplayRef.current = setInterval(() => {
+        setCurrentIndex((prevIndex) =>
+          prevIndex === videoTestimonials.length - 1 ? 0 : prevIndex + 1
+        );
+        setIframeLoading(true);
+      }, 10000); // Change video every 10 seconds
+    }
+
+    return () => {
+      clearTimeout(timer);
+      if (autoplayRef.current) {
+        clearInterval(autoplayRef.current);
+      }
+    };
+  }, [currentIndex, isPlaying, videoTestimonials.length]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -198,253 +228,255 @@ const StudentReels = () => {
       window.removeEventListener("touchmove", handleDragMove);
       window.removeEventListener("touchend", handleDragEnd);
     };
-  }, [isDragging, currentIndex, startY, currentY]);
+  }, [isDragging, startY, currentY]); // Removed currentIndex from deps as it's handled in the new effect
 
-  // Autoplay effect
-  useEffect(() => {
-    if (isPlaying) {
-      autoplayRef.current = setInterval(() => {
-        setCurrentIndex((prevIndex) =>
-          prevIndex === videoTestimonials.length - 1 ? 0 : prevIndex + 1
-        );
-      }, 10000); // Change video every 10 seconds
-    }
+  // Animation variants for consistent animations
+  const fadeInUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -20 }
+  };
 
-    return () => {
-      if (autoplayRef.current) {
-        clearInterval(autoplayRef.current);
-      }
-    };
-  }, [isPlaying, currentIndex, videoTestimonials.length]);
+  const scaleIn = {
+    initial: { opacity: 0, scale: 0.9 },
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 1.1 }
+  };
+
+  // Variants for text/badge entrance
+  const contentVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+    exit: { opacity: 0, y: -10, transition: { duration: 0.3, ease: "easeIn" } }
+  };
+
+  // Variants for stats block highlight
+  const statVariants = {
+    initial: { scale: 1, borderColor: 'rgba(255, 255, 255, 0.1)' },
+    active: { scale: 1.02, borderColor: 'rgba(59, 130, 246, 0.5)', transition: { duration: 0.3 } },
+    inactive: { scale: 1, borderColor: 'rgba(255, 255, 255, 0.1)', transition: { duration: 0.3 } },
+  };
 
   return (
-    <div className="py-16 bg-black overflow-hidden relative flex justify-center items-center">
-      {/* Academy Showcase Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-black opacity-90">
-        <div className="absolute inset-0 bg-[url('/images/academy-bg.jpg')] bg-cover bg-center opacity-20"></div>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden relative">
+      {/* Background Effects */}
+      <div className="absolute inset-0">
+        {/* Diagonal Line Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'linear-gradient(45deg, #ffffff1a 8%, transparent 8%, transparent 92%, #ffffff1a 92%), linear-gradient(-45deg, #ffffff1a 8%, transparent 8%, transparent 92%, #ffffff1a 92%)',
+            backgroundSize: '40px 40px',
+          }}></div>
+        </div>
       </div>
 
-      {/* Main Content Area - Video and Blocks */}
-      <div className="relative w-full max-w-5xl mx-auto py-16">
-        {/* Animated Blocks positioned around the center video container */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          {/* Block 1: Top Left */}
+      {/* Main Content */}
+      <div className="relative min-h-screen flex items-center justify-center p-4">
+        {/* Left Stats Panel */}
           <motion.div
-            key={animatedBlocks[0].id}
-            className={`absolute w-40 h-40 lg:w-48 lg:h-48 bg-gradient-to-br ${animatedBlocks[0].color} backdrop-blur-sm border border-white/10 p-4 flex flex-col items-center justify-center ${animatedBlocks[0].textColor} ${animatedBlocks[0].shape} text-center`}
-            style={{
-              top: "0%",
-              left: "0%",
-              transform: "translate(-20%, -20%)",
-            }}
-            initial="initial"
-            animate="animate"
-            variants={floatingAnimation}
-            transition={{ delay: animatedBlocks[0].delay }}
+          className="hidden lg:block absolute left-8 top-8 w-64"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
           >
-            <span className="text-3xl font-bold mb-1">
-              {animatedBlocks[0].count}
+          <div className="space-y-6">
+            {animatedBlocks.map((block, index) => (
+          <motion.div
+                key={block.id}
+                className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl border border-white/10 p-6 hover:border-blue-500/50 transition-all duration-300"
+                variants={statVariants}
+            initial="initial"
+                animate={index === currentIndex ? "active" : "inactive"}
+                transition={{ delay: block.delay }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative">
+                  <span className="text-3xl font-bold text-white block mb-2">
+                    {block.count}
             </span>
-            <span className="text-sm font-medium leading-tight">
-              {animatedBlocks[0].label}
+                  <span className="text-gray-400 font-medium">
+                    {block.label}
             </span>
+                </div>
+          </motion.div>
+            ))}
+          </div>
           </motion.div>
 
-          {/* Block 2: Bottom Left */}
+        {/* Center Video Player */}
+        <div className="relative w-full max-w-sm mx-auto">
           <motion.div
-            key={animatedBlocks[1].id}
-            className={`absolute w-40 h-40 lg:w-48 lg:h-48 bg-gradient-to-br ${animatedBlocks[1].color} backdrop-blur-sm border border-white/10 p-4 flex flex-col items-center justify-center ${animatedBlocks[1].textColor} ${animatedBlocks[1].shape} text-center`}
-            style={{
-              bottom: "0%",
-              left: "0%",
-              transform: "translate(-20%, 20%)",
-            }}
-            initial="initial"
-            animate="animate"
-            variants={floatingAnimation}
-            transition={{ delay: animatedBlocks[1].delay }}
-          >
-            <span className="text-3xl font-bold mb-1">
-              {animatedBlocks[1].count}
-            </span>
-            <span className="text-sm font-medium leading-tight">
-              {animatedBlocks[1].label}
-            </span>
-          </motion.div>
-
-          {/* Block 3: Top Right */}
-          <motion.div
-            key={animatedBlocks[2].id}
-            className={`absolute w-40 h-40 lg:w-48 lg:h-48 bg-gradient-to-br ${animatedBlocks[2].color} backdrop-blur-sm border border-white/10 p-4 flex flex-col items-center justify-center ${animatedBlocks[2].textColor} ${animatedBlocks[2].shape} text-center`}
-            style={{
-              top: "0%",
-              right: "0%",
-              transform: "translate(20%, -20%)",
-            }}
-            initial="initial"
-            animate="animate"
-            variants={floatingAnimation}
-            transition={{ delay: animatedBlocks[2].delay }}
-          >
-            <span className="text-2xl font-bold mb-1 leading-tight">
-              {animatedBlocks[2].count}
-            </span>
-            <span className="text-sm font-medium leading-tight">
-              {animatedBlocks[2].label}
-            </span>
-          </motion.div>
-
-          {/* Block 4: Bottom Right */}
-          <motion.div
-            key={animatedBlocks[3].id}
-            className={`absolute w-40 h-40 lg:w-48 lg:h-48 bg-gradient-to-br ${animatedBlocks[3].color} backdrop-blur-sm border border-white/10 p-4 flex flex-col items-center justify-center ${animatedBlocks[3].textColor} ${animatedBlocks[3].shape} text-center`}
-            style={{
-              bottom: "0%",
-              right: "0%",
-              transform: "translate(20%, 20%)",
-            }}
-            initial="initial"
-            animate="animate"
-            variants={floatingAnimation}
-            transition={{ delay: animatedBlocks[3].delay }}
-          >
-            <span className="text-3xl font-bold mb-1">
-              {animatedBlocks[3].count}
-            </span>
-            <span className="text-sm font-medium leading-tight">
-              {animatedBlocks[3].label}
-            </span>
-          </motion.div>
-        </div>
-
-        {/* Center - Video Player */}
-        <div className="relative max-w-md mx-auto">
-          {/* Video Container with 9:16 Aspect Ratio */}
-          <div
             ref={containerRef}
-            className="relative w-full overflow-hidden rounded-2xl bg-gray-900 cursor-grab active:cursor-grabbing"
-            style={{ aspectRatio: "9/16" }}
+            className="relative w-full overflow-hidden rounded-3xl bg-gray-900/50 backdrop-blur-xl cursor-grab active:cursor-grabbing"
+            style={{
+              aspectRatio: "9/16",
+              maxHeight: "calc(100vh - 100px)",
+              minHeight: "500px",
+              boxShadow: `
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 0 30px rgba(59, 130, 246, 0.2),
+                0 0 60px rgba(59, 130, 246, 0.1)
+              `
+            }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
           >
+            {/* Glass Border Effect */}
+            <div className="absolute inset-0 rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent"></div>
+
+            <AnimatePresence mode="wait">
             {videoTestimonials.map((testimonial, index) => {
-              const offset = index - currentIndex;
-              const translateY = isDragging
-                ? `${
-                    offset * 100 +
-                    ((currentY - startY) / containerRef.current?.offsetHeight) *
-                      100
-                  }%`
-                : `${offset * 100}%`;
+                if (index !== currentIndex) return null;
 
               return (
-                <div
+                  <motion.div
                   key={testimonial.id}
-                  className="absolute w-full h-full transition-transform duration-300"
-                  style={{
-                    transform: `translateY(${translateY})`,
-                    zIndex: videoTestimonials.length - Math.abs(offset),
-                  }}
-                >
-                  {/* Video Content (iframe, overlay, etc.) */}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0"
+                  >
                   <div className="relative w-full h-full">
+                      {iframeLoading && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-gray-900 z-10">
+                          <motion.div 
+                            className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                          />
+                        </div>
+                      )}
                     <iframe
                       src={testimonial.videoUrl}
-                      title={`${testimonial.name}'s Testimonial`}
-                      className="w-full h-full"
+                        title={`${testimonial.name}'s Success Story`}
+                        className={`w-full h-full object-cover ${iframeLoading ? 'invisible' : 'visible'}`}
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
+                        onLoad={() => setIframeLoading(false)}
                     ></iframe>
 
-                    {/* Overlay with User Info and Actions */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-                      <div className="flex items-center gap-4 mb-4">
-                        <img
-                          src={testimonial.thumbnail}
-                          alt={testimonial.name}
-                          className="w-12 h-12 rounded-full border-2 border-orange-500"
-                        />
-                        <div>
-                          <h3 className="text-lg font-bold text-white">
+                      {/* Content Overlay */}
+                      <motion.div 
+                        className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        variants={contentVariants}
+                      >
+                        <div className="absolute bottom-0 left-0 right-0 p-6">
+                          {/* Student Info */}
+                          <motion.div 
+                            className="mb-4"
+                            variants={contentVariants}
+                            transition={{ delay: 0.2 }}
+                          >
+                            <h6 className="text-2xl font-bold text-white mb-1">
                             {testimonial.name}
-                          </h3>
-                          <p className="text-orange-500 font-medium">
+                            </h6>
+                            <p className="text-blue-400 font-medium">
                             {testimonial.role} at {testimonial.company}
                           </p>
-                        </div>
-                      </div>
+                          </motion.div>
 
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        <span className="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm font-medium">
-                          {testimonial.course}
-                        </span>
-                        <span className="px-3 py-1 bg-white/20 text-white rounded-full text-sm">
-                          Batch {testimonial.batch}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Right Side Actions */}
-                    <div className="absolute right-4 bottom-24 flex flex-col items-center gap-6">
-                      <button className="flex flex-col items-center text-white hover:scale-110 transition-transform">
+                          {/* Achievement Badge */}
+                          <motion.div 
+                            className="mb-4"
+                            variants={contentVariants}
+                            transition={{ delay: 0.3 }}
+                          >
+                            <span className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-400 rounded-full text-sm font-medium hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-300">
                         <svg
-                          className="w-8 h-8"
+                                className="w-4 h-4 mr-2"
                           fill="currentColor"
-                          viewBox="0 0 24 24"
+                                viewBox="0 0 20 20"
                         >
-                          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
-                        <span className="text-sm">{testimonial.likes}</span>
-                      </button>
-                      <button className="flex flex-col items-center text-white hover:scale-110 transition-transform">
-                        <svg
-                          className="w-8 h-8"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z" />
-                        </svg>
-                        <span className="text-sm">{testimonial.comments}</span>
-                      </button>
-                      <button className="flex flex-col items-center text-white hover:scale-110 transition-transform">
-                        <svg
-                          className="w-8 h-8"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
-                        </svg>
-                      </button>
+                              {testimonial.achievement}
+                            </span>
+                          </motion.div>
                     </div>
-
-                    {/* Progress Bar */}
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-700">
-                      <div
-                        className="h-full bg-orange-500 transition-all duration-300"
-                        style={{
-                          width: isPlaying ? "100%" : "0%",
-                          transition: isPlaying ? "width 10s linear" : "none",
-                        }}
-                      />
+                      </motion.div>
                     </div>
-                  </div>
-                </div>
+                  </motion.div>
               );
             })}
-          </div>
+            </AnimatePresence>
+          </motion.div>
 
-          {/* Video Indicators */}
-          <div className="flex justify-center gap-2 mt-4">
+          {/* Video Navigation */}
+          <motion.div 
+            className="flex justify-center gap-2 mt-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
             {videoTestimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? "bg-orange-500 w-8" : "bg-gray-500"
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  index === currentIndex 
+                    ? "bg-gradient-to-r from-blue-500 to-purple-500 w-8" 
+                    : "bg-gray-600 w-4 hover:bg-gray-500"
                 }`}
               />
             ))}
-          </div>
+          </motion.div>
         </div>
+
+        {/* Right Side Guide */}
+        <motion.div 
+          className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="text-center">
+            <p className="text-sm text-gray-400 mb-2">Swipe to explore</p>
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 flex items-center justify-center"
+            >
+              <svg
+                className="w-4 h-4 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                />
+              </svg>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
+
+      {/* Animation Keyframes */}
+      <style jsx>{`
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+      `}</style>
     </div>
   );
 };
