@@ -10,6 +10,7 @@ import AboutUs from "./AboutUs";
 import GetInTouch from "./GetInTouch";
 import CareerAdvisorModal from "./CareerAdvisorModal";
 import RoadmapSection from "./RoadmapSection";
+import StudentReels from "./StudentReels";
 
 function HeroSection() {
   const [showAdvisorModal, setShowAdvisorModal] = useState(false);
@@ -233,8 +234,12 @@ function HeroSection() {
   return (
     <section id="home" className="pt-24 bg-gradient-to-b from-white to-gray-50">
       {/* Career Advisor Modal */}
-      <CareerAdvisorModal isOpen={showAdvisorModal} onClose={handleCloseModal} />
+      <CareerAdvisorModal
+        isOpen={showAdvisorModal}
+        onClose={handleCloseModal}
+      />
       <div className="w-full">
+        <StudentReels />
         <TopPlacements />
         <CompaniesHire />
         <RoadmapSection />
