@@ -2,79 +2,28 @@ import React, { useState, useEffect, useRef } from "react";
 import CourseDetailsModal from "./CourseDetailsModal";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
-import mernSyllabusUrl from "/assets/related_PDFs/mern-syllabus.pdf?url";
-import javafullstackSyllabusUrl from "/assets/related_PDFs/java-full-stack-syllabus.pdf?url";
-import pythonfullstackSyllabusUrl from "/assets/related_PDFs/python-full-stack-syllabus.pdf?url";
 import MERN from "/assets/related_Pics/mern.png";
 import JAVA from "/assets/related_Pics/java.png";
 import PYTHON from "/assets/related_Pics/python.png";
+import { useNavigate } from "react-router-dom";
 
 const Courses = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const [courseForDownload, setCourseForDownload] = useState(null);
-  const [showEnrollPrompt, setShowEnrollPrompt] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", phone: "" });
-  const [formError, setFormError] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   const handleEnrollClick = () => {
-    setShowEnrollPrompt(true);
-  };
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-    setFormError("");
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!form.name || !form.email || !form.phone) {
-      setFormError("Please fill in all fields.");
-      return;
-    }
-    setIsSubmitting(true);
-    try {
-      // Add to Firestore 'enrollments' collection
-      await addDoc(collection(db, "enrollments"), {
-        name: form.name,
-        email: form.email,
-        mobile: form.phone,
-        course: courseForDownload.title,
-        timestamp: new Date(),
-        status: "new",
-        source: "CourseCard",
-      });
-      setShowEnrollPrompt(false);
-      setForm({ name: "", email: "", phone: "" });
-
-      // Download the syllabus after successful enrollment
-      const syllabusPaths = {
-        mern: mernSyllabusUrl,
-        java: javafullstackSyllabusUrl,
-        python: pythonfullstackSyllabusUrl,
-      };
-
-      const syllabusPath = syllabusPaths[courseForDownload.id];
-      if (syllabusPath) {
-        const link = document.createElement("a");
-        link.href = syllabusPath;
-        link.download = `${courseForDownload.title}-Syllabus.pdf`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
-    } catch (error) {
-      setFormError(
-        "There was an error submitting your registration. Please try again."
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
+    // This function might not be needed anymore if only using QuoteForm for downloads
+    // setShowEnrollPrompt(true);
   };
 
   const handleDownloadSyllabus = (course) => {
-    setCourseForDownload(course);
-    setShowEnrollPrompt(true);
+    // Navigate to EnrollPage with state for download
+    navigate("/enroll", { 
+      state: { 
+        downloadType: "syllabus",
+        courseToDownload: course 
+      }
+    });
   };
 
   const handleLearnMore = (course) => {
@@ -383,69 +332,6 @@ const Courses = () => {
         onClose={() => setSelectedCourse(null)}
         course={selectedCourse}
       />
-
-      {/* Enrollment Form Modal */}
-      {showEnrollPrompt && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center">
-          <div
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm"
-            onClick={() => setShowEnrollPrompt(false)}
-          ></div>
-          <div className="relative bg-white rounded-xl p-8 w-full max-w-md mx-4 z-10">
-            <button
-              className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold"
-              onClick={() => setShowEnrollPrompt(false)}
-              aria-label="Close"
-            >
-              &times;
-            </button>
-            <h3 className="text-xl font-bold mb-4 text-center text-[#FF6B00]">
-              Enroll to Download Syllabus
-            </h3>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                value={form.name}
-                onChange={handleChange}
-                className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FF6B00]"
-                disabled={isSubmitting}
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                value={form.email}
-                onChange={handleChange}
-                className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FF6B00]"
-                disabled={isSubmitting}
-              />
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Your Phone Number"
-                value={form.phone}
-                onChange={handleChange}
-                className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FF6B00]"
-                disabled={isSubmitting}
-              />
-              {formError && (
-                <div className="text-red-500 text-sm text-center">
-                  {formError}
-                </div>
-              )}
-              <button
-                type="submit"
-                className="bg-[#FF6B00] text-white font-bold py-2 rounded-lg hover:bg-[#FF6B00]/90 transition-all disabled:opacity-60"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Registering..." : "Register & Download"}
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

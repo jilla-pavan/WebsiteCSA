@@ -1,13 +1,17 @@
 import React from "react";
 import QuoteForm from "../components/QuoteForm";
+import { useLocation } from "react-router-dom";
 
-export default function EnrollPage() {
+const EnrollPage = () => {
+  const location = useLocation();
+  const { downloadType, courseToDownload } = location.state || {};
+
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-start py-12 pt-18 overflow-hidden">
       {/* Content Grid adjusted for wider form */}
-      <div className="relative mx-auto w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-8 items-center px-4">
+      <div className="relative mx-auto w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 md:divide-x-2 md:divide-gray-400 gap-8 px-4">
         {/* Left Column - Advisor Info */}
-        <div className="flex flex-col justify-center items-start py-8 pr-4">
+        <div className="flex flex-col py-8 md:pr-4">
           <h1 className="text-3xl md:text-4xl font-extrabold mb-2 text-gray-900 leading-tight">
             Talk to Our Advisor & <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-400">
@@ -35,14 +39,19 @@ export default function EnrollPage() {
         </div>
 
         {/* Right Column - Form Container - Wider */}
-        <div className="flex flex-col justify-center items-center py-8 pl-4 w-full">
+        <div className="flex flex-col justify-center items-center py-8 md:pl-4 w-full">
           <div className="relative w-full">
             <div className="w-full bg-white backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-orange-100 self-center transition-all duration-300">
-              <QuoteForm />
+              <QuoteForm 
+                downloadType={downloadType}
+                courseToDownload={courseToDownload}
+              />
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default EnrollPage;
