@@ -30,7 +30,7 @@ function AboutUs() {
           </div>
           <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-5 border border-gray-700 text-center transform hover:scale-105 transition-all duration-300">
             <div className="text-2xl font-extrabold text-primary mb-2 tracking-tight">
-              15,000+
+              1500+
             </div>
             <p className="text-gray-400 text-sm font-medium">
               Enrolled Students

@@ -196,7 +196,7 @@ const ExpertTrainers = () => {
         </div>
         <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-6 text-center border border-gray-700/50 transform hover:scale-105 transition-all duration-300">
           <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">
-            500+
+            1000+
           </div>
           <p className="text-gray-400 text-sm md:text-base">
             Students Mentored

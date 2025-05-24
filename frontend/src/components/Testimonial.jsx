@@ -1,5 +1,11 @@
 import React from "react";
-import { Udhay, Dileep, Rambabu, Jagadeesh, Teja } from "../../public/assets/placements";
+import {
+  Udhay,
+  Dileep,
+  Rambabu,
+  Jagadeesh,
+  Teja,
+} from "../../public/assets/placements";
 
 export const Testimonial = () => {
   const testimonials = [
@@ -9,10 +15,12 @@ export const Testimonial = () => {
       role: "Software Developer",
       company: "Multiplier AI",
       image: Udhay,
-      testimonial: "The comprehensive curriculum and hands-on projects at CSA helped me secure my dream role at Multiplier AI!",
+      testimonial:
+        "The comprehensive curriculum and hands-on projects at CSA helped me secure my dream role at Multiplier AI!",
       rating: 5,
       batch: "2023",
-      companyLogo: "https://multiplierai.co/wp-content/uploads/2022/06/multiplier_logo.png",
+      companyLogo:
+        "https://multiplierai.co/wp-content/uploads/2022/06/multiplier_logo.png",
     },
     {
       id: 2,
@@ -20,10 +28,12 @@ export const Testimonial = () => {
       role: "Testing Engineer",
       company: "Wipro",
       image: Dileep,
-      testimonial: "The practical training and industry exposure at CSA prepared me well for my role at Wipro.",
+      testimonial:
+        "The practical training and industry exposure at CSA prepared me well for my role at Wipro.",
       rating: 5,
       batch: "2023",
-      companyLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Wipro_new_logo.svg/330px-Wipro_new_logo.svg.png",
+      companyLogo:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Wipro_new_logo.svg/330px-Wipro_new_logo.svg.png",
     },
     {
       id: 3,
@@ -31,10 +41,12 @@ export const Testimonial = () => {
       role: "Software Developer",
       company: "Sconex Software",
       image: Jagadeesh,
-      testimonial: "The mentorship and project-based learning approach at CSA was instrumental in my success.",
+      testimonial:
+        "The mentorship and project-based learning approach at CSA was instrumental in my success.",
       rating: 5,
       batch: "2023",
-      companyLogo: "https://media.licdn.com/dms/image/v2/D560BAQFnAOeChCHW-Q/company-logo_200_200/company-logo_200_200/0/1729242362993/sconexit_logo?e=2147483647&v=beta&t=lxiLsl70uulj0KYdk2B8tj9-8jxOZQDEZ8MKkuJ62zY",
+      companyLogo:
+        "https://media.licdn.com/dms/image/v2/D560BAQFnAOeChCHW-Q/company-logo_200_200/company-logo_200_200/0/1729242362993/sconexit_logo?e=2147483647&v=beta&t=lxiLsl70uulj0KYdk2B8tj9-8jxOZQDEZ8MKkuJ62zY",
     },
     {
       id: 4,
@@ -42,10 +54,12 @@ export const Testimonial = () => {
       role: "Data Analyst",
       company: "Nova Web Innovations",
       image: Rambabu,
-      testimonial: "CSA's data science program provided me with the perfect foundation for my career in analytics.",
+      testimonial:
+        "CSA's data science program provided me with the perfect foundation for my career in analytics.",
       rating: 5,
       batch: "2023",
-      companyLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png",
+      companyLogo:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png",
     },
     {
       id: 5,
@@ -53,10 +67,12 @@ export const Testimonial = () => {
       role: "Software Developer",
       company: "Kapil Technogles",
       image: Teja,
-      testimonial: "The industry-relevant curriculum and placement support at CSA helped me land my first tech role.",
+      testimonial:
+        "The industry-relevant curriculum and placement support at CSA helped me land my first tech role.",
       rating: 5,
       batch: "2023",
-      companyLogo: "https://kcs-tech.com/static/media/ptkcs%20logo%20png%20total.cf3b714d11854610e992.png",
+      companyLogo:
+        "https://kcs-tech.com/static/media/ptkcs%20logo%20png%20total.cf3b714d11854610e992.png",
     },
   ];
 
@@ -155,7 +171,7 @@ export const Testimonial = () => {
         </div>
         <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-5 border border-gray-700 text-center transform hover:scale-105 transition-all duration-300">
           <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">
-            15,000+
+            1500+
           </div>
           <p className="text-gray-400 text-sm md:text-base">
             Enrolled Students

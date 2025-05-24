@@ -326,7 +326,7 @@ const CompaniesHire = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mt-10 px-2 md:px-6">
         <div className="bg-gray-800 border border-gray-700 rounded-xl p-4 md:p-6 flex flex-col items-center text-center transform hover:scale-105 transition-all duration-300">
           <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">
-            150+
+            500+
           </div>
           <p className="text-gray-400 text-sm md:text-base">Hiring Partners</p>
         </div>

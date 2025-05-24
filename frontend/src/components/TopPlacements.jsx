@@ -9,11 +9,13 @@ import {
   Jagadeesh,
   Rushikesh,
   Shahil,
+  Dasthagiri,
+  Navneeth,
+  Nikhil,
+  Sachin,
+  Vinay,
 } from "../../public/assets/placements";
 import { Nova } from "../../public/assets/company_Logos";
-
-const ENROLL_FORM_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSf-TFPS1co0mS1lrmb-7-0Ffln-LLKDKN8UzXr6Y7XSG8l1vw/viewform?usp=header";
 
 const TopPlacements = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -27,6 +29,51 @@ const TopPlacements = () => {
   const topPlacements = [
     {
       id: 1,
+      name: "Dasthagiri",
+      position: "Software Developer",
+      company: "Saven Technologies",
+      salary: "₹8 LPA",
+      image: Dasthagiri,
+      logo: "https://placehold.co/200x200/2563eb/ffffff?text=ST",
+    },
+    {
+      id: 2,
+      name: "Nikhil",
+      position: "Software Developer",
+      company: "TCS",
+      salary: "₹7.5 LPA",
+      image: Nikhil,
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/TCS_Symbol.svg/1200px-TCS_Symbol.svg.png",
+    },
+    {
+      id: 3,
+      name: "Navneeth",
+      position: "Software Developer",
+      company: "Unify",
+      salary: "₹7.5 LPA",
+      image: Navneeth,
+      logo: "https://placehold.co/200x200/2563eb/ffffff?text=UF",
+    },
+    {
+      id: 4,
+      name: "Vinay",
+      position: "Software Developer",
+      company: "Msys Technologies",
+      salary: "₹7 LPA",
+      image: Vinay,
+      logo: "https://placehold.co/200x200/2563eb/ffffff?text=MT",
+    },
+    {
+      id: 5,
+      name: "Sachin",
+      position: "Software Developer",
+      company: "Mobinis Msys Digital",
+      salary: "₹5.5 LPA",
+      image: Sachin,
+      logo: "https://placehold.co/200x200/2563eb/ffffff?text=MMD",
+    },
+    {
+      id: 6,
       name: "Udhay Kaitha",
       position: "Software Developer",
       company: "Multiplier AI",
@@ -35,7 +82,7 @@ const TopPlacements = () => {
       logo: "https://multiplierai.co/wp-content/uploads/2022/06/multiplier_logo.png",
     },
     {
-      id: 2,
+      id: 7,
       name: "Dileep",
       position: "Testing",
       company: "Wipro",
@@ -44,7 +91,7 @@ const TopPlacements = () => {
       logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Wipro_new_logo.svg/330px-Wipro_new_logo.svg.png",
     },
     {
-      id: 3,
+      id: 8,
       name: "Jagadeesh",
       position: "Software Developer",
       company: "Sconex Software",
@@ -53,7 +100,7 @@ const TopPlacements = () => {
       logo: "https://media.licdn.com/dms/image/v2/D560BAQFnAOeChCHW-Q/company-logo_200_200/company-logo_200_200/0/1729242362993/sconexit_logo?e=2147483647&v=beta&t=lxiLsl70uulj0KYdk2B8tj9-8jxOZQDEZ8MKkuJ62zY",
     },
     {
-      id: 4,
+      id: 9,
       name: "Rambabu",
       position: "Data Analyst",
       company: "Nova Web Innovations",
@@ -62,7 +109,7 @@ const TopPlacements = () => {
       logo: Nova,
     },
     {
-      id: 5,
+      id: 10,
       name: "Tirumala Teja",
       position: "Software Developer",
       company: "Kapil Technogles",
@@ -71,7 +118,7 @@ const TopPlacements = () => {
       logo: "https://kcs-tech.com/static/media/ptkcs%20logo%20png%20total.cf3b714d11854610e992.png",
     },
     {
-      id: 6,
+      id: 11,
       name: "Rushikesh",
       position: "Software Developer",
       company: "Stalcon",
@@ -80,7 +127,7 @@ const TopPlacements = () => {
       logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvFJn_SHIfzEBfw5XjGGpFfF92PSHDbA4lanew_bnbDQ&s",
     },
     {
-      id: 7,
+      id: 12,
       name: "Shahil",
       position: "Software Developer",
       company: "Stalcon",
@@ -288,13 +335,17 @@ const TopPlacements = () => {
                 </p>
               </div>
               <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm transform hover:scale-105 transition-all duration-300">
-                <div className="text-2xl font-bold text-primary mb-1">4 LPA</div>
+                <div className="text-2xl font-bold text-primary mb-1">
+                  4 LPA
+                </div>
                 <p className="text-sm text-gray-600 font-medium">
                   Avg. Package
                 </p>
               </div>
               <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm transform hover:scale-105 transition-all duration-300">
-                <div className="text-2xl font-bold text-primary mb-1">1000+</div>
+                <div className="text-2xl font-bold text-primary mb-1">
+                  1000+
+                </div>
                 <p className="text-sm text-gray-600 font-medium">
                   Students Placed
                 </p>
@@ -332,8 +383,8 @@ const TopPlacements = () => {
       <div className="lg:w-1/2">
         <div className="w-full max-w-xl mx-auto px-4 py-8">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 sm:mb-6">
-            Start Your Tech <span className="text-primary">Career</span> Journey
-            Today In Fullstack with AI
+            Start Your Journey <span className="text-primary">Today</span> In
+            Fullstack with AI
           </h1>
           <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 leading-relaxed">
             Join Career Sure Academy and gain the skills, knowledge, and
@@ -349,7 +400,11 @@ const TopPlacements = () => {
             </button>
             <button
               className="w-full font-bold py-3 rounded-lg shadow-lg bg-gradient-to-r from-primary to-primary-light text-white hover:-translate-y-1 hover:shadow-xl transition-all"
-              onClick={() => navigate("/enroll", { state: { postSubmitDownloadType: 'brochure' } })}
+              onClick={() =>
+                navigate("/enroll", {
+                  state: { postSubmitDownloadType: "brochure" },
+                })
+              }
             >
               Download Brochure
             </button>
