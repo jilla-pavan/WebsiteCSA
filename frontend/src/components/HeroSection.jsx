@@ -239,14 +239,14 @@ function HeroSection() {
         onClose={handleCloseModal}
       />
       <div className="w-full">
-        <StudentReels />
         <TopPlacements />
+        <StudentReels />
         <CompaniesHire />
         <RoadmapSection />
         <ExpertTrainers />
         <Courses />
         <Testimonial />
-        <FAQs />
+        <FAQs />.
         <AboutUs />
         <GetInTouch />
       </div>

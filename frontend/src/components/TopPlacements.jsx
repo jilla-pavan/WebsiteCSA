@@ -129,7 +129,7 @@ const TopPlacements = () => {
                     <div className="h-full flex flex-col">
                       {/* Package banner */}
                       <div className="bg-primary py-1.5 px-4 text-right">
-                        <span className="text-white text-sm font-bold">
+                        <span className="text-white text-2xl font-bold">
                           {profile.salary}
                         </span>
                       </div>
@@ -203,7 +203,7 @@ const TopPlacements = () => {
                     <div className="h-full flex flex-col">
                       {/* Package banner */}
                       <div className="bg-primary py-1.5 px-4 text-right">
-                        <span className="text-white text-sm font-bold">
+                        <span className="text-2xl text-white font-bold">
                           {profile.salary}
                         </span>
                       </div>
@@ -282,25 +282,19 @@ const TopPlacements = () => {
           {isLoaded && (
             <div className="grid grid-cols-3 gap-5 mt-8 w-full">
               <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm transform hover:scale-105 transition-all duration-300">
-                <div className="text-2xl font-bold text-primary mb-1">
-                  97%
-                </div>
+                <div className="text-2xl font-bold text-primary mb-1">97%</div>
                 <p className="text-sm text-gray-600 font-medium">
                   Placement Rate
                 </p>
               </div>
               <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm transform hover:scale-105 transition-all duration-300">
-                <div className="text-2xl font-bold text-primary mb-1">
-                  6LPA
-                </div>
+                <div className="text-2xl font-bold text-primary mb-1">6LPA</div>
                 <p className="text-sm text-gray-600 font-medium">
                   Avg. Package
                 </p>
               </div>
               <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm transform hover:scale-105 transition-all duration-300">
-                <div className="text-2xl font-bold text-primary mb-1">
-                  100+
-                </div>
+                <div className="text-2xl font-bold text-primary mb-1">100+</div>
                 <p className="text-sm text-gray-600 font-medium">
                   Students Placed
                 </p>
@@ -349,14 +343,9 @@ const TopPlacements = () => {
           <div className="flex flex-col gap-4">
             <button
               className="w-full font-bold py-3 rounded-lg shadow-lg bg-gradient-to-r from-primary to-primary-light text-white mb-3 hover:-translate-y-1 hover:shadow-xl transition-all"
-              onClick={() =>
-                window.open(
-                  "https://docs.google.com/forms/d/e/1FAIpQLSf-TFPS1co0mS1lrmb-7-0Ffln-LLKDKN8UzXr6Y7XSG8l1vw/viewform?usp=header",
-                  "_blank"
-                )
-              }
+              onClick={() => navigate("/enroll")}
             >
-              Fill the form &rarr;
+              Kick Start Your Journey &rarr;
             </button>
             <button
               className="w-full font-bold py-3 rounded-lg shadow-lg bg-gradient-to-r from-primary to-primary-light text-white hover:-translate-y-1 hover:shadow-xl transition-all"

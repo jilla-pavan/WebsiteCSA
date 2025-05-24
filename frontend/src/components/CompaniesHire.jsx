@@ -1,39 +1,48 @@
 import React from "react";
+import { Nova } from "../../public/assets/company_Logos";
 
 const CompaniesHire = () => {
   // First row of company logos
   const companyLogosRow1 = [
     {
-      name: "Google",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png",
+      name: "Wipro",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Wipro_Primary_Logo_Color_RGB.svg/1280px-Wipro_Primary_Logo_Color_RGB.svg.png",
     },
     {
-      name: "Microsoft",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png",
+      name: "Nova Web",
+      logo: Nova,
     },
     {
-      name: "Amazon",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png",
+      name: "Ample Logic",
+      logo: "https://amplelogic.com/wp-content/uploads/2023/03/10018-4-300x56-1.jpg",
     },
     {
-      name: "IBM",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/2560px-IBM_logo.svg.png",
+      name: "V&V Tech",
+      logo: "https://vandvtechnologies.com/wp-content/uploads/2022/04/cropped-vv-photo.png",
     },
     {
-      name: "Meta",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Meta_Platforms_Inc._logo.svg/1280px-Meta_Platforms_Inc._logo.svg.png",
+      name: "Stalcon",
+      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvFJn_SHIfzEBfw5XjGGpFfF92PSHDbA4lanew_bnbDQ&s",
     },
     {
-      name: "Adobe",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Adobe_Corporate_Logo.png/1280px-Adobe_Corporate_Logo.png",
+      name: "Multiplier AI",
+      logo: "https://multiplierai.co/wp-content/uploads/2022/06/multiplier_logo.png",
     },
     {
-      name: "Samsung",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/2560px-Samsung_Logo.svg.png",
+      name: "Kapil Tech",
+      logo: "https://kcs-tech.com/static/media/ptkcs%20logo%20png%20total.cf3b714d11854610e992.png",
     },
     {
-      name: "Oracle",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_logo.svg/2560px-Oracle_logo.svg.png",
+      name: "Msys Tech",
+      logo: "https://www.msystechnologies.com/wp-content/uploads/2020/01/MSys-Standard-Logo-1.png",
+    },
+    {
+      name: "Saven Tech",
+      logo: "https://saventech.com/wp-content/uploads/2024/07/Saven-Website-logo-2.png",
+    },
+    {
+      name: "Unify",
+      logo: "https://media.licdn.com/dms/image/v2/D560BAQEHF-p9txVvDw/company-logo_200_200/company-logo_200_200/0/1708606546779/unifytech_logo?e=2147483647&v=beta&t=ydp-QL3wDOCP84ieMzblbTrH_-p-46wSNIamYWbesgQ",
     },
   ];
 
@@ -184,7 +193,7 @@ const CompaniesHire = () => {
   return (
     <div id="companies" className="w-full">
       <div className="text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 mt-6">
           <span className="text-gray-900">Our </span>
           <span className="text-[#FF6B00]">Industry Partners</span>
         </h1>
