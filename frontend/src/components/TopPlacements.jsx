@@ -349,7 +349,7 @@ const TopPlacements = () => {
             </button>
             <button
               className="w-full font-bold py-3 rounded-lg shadow-lg bg-gradient-to-r from-primary to-primary-light text-white hover:-translate-y-1 hover:shadow-xl transition-all"
-              onClick={() => navigate("/enroll")}
+              onClick={() => navigate("/enroll", { state: { postSubmitDownloadType: 'brochure' } })}
             >
               Download Brochure
             </button>

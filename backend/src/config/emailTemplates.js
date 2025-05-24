@@ -4,15 +4,13 @@ export const createAdminNotificationEmail = (enrollmentData) => {
     email,
     mobile,
     status,
-    educationLevel,
-    degreeDetails,
-    collegeName,
-    branch,
-    percentage,
-    yop,
+    enrollmentId,
     submittedAt,
-    enrollmentId
+    timestamp
   } = enrollmentData;
+
+  const formattedSubmittedAt = submittedAt ? new Date(submittedAt).toLocaleString() : 'N/A';
+  const formattedTimestamp = timestamp ? new Date(timestamp).toLocaleString() : 'N/A';
 
   return {
     subject: `New Enrollment 🚀`,
@@ -22,13 +20,8 @@ New Course Enrollment
 Enrollment ID: ${enrollmentId}
 Name: ${name}
 Status: ${status}
-Education: ${educationLevel} - ${degreeDetails}
-College: ${collegeName}
-Branch: ${branch}
-Percentage/CGPA: ${percentage}
-Year of Passing: ${yop}
 Contact: ${email} | ${mobile}
-Date: ${new Date(submittedAt).toLocaleString()}
+Submitted At: ${formattedSubmittedAt}
 `,
     html: `
 <!DOCTYPE html>
@@ -53,32 +46,16 @@ Date: ${new Date(submittedAt).toLocaleString()}
         <span style="color: #333;">${status}</span>
       </p>
       <p style="margin: 0 0 15px 0;">
-        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Education:</strong>
-        <span style="color: #333;">${educationLevel} - ${degreeDetails}</span>
-      </p>
-      <p style="margin: 0 0 15px 0;">
-        <strong style="color: #FF6B00; display: inline-block; width: 120px;">College:</strong>
-        <span style="color: #333;">${collegeName}</span>
-      </p>
-       <p style="margin: 0 0 15px 0;">
-        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Branch:</strong>
-        <span style="color: #333;">${branch}</span>
-      </p>
-       <p style="margin: 0 0 15px 0;">
-        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Percentage/CGPA:</strong>
-        <span style="color: #333;">${percentage}</span>
-      </p>
-       <p style="margin: 0 0 15px 0;">
-        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Year of Passing:</strong>
-        <span style="color: #333;">${yop}</span>
-      </p>
-      <p style="margin: 0 0 15px 0;">
         <strong style="color: #FF6B00; display: inline-block; width: 120px;">Email:</strong>
         <a href="mailto:${email}" style="color: #FF6B00; text-decoration: none;">${email}</a>
       </p>
-      <p style="margin: 0;">
+      <p style="margin: 0 0 15px 0;">
         <strong style="color: #FF6B00; display: inline-block; width: 120px;">Mobile:</strong>
         <span style="color: #333;">${mobile}</span>
+      </p>
+      <p style="margin: 0;">
+        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Submitted At:</strong>
+        <span style="color: #333;">${formattedSubmittedAt}</span>
       </p>
     </div>
 
@@ -90,8 +67,8 @@ Date: ${new Date(submittedAt).toLocaleString()}
 };
 
 export const createUserConfirmationEmail = (userData) => {
-  const { name, enrollmentId, status, educationLevel, degreeDetails, collegeName, branch, percentage, yop, email, mobile } = userData;
-  
+  const { name, enrollmentId, status, email, mobile } = userData;
+
   return {
     subject: `Welcome to CSA`,
     text: `
@@ -103,11 +80,6 @@ Enrollment ID: ${enrollmentId}
 
 Your Details:
 Status: ${status}
-Education: ${educationLevel} - ${degreeDetails}
-College: ${collegeName}
-Branch: ${branch}
-Percentage/CGPA: ${percentage}
-Year of Passing: ${yop}
 Contact: ${email} | ${mobile}
 
 About CSA:
@@ -137,7 +109,7 @@ CSA Team
     </div>
 
     <p style="margin-bottom: 20px;">Dear ${name},</p>
-    
+
     <p style="margin-bottom: 20px;">
       Thank you for enrolling with us. We're excited to have you join us!
     </p>
@@ -175,7 +147,7 @@ CSA Team
     <p style="margin-bottom: 25px;">
       Our team will contact you shortly.
       Ph No : +91 8919734391, +91 6301046346
-      Mail Us : contact@careersureacademy.com 
+      Mail Us : contact@careersureacademy.com
     </p>
 
     <div style="margin-top: 25px;">

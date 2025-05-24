@@ -91,7 +91,7 @@ function Footer() {
                 </svg>
               </a>
               <a
-                href="https://x.com/home"
+                href="https://x.com/CareerSureAcad"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-primary transition-all"

@@ -36,19 +36,13 @@ const educationLevels = [
 
 const statusOptions = ["Student", "Working Professional", "Fresher", "Other"];
 
-function QuoteForm({ onSubmitSuccess, downloadType, courseToDownload }) {
+function QuoteForm({ onSubmitSuccess, downloadType, courseToDownload, postSubmitDownloadType }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     mobile: "",
     receiveUpdates: true,
     status: "",
-    educationLevel: "",
-    degreeDetails: "",
-    collegeName: "",
-    branch: "",
-    percentage: "",
-    yop: "",
   });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -66,19 +60,7 @@ function QuoteForm({ onSubmitSuccess, downloadType, courseToDownload }) {
       newErrors.mobile = "Enter a valid 10-digit mobile number.";
     if (!formData.status)
       newErrors.status = "Please select your current status.";
-    if (!formData.educationLevel)
-      newErrors.educationLevel = "Please select your education level.";
-    if (!formData.degreeDetails.trim())
-      newErrors.degreeDetails = "Degree details are required.";
-    if (!formData.collegeName.trim())
-      newErrors.collegeName = "College name is required.";
-    if (!formData.branch.trim()) newErrors.branch = "Branch is required.";
-    if (!formData.percentage.trim())
-      newErrors.percentage = "Percentage/CGPA is required.";
-    if (!formData.yop.trim()) newErrors.yop = "Year of Passing is required.";
-    else if (!/^\d{4}$/.test(formData.yop))
-      newErrors.yop = "Enter a valid 4-digit year.";
-    
+
     return newErrors;
   };
 
@@ -94,7 +76,7 @@ function QuoteForm({ onSubmitSuccess, downloadType, courseToDownload }) {
     let downloadUrl;
     let fileName;
 
-    if (type === 'syllabus' && course) {
+    if (type === "syllabus" && course) {
       const syllabusPaths = {
         mern: mernSyllabusUrl,
         java: javafullstackSyllabusUrl,
@@ -121,35 +103,26 @@ function QuoteForm({ onSubmitSuccess, downloadType, courseToDownload }) {
     e.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
-    
+
     if (Object.keys(validationErrors).length === 0) {
       setIsSubmitting(true);
       try {
         // Create submission data with timestamp and additional metadata
         const submissionData = {
-          ...formData,
+          name: formData.name,
+          email: formData.email,
+          mobile: formData.mobile,
+          status: formData.status,
           timestamp: new Date(),
-          // Keeping user's selected status from formData
-          // Adding a separate field for the processing status of the enrollment
-          processingStatus: "new",
           submittedAt: new Date().toISOString(),
-          lastUpdated: new Date().toISOString(),
-          formVersion: "1.0",
-          source: "web_form",
-          // Add additional metadata
-          metadata: {
-            userAgent: navigator.userAgent,
-            screenResolution: `${window.screen.width}x${window.screen.height}`,
-            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-          },
         };
-        
+
         // Save to Firebase and get the document reference
         const docRef = await addDoc(
           collection(db, "enrollments"),
           submissionData
         );
-        
+
         // Add document ID to the data
         const enrollmentData = {
           ...submissionData,
@@ -161,16 +134,10 @@ function QuoteForm({ onSubmitSuccess, downloadType, courseToDownload }) {
         const userEmailResult = await sendEmail({
           to: formData.email,
           type: "USER_CONFIRMATION",
-          data: { // Ensure all necessary data is passed for the email template
+          data: {
             name: formData.name,
             enrollmentId: docRef.id,
             status: formData.status,
-            educationLevel: formData.educationLevel,
-            degreeDetails: formData.degreeDetails,
-            collegeName: formData.collegeName,
-            branch: formData.branch,
-            percentage: formData.percentage,
-            yop: formData.yop,
             email: formData.email,
             mobile: formData.mobile,
           },
@@ -186,6 +153,7 @@ function QuoteForm({ onSubmitSuccess, downloadType, courseToDownload }) {
 
         // Send detailed notification to admin only if admin email is configured
         if (ADMIN_EMAIL) {
+          console.log("Attempting to send admin notification email to:", ADMIN_EMAIL);
           const adminEmailResult = await sendEmail({
             to: ADMIN_EMAIL,
             type: "ADMIN_NOTIFICATION",
@@ -205,6 +173,8 @@ function QuoteForm({ onSubmitSuccess, downloadType, courseToDownload }) {
               adminEmailResult.error
             );
             // Don't throw error here as user registration was successful
+          } else {
+            console.log("Admin notification email sent successfully.");
           }
         } else {
           console.warn(
@@ -222,10 +192,17 @@ function QuoteForm({ onSubmitSuccess, downloadType, courseToDownload }) {
         if (onSubmitSuccess) {
           onSubmitSuccess(downloadType, courseToDownload);
         } else {
-          handleDownload(downloadType, courseToDownload);
+          // If no specific onSubmitSuccess callback is provided, perform the download based on props
+          if (downloadType || courseToDownload) {
+            handleDownload(downloadType, courseToDownload);
+          } else if (postSubmitDownloadType === 'brochure') {
+            handleDownload('brochure');
+          } else {
+            // Optionally handle case where no specific action is defined
+            console.log("Form submitted successfully, no download or success action specified.");
+          }
           setSubmitted(true);
         }
-
       } catch (error) {
         console.error("Error submitting form:", error);
         // Show more specific error message to user
@@ -265,7 +242,7 @@ function QuoteForm({ onSubmitSuccess, downloadType, courseToDownload }) {
           <p className="text-gray-600 text-sm mb-4 font-medium">
             Thank you for enrolling. Our team will contact you soon.
           </p>
-          <button 
+          <button
             onClick={() => (window.location.href = "/")}
             className="px-6 py-2 bg-[#FF6B00] text-white rounded-lg font-medium hover:bg-orange-600 transition-all duration-300 text-sm shadow hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
           >
@@ -277,286 +254,171 @@ function QuoteForm({ onSubmitSuccess, downloadType, courseToDownload }) {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="w-full mx-auto p-6 sm:p-8 bg-white rounded-lg shadow-lg"
-    >
-      <div className="mb-8 text-center">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2 tracking-tight">
-          Enrollment <span className="text-primary">Form</span>
-        </h2>
-        <p className="text-gray-600 text-sm">
-          Fill in your details and our team will reach out to you
-        </p>
-      </div>
-      <div className="space-y-5">
-        <div className="group">
-          <label className="block text-gray-700 text-sm font-medium mb-1.5">
-            Full Name <span className="text-primary">*</span>
-          </label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className={`w-full px-3 py-2.5 border ${
-              errors.name ? "border-red-400" : "border-gray-300"
-            } rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white`}
-            placeholder="Enter your full name"
-          />
-          {errors.name && (
-            <p className="text-red-500 text-xs mt-1">{errors.name}</p>
-          )}
+    <div className="w-full mx-auto max-w-md p-2 sm:p-2">
+      <form onSubmit={handleSubmit} className="w-full">
+        <div className="mb-6 text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2 tracking-tight">
+            Enrollment <span className="text-primary">Form</span>
+          </h2>
+          <p className="text-gray-600 text-sm">
+            Fill in your details and our team will reach out to you
+          </p>
         </div>
-        <div className="group">
-          <label className="block text-gray-700 text-sm font-medium mb-1.5">
-            Email <span className="text-primary">*</span>
-          </label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className={`w-full px-3 py-2.5 border ${
-              errors.email ? "border-red-400" : "border-gray-300"
-            } rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white`}
-            placeholder="Enter your email address"
-          />
-          {errors.email && (
-            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
-          )}
-        </div>
-        <div className="group">
-          <label className="block text-gray-700 text-sm font-medium mb-1.5">
-            Mobile Number <span className="text-primary">*</span>
-          </label>
-          <input
-            type="tel"
-            name="mobile"
-            value={formData.mobile}
-            onChange={handleChange}
-            className={`w-full px-3 py-2.5 border ${
-              errors.mobile ? "border-red-400" : "border-gray-300"
-            } rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white`}
-            placeholder="Enter your 10-digit mobile number"
-            maxLength={10}
-          />
-          {errors.mobile && (
-            <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
-          )}
-        </div>
-        <div className="group">
-          <label className="block text-gray-700 text-sm font-medium mb-1.5">
-            Current Status <span className="text-primary">*</span>
-          </label>
-          <select
-            name="status"
-            value={formData.status}
-            onChange={handleChange}
-            className={`w-full px-3 py-2.5 border ${
-              errors.status ? "border-red-400" : "border-gray-300"
-            } rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20d%3D%22M6%208l4%204%204-4%22%20fill%3D%22none%22%20stroke%3D%22%23666%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E')] bg-[length:20px_20px] bg-[right_0.5rem_center] bg-no-repeat pr-8`}
-          >
-            <option value="">Select your current status</option>
-            {statusOptions.map((status) => (
-              <option key={status} value={status}>
-                {status}
-              </option>
-            ))}
-          </select>
-          {errors.status && (
-            <p className="text-red-500 text-xs mt-1">{errors.status}</p>
-          )}
-        </div>
-        <div className="group">
-          <label className="block text-gray-700 text-sm font-medium mb-1.5">
-            Education Level <span className="text-primary">*</span>
-          </label>
-          <select
-            name="educationLevel"
-            value={formData.educationLevel}
-            onChange={handleChange}
-            className={`w-full px-3 py-2.5 border ${
-              errors.educationLevel ? "border-red-400" : "border-gray-300"
-            } rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20d%3D%22M6%208l4%204%204-4%22%20fill%3D%22none%22%20stroke%3D%22%23666%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E')] bg-[length:20px_20px] bg-[right_0.5rem_center] bg-no-repeat pr-8`}
-          >
-            <option value="">Select your education level</option>
-            {educationLevels.map((level) => (
-              <option key={level} value={level}>
-                {level}
-              </option>
-            ))}
-          </select>
-          {errors.educationLevel && (
-            <p className="text-red-500 text-xs mt-1">{errors.educationLevel}</p>
-          )}
-        </div>
-        <div className="group">
-          <label className="block text-gray-700 text-sm font-medium mb-1.5">
-            Degree Details <span className="text-primary">*</span>
-          </label>
-          <input
-            type="text"
-            name="degreeDetails"
-            value={formData.degreeDetails}
-            onChange={handleChange}
-            className={`w-full px-3 py-2.5 border ${
-              errors.degreeDetails ? "border-red-400" : "border-gray-300"
-            } rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white`}
-            placeholder="Enter your recent qualification"
-          />
-          {errors.degreeDetails && (
-            <p className="text-red-500 text-xs mt-1">{errors.degreeDetails}</p>
-          )}
-        </div>
-            <div className="group">
-          <label className="block text-gray-700 text-sm font-medium mb-1.5">
-            College Name <span className="text-primary">*</span>
-              </label>
-              <input
-                type="text"
-            name="collegeName"
-            value={formData.collegeName}
-                onChange={handleChange}
-            className={`w-full px-3 py-2.5 border ${
-              errors.collegeName ? "border-red-400" : "border-gray-300"
-            } rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white`}
-            placeholder="Enter your college name"
-          />
-          {errors.collegeName && (
-            <p className="text-red-500 text-xs mt-1">{errors.collegeName}</p>
-          )}
-            </div>
-        <div className="group">
-          <label className="block text-gray-700 text-sm font-medium mb-1.5">
-            Branch <span className="text-primary">*</span>
-          </label>
-          <input
-            type="text"
-            name="branch"
-            value={formData.branch}
-            onChange={handleChange}
-            className={`w-full px-3 py-2.5 border ${
-              errors.branch ? "border-red-400" : "border-gray-300"
-            } rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white`}
-            placeholder="Enter your branch"
-          />
-          {errors.branch && (
-            <p className="text-red-500 text-xs mt-1">{errors.branch}</p>
-          )}
-        </div>
-        <div className="group">
-          <label className="block text-gray-700 text-sm font-medium mb-1.5">
-            Percentage/CGPA <span className="text-primary">*</span>
-          </label>
-          <input
-            type="text"
-            name="percentage"
-            value={formData.percentage}
-            onChange={handleChange}
-            className={`w-full px-3 py-2.5 border ${
-              errors.percentage ? "border-red-400" : "border-gray-300"
-            } rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white`}
-            placeholder="Enter your percentage or CGPA"
-          />
-          {errors.percentage && (
-            <p className="text-red-500 text-xs mt-1">{errors.percentage}</p>
-          )}
-        </div>
-        <div className="group">
-          <label className="block text-gray-700 text-sm font-medium mb-1.5">
-            Year of Passing (YOP) <span className="text-primary">*</span>
-          </label>
-          <input
-            type="number"
-            name="yop"
-            value={formData.yop}
-            onChange={handleChange}
-            className={`w-full px-3 py-2.5 border ${
-              errors.yop ? "border-red-400" : "border-gray-300"
-            } rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white`}
-            placeholder="Enter your year of passing (e.g., 2023)"
-            maxLength={4}
-          />
-          {errors.yop && (
-            <p className="text-red-500 text-xs mt-1">{errors.yop}</p>
-          )}
-        </div>
-        <div className="flex items-center bg-gray-50/70 p-3 rounded-md border border-gray-100 hover:bg-gray-50/90 transition-all">
-          <input
-            type="checkbox"
-            name="receiveUpdates"
-            checked={formData.receiveUpdates}
-            onChange={handleChange}
-            className="h-4 w-4 text-primary focus:ring-1 focus:ring-primary border-gray-300 rounded"
-            id="receiveUpdates"
-          />
-          <label
-            htmlFor="receiveUpdates"
-            className="ml-2 text-gray-600 text-sm select-none cursor-pointer"
-          >
-            I want to receive updates about courses, webinars, and placement
-            opportunities
-          </label>
-        </div>
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className={`w-full py-3 mt-6 bg-[#FF6B00] text-white font-semibold rounded-md shadow hover:shadow-md transition-all duration-300 text-sm relative overflow-hidden ${
-            isSubmitting
-              ? "opacity-75 cursor-not-allowed"
-              : "hover:bg-orange-600 active:scale-[0.98]"
-          }`}
-        >
-          <span className="relative inline-flex items-center justify-center">
-            {isSubmitting ? (
-              <>
-                <svg
-                  className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
-                Submitting...
-              </>
-            ) : (
-              <>
-                Register Now
-                <svg
-                  className="w-5 h-5 ml-2 -mr-1 transform group-hover:translate-x-1 transition-transform duration-200"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M13 7l5 5m0 0l-5 5m5-5H6"
-                  ></path>
-                </svg>
-              </>
+        <div className="space-y-5">
+          <div className="group">
+            <label className="block text-gray-700 text-sm font-medium mb-1.5">
+              Full Name <span className="text-primary">*</span>
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className={`w-full px-3 py-2 border ${
+                errors.name ? "border-red-400" : "border-gray-300"
+              } rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white`}
+              placeholder="Enter your full name"
+            />
+            {errors.name && (
+              <p className="text-red-500 text-xs mt-1">{errors.name}</p>
             )}
-          </span>
-        </button>
-      </div>
-    </form>
+          </div>
+          <div className="group">
+            <label className="block text-gray-700 text-sm font-medium mb-1.5">
+              Email <span className="text-primary">*</span>
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className={`w-full px-3 py-2 border ${
+                errors.email ? "border-red-400" : "border-gray-300"
+              } rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white`}
+              placeholder="Enter your email address"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+            )}
+          </div>
+          <div className="group">
+            <label className="block text-gray-700 text-sm font-medium mb-1.5">
+              Mobile Number <span className="text-primary">*</span>
+            </label>
+            <input
+              type="tel"
+              name="mobile"
+              value={formData.mobile}
+              onChange={handleChange}
+              className={`w-full px-3 py-2 border ${
+                errors.mobile ? "border-red-400" : "border-gray-300"
+              } rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white`}
+              placeholder="Enter your 10-digit mobile number"
+              maxLength={10}
+            />
+            {errors.mobile && (
+              <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
+            )}
+          </div>
+          <div className="group">
+            <label className="block text-gray-700 text-sm font-medium mb-1.5">
+              Current Status <span className="text-primary">*</span>
+            </label>
+            <select
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+              className={`w-full px-3 py-2 border ${
+                errors.status ? "border-red-400" : "border-gray-300"
+              } rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm bg-white appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20d%3D%22M6%208l4%204%204-4%22%20fill%3D%22none%22%20stroke%3D%22%23666%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E')] bg-[length:20px_20px] bg-[right_0.5rem_center] bg-no-repeat pr-8`}
+            >
+              <option value="">Select your current status</option>
+              {statusOptions.map((status) => (
+                <option key={status} value={status}>
+                  {status}
+                </option>
+              ))}
+            </select>
+            {errors.status && (
+              <p className="text-red-500 text-xs mt-1">{errors.status}</p>
+            )}
+          </div>
+          <div className="flex items-center bg-gray-50/70 p-3 rounded-md border border-gray-100 hover:bg-gray-50/90 transition-all">
+            <input
+              type="checkbox"
+              name="receiveUpdates"
+              checked={formData.receiveUpdates}
+              onChange={handleChange}
+              className="h-4 w-4 text-primary focus:ring-1 focus:ring-primary border-gray-300 rounded"
+              id="receiveUpdates"
+            />
+            <label
+              htmlFor="receiveUpdates"
+              className="ml-2 text-gray-600 text-sm select-none cursor-pointer"
+            >
+              I want to receive updates about courses, webinars, and placement
+              opportunities
+            </label>
+          </div>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className={`w-full py-3 mt-6 bg-[#FF6B00] text-white font-semibold rounded-md shadow hover:shadow-md transition-all duration-300 text-sm relative overflow-hidden ${
+              isSubmitting
+                ? "opacity-75 cursor-not-allowed"
+                : "hover:bg-orange-600 active:scale-[0.98]"
+            }`}
+          >
+            <span className="relative inline-flex items-center justify-center">
+              {isSubmitting ? (
+                <>
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  Submitting...
+                </>
+              ) : (
+                <>
+                  Register Now
+                  <svg
+                    className="w-5 h-5 ml-2 -mr-1 transform group-hover:translate-x-1 transition-transform duration-200"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                    ></path>
+                  </svg>
+                </>
+              )}
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 
-export default QuoteForm; 
+export default QuoteForm;
