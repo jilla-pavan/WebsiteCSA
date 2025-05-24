@@ -282,19 +282,19 @@ const TopPlacements = () => {
           {isLoaded && (
             <div className="grid grid-cols-3 gap-5 mt-8 w-full">
               <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm transform hover:scale-105 transition-all duration-300">
-                <div className="text-2xl font-bold text-primary mb-1">97%</div>
+                <div className="text-2xl font-bold text-primary mb-1">90%</div>
                 <p className="text-sm text-gray-600 font-medium">
                   Placement Rate
                 </p>
               </div>
               <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm transform hover:scale-105 transition-all duration-300">
-                <div className="text-2xl font-bold text-primary mb-1">6LPA</div>
+                <div className="text-2xl font-bold text-primary mb-1">4 LPA</div>
                 <p className="text-sm text-gray-600 font-medium">
                   Avg. Package
                 </p>
               </div>
               <div className="bg-white rounded-lg p-4 text-center border border-gray-100 shadow-sm transform hover:scale-105 transition-all duration-300">
-                <div className="text-2xl font-bold text-primary mb-1">100+</div>
+                <div className="text-2xl font-bold text-primary mb-1">1000+</div>
                 <p className="text-sm text-gray-600 font-medium">
                   Students Placed
                 </p>

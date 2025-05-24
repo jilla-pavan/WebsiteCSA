@@ -8,79 +8,55 @@ const StudentReels = () => {
   const [startY, setStartY] = useState(0);
   const [currentY, setCurrentY] = useState(0);
   const containerRef = useRef(null);
-  const autoplayRef = useRef(null);
   const [iframeLoading, setIframeLoading] = useState(true);
+  const playerRefs = useRef([]);
+  const [playerReady, setPlayerReady] = useState(false);
+  const [error, setError] = useState(null);
+  const [showControls, setShowControls] = useState(false);
+  const controlsTimeoutRef = useRef(null);
+  const dragTimeoutRef = useRef(null);
 
-  // Updated video testimonials with more professional data structure
+  // Updated video testimonials with relevant data structure
   const videoTestimonials = [
     {
       id: 1,
-      name: "Udhay Kaitha",
+      name: "Dileep",
       role: "Software Developer",
-      company: "Multiplier AI",
-      videoUrl: "https://www.youtube.com/embed/VIDEO_ID_1",
-      thumbnail: "https://randomuser.me/api/portraits/men/28.jpg",
-      course: "Full Stack Development",
-      batch: "2023",
-      likes: "2.5K",
-      comments: "245",
-      date: "March 15, 2024",
-      achievement: "Secured 4.5 LPA Package",
-      duration: "6 months",
-      previousRole: "Fresher",
-      previousCompany: "Career Sure Academy",
-      skills: ["React", "Node.js", "JavaScript", "MongoDB"],
-      project: "Built E-commerce Platform",
-      interviewRounds: "3 rounds cleared",
-      preparationTime: "4 months",
-      testimonial:
-        "Career Sure Academy transformed my career journey. The practical approach and industry-focused curriculum helped me land my dream job at Multiplier AI.",
+      company: "Wipro",
+      videoUrl: "https://www.youtube.com/embed/XsPbphv-0H4",
+      achievement: "Secured 4 LPA Package",
     },
     {
       id: 2,
-      name: "Dileep",
+      name: "Barenkala Guru Charan",
       role: "Software Tester",
-      company: "Wipro",
-      videoUrl: "https://www.youtube.com/embed/VIDEO_ID_2",
-      thumbnail: "https://randomuser.me/api/portraits/men/36.jpg",
-      course: "Software Testing",
-      batch: "2023",
-      likes: "1.8K",
-      comments: "189",
-      date: "February 28, 2024",
+      company: "Amplelogic",
+      videoUrl: "https://www.youtube.com/embed/ETOGGjsHTEo",
       achievement: "Secured 4 LPA Package",
-      duration: "5 months",
-      previousRole: "Fresher",
-      previousCompany: "Career Sure Academy",
-      skills: ["Manual Testing", "Automation", "Selenium", "JIRA"],
-      project: "Automated Testing Framework",
-      interviewRounds: "3 rounds cleared",
-      preparationTime: "4 months",
-      testimonial:
-        "The hands-on training and real-time project experience at Career Sure Academy gave me the confidence to excel in my interviews.",
     },
     {
       id: 3,
-      name: "Jagadeesh",
+      name: "Archana Vusa",
       role: "Software Developer",
-      company: "Sconex Software",
-      videoUrl: "https://www.youtube.com/embed/VIDEO_ID_3",
-      thumbnail: "https://randomuser.me/api/portraits/men/65.jpg",
-      course: "Full Stack Development",
-      batch: "2023",
-      likes: "3.2K",
-      comments: "312",
-      date: "January 20, 2024",
+      company: "V&V Technologies",
+      videoUrl: "https://www.youtube.com/embed/25uxEDvDlfM",
       achievement: "Secured 4 LPA Package",
-      duration: "6 months",
-      previousRole: "Fresher",
-      previousCompany: "Career Sure Academy",
-      skills: ["React", "Node.js", "Express", "MongoDB"],
-      project: "Real-time Chat Application",
-      interviewRounds: "4 rounds cleared",
-      preparationTime: "5 months",
-      testimonial:
-        "The mentorship and placement support at Career Sure Academy was exceptional. They helped me build a strong portfolio and prepare for interviews.",
+    },
+    {
+      id: 4,
+      name: "Udhay kaitha",
+      role: "Software Developer",
+      company: "Multiplier Ai",
+      videoUrl: "https://www.youtube.com/embed/1PFjrhqpcQk",
+      achievement: "Secured 4 LPA Package",
+    },
+    {
+      id: 5,
+      name: "Tirumala teja",
+      role: "Software Developer",
+      company: "Multiplier Ai",
+      videoUrl: "https://www.youtube.com/embed/jFbrJB-PEjM",
+      achievement: "Secured 4 LPA Package",
     },
   ];
 
@@ -88,7 +64,7 @@ const StudentReels = () => {
   const animatedBlocks = [
     {
       id: 1,
-      count: "97%",
+      count: "90%",
       label: "Placement Rate",
       color: "from-blue-500/80 to-blue-600/80",
       textColor: "text-white",
@@ -97,7 +73,7 @@ const StudentReels = () => {
     },
     {
       id: 2,
-      count: "100+",
+      count: "1000+",
       label: "Students Placed",
       color: "from-emerald-500/80 to-emerald-600/80",
       textColor: "text-white",
@@ -106,7 +82,7 @@ const StudentReels = () => {
     },
     {
       id: 3,
-      count: "6 LPA",
+      count: "4 LPA",
       label: "Avg. Package",
       color: "from-violet-500/80 to-violet-600/80",
       textColor: "text-white",
@@ -115,7 +91,7 @@ const StudentReels = () => {
     },
     {
       id: 4,
-      count: "150+",
+      count: "500+",
       label: "Hiring Partners",
       color: "from-rose-500/80 to-rose-600/80",
       textColor: "text-white",
@@ -137,92 +113,187 @@ const StudentReels = () => {
     },
   };
 
-  // Updated drag handlers for smoother reel-like experience
+  // Improved drag handlers
   const handleDragStart = (e) => {
+    e.preventDefault();
     setIsDragging(true);
     setStartY(e.type === "mousedown" ? e.clientY : e.touches[0].clientY);
     setCurrentY(e.type === "mousedown" ? e.clientY : e.touches[0].clientY);
+    
+    // Pause video when starting to drag
+    const currentPlayer = playerRefs.current[currentIndex];
+    if (currentPlayer && typeof currentPlayer.pauseVideo === 'function') {
+      currentPlayer.pauseVideo();
     setIsPlaying(false);
-    setIframeLoading(true);
+    }
   };
 
   const handleDragMove = (e) => {
     if (!isDragging) return;
-    const currentPosition =
-      e.type === "mousemove" ? e.clientY : e.touches[0].clientY;
+    e.preventDefault();
+    const currentPosition = e.type === "mousemove" ? e.clientY : e.touches[0].clientY;
     setCurrentY(currentPosition);
   };
 
-  const handleDragEnd = () => {
+  const handleDragEnd = (e) => {
     if (!isDragging) return;
+    e.preventDefault();
     setIsDragging(false);
 
     const dragDistance = currentY - startY;
-    const threshold = 80; // Adjusted threshold for smoother navigation
+    const threshold = 50; // Reduced threshold for easier navigation
 
     if (Math.abs(dragDistance) > threshold) {
       if (dragDistance > 0 && currentIndex > 0) {
         setCurrentIndex(currentIndex - 1);
-      } else if (
-        dragDistance < 0 &&
-        currentIndex < videoTestimonials.length - 1
-      ) {
+      } else if (dragDistance < 0 && currentIndex < videoTestimonials.length - 1) {
         setCurrentIndex(currentIndex + 1);
       } else if (dragDistance > 0 && currentIndex === 0) {
         setCurrentIndex(videoTestimonials.length - 1);
-      } else if (
-        dragDistance < 0 &&
-        currentIndex === videoTestimonials.length - 1
-      ) {
+      } else if (dragDistance < 0 && currentIndex === videoTestimonials.length - 1) {
         setCurrentIndex(0);
       }
     }
 
     setCurrentY(startY);
-    // setIsPlaying(true); // Re-enable autoplay after a short delay if needed
   };
 
-  // Add useEffect for currentIndex change to manage loading state and autoplay
+  // Initialize YouTube API
   useEffect(() => {
+    const initYouTubeAPI = () => {
+      if (window.YT && window.YT.Player) {
+        setPlayerReady(true);
+      } else {
+        setTimeout(initYouTubeAPI, 100);
+      }
+    };
+
+    initYouTubeAPI();
+
+    return () => {
+      playerRefs.current.forEach((player) => {
+        if (player && typeof player.destroy === 'function') {
+          player.destroy();
+        }
+      });
+    };
+  }, []);
+
+  // Effect to handle video changes
+  useEffect(() => {
+    if (!playerReady) return;
+
     setIframeLoading(true);
-    const timer = setTimeout(() => {
-      setIframeLoading(false);
-    }, 500); // Simulate loading delay
+    setError(null);
 
-    if (autoplayRef.current) {
-      clearInterval(autoplayRef.current);
+    // Pause all other videos
+    playerRefs.current.forEach((player, index) => {
+      if (index !== currentIndex && player && typeof player.pauseVideo === 'function') {
+        player.pauseVideo();
+      }
+    });
+
+    // Play current video
+    const currentPlayer = playerRefs.current[currentIndex];
+    if (currentPlayer && typeof currentPlayer.playVideo === 'function') {
+      const playTimer = setTimeout(() => {
+        try {
+          currentPlayer.playVideo();
+          setIsPlaying(true);
+        } catch (err) {
+          console.error('Error playing video:', err);
+          setError('Failed to play video. Please try again.');
+        }
+      }, 100);
+      return () => clearTimeout(playTimer);
     }
+  }, [currentIndex, playerReady]);
 
+  // Effect to handle viewport visibility
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          const currentPlayer = playerRefs.current[currentIndex];
+          if (currentPlayer && typeof currentPlayer.playVideo === 'function') {
+            currentPlayer.playVideo();
+            setIsPlaying(true);
+          }
+        } else {
+          const currentPlayer = playerRefs.current[currentIndex];
+          if (currentPlayer && typeof currentPlayer.pauseVideo === 'function') {
+            currentPlayer.pauseVideo();
+            setIsPlaying(false);
+          }
+        }
+      },
+      { threshold: 0.75 }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [currentIndex]);
+
+  // Toggle play/pause on video click
+  const handleVideoClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const currentPlayer = playerRefs.current[currentIndex];
+    if (currentPlayer) {
+      try {
     if (isPlaying) {
-      autoplayRef.current = setInterval(() => {
+          currentPlayer.pauseVideo();
+        } else {
+          currentPlayer.playVideo();
+        }
+        setIsPlaying(!isPlaying);
+      } catch (err) {
+        console.error('Error toggling play/pause:', err);
+        setError('Failed to control video. Please try again.');
+      }
+    }
+  };
+
+  // Show/hide controls on mouse move
+  const handleMouseMove = () => {
+    setShowControls(true);
+    if (controlsTimeoutRef.current) {
+      clearTimeout(controlsTimeoutRef.current);
+    }
+    controlsTimeoutRef.current = setTimeout(() => {
+      setShowControls(false);
+    }, 2000);
+  };
+
+  // Handle video end
+  const handleVideoEnd = () => {
         setCurrentIndex((prevIndex) =>
           prevIndex === videoTestimonials.length - 1 ? 0 : prevIndex + 1
         );
         setIframeLoading(true);
-      }, 10000); // Change video every 10 seconds
-    }
+  };
 
-    return () => {
-      clearTimeout(timer);
-      if (autoplayRef.current) {
-        clearInterval(autoplayRef.current);
-      }
-    };
-  }, [currentIndex, isPlaying, videoTestimonials.length]);
-
+  // Add event listeners for drag
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+
+    const preventDefault = (e) => e.preventDefault();
 
     // Mouse events
     container.addEventListener("mousedown", handleDragStart);
     window.addEventListener("mousemove", handleDragMove);
     window.addEventListener("mouseup", handleDragEnd);
-
-    // Touch events
-    container.addEventListener("touchstart", handleDragStart);
-    window.addEventListener("touchmove", handleDragMove);
+    container.addEventListener("touchstart", handleDragStart, { passive: false });
+    window.addEventListener("touchmove", handleDragMove, { passive: false });
     window.addEventListener("touchend", handleDragEnd);
+
+    // Prevent default touch behavior
+    container.addEventListener("touchmove", preventDefault, { passive: false });
 
     return () => {
       container.removeEventListener("mousedown", handleDragStart);
@@ -231,8 +302,9 @@ const StudentReels = () => {
       container.removeEventListener("touchstart", handleDragStart);
       window.removeEventListener("touchmove", handleDragMove);
       window.removeEventListener("touchend", handleDragEnd);
+      container.removeEventListener("touchmove", preventDefault);
     };
-  }, [isDragging, startY, currentY]); // Removed currentIndex from deps as it's handled in the new effect
+  }, [isDragging, startY, currentY, currentIndex]);
 
   // Animation variants for consistent animations
   const fadeInUp = {
@@ -274,7 +346,11 @@ const StudentReels = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden relative">
+    <div className="min-h-screen bg-black overflow-hidden relative"
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onTouchMove={handleMouseMove}
+    >
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Diagonal Line Pattern */}
@@ -327,23 +403,49 @@ const StudentReels = () => {
         <div className="relative w-full max-w-sm mx-auto">
           <motion.div
             ref={containerRef}
-            className="relative w-full overflow-hidden rounded-3xl bg-gray-900/50 backdrop-blur-xl cursor-grab active:cursor-grabbing"
+            className="relative w-full overflow-hidden rounded-3xl bg-black cursor-pointer touch-none"
             style={{
               aspectRatio: "9/16",
               maxHeight: "calc(100vh - 100px)",
               minHeight: "500px",
-              boxShadow: `
-                0 0 0 1px rgba(255, 255, 255, 0.1),
-                0 0 30px rgba(59, 130, 246, 0.2),
-                0 0 60px rgba(59, 130, 246, 0.1)
-              `,
             }}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
+            onClick={handleVideoClick}
           >
-            {/* Glass Border Effect */}
-            <div className="absolute inset-0 rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent"></div>
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="absolute top-4 left-4 right-4 bg-red-500/90 text-white p-3 rounded-lg text-sm"
+              >
+                {error}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setError(null);
+                  }}
+                  className="absolute top-2 right-2 text-white hover:text-gray-200"
+                >
+                  ×
+                </button>
+              </motion.div>
+            )}
+
+            {iframeLoading && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black">
+                <motion.div
+                  className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
+                  animate={{ rotate: 360 }}
+                  transition={{
+                    duration: 1,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                />
+              </div>
+            )}
 
             <AnimatePresence mode="wait">
               {videoTestimonials.map((testimonial, index) => {
@@ -359,44 +461,112 @@ const StudentReels = () => {
                     className="absolute inset-0"
                   >
                     <div className="relative w-full h-full">
-                      {iframeLoading && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-gray-900 z-10">
-                          <motion.div
-                            className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
-                            animate={{ rotate: 360 }}
-                            transition={{
-                              duration: 1,
-                              repeat: Infinity,
-                              ease: "linear",
-                            }}
-                          />
-                        </div>
-                      )}
-                      <iframe
-                        src={testimonial.videoUrl}
+                      <motion.iframe
+                        key={testimonial.id}
+                        id={`youtube-player-${testimonial.id}`}
+                        src={
+                          testimonial.videoUrl.includes('shorts') 
+                            ? `https://www.youtube.com/embed/${testimonial.videoUrl.split('/').pop().split('?')[0]}?enablejsapi=1&origin=${window.location.origin}&playsinline=1&rel=0&autoplay=1&mute=0&controls=0`
+                            : `${testimonial.videoUrl}?enablejsapi=1&origin=${window.location.origin}&playsinline=1&rel=0&autoplay=1&mute=0&controls=0`
+                        }
                         title={`${testimonial.name}'s Success Story`}
                         className={`w-full h-full object-cover ${
-                          iframeLoading ? "invisible" : "visible"
-                        }`}
+                          iframeLoading ? "opacity-0" : "opacity-100"
+                        } transition-opacity duration-500`}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
-                        onLoad={() => setIframeLoading(false)}
-                      ></iframe>
+                        onLoad={() => {
+                          setIframeLoading(false);
+                          if (!playerRefs.current[index] && window.YT && window.YT.Player) {
+                            try {
+                              playerRefs.current[index] = new window.YT.Player(`youtube-player-${testimonial.id}`, {
+                                events: {
+                                  'onReady': (event) => {
+                                    if (isPlaying) {
+                                      event.target.playVideo();
+                                    }
+                                  },
+                                  'onStateChange': (event) => {
+                                    const playerState = event.data;
+                                    if (playerState === window.YT.PlayerState.PLAYING) {
+                                      setIsPlaying(true);
+                                    } else if (playerState === window.YT.PlayerState.PAUSED || 
+                                             playerState === window.YT.PlayerState.ENDED) {
+                                      setIsPlaying(false);
+                                    }
+                                    if (playerState === window.YT.PlayerState.ENDED) {
+                                      handleVideoEnd();
+                                    }
+                                  },
+                                  'onError': (event) => {
+                                    console.error('YouTube Player Error:', event.data);
+                                    setError('Failed to load video. Please try again.');
+                                  }
+                                },
+                              });
+                            } catch (err) {
+                              console.error('Error creating YouTube player:', err);
+                              setError('Failed to initialize video player. Please refresh the page.');
+                            }
+                          }
+                        }}
+                      />
+
+                      {/* Play/Pause Overlay */}
+                      <AnimatePresence>
+                        {showControls && (
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="absolute inset-0 flex items-center justify-center bg-black/30"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleVideoClick(e);
+                            }}
+                          >
+                            <motion.div
+                              className="w-16 h-16 rounded-full bg-black/50 flex items-center justify-center"
+                              whileHover={{ scale: 1.1 }}
+                              whileTap={{ scale: 0.9 }}
+                            >
+                              {isPlaying ? (
+                                <svg
+                                  className="w-8 h-8 text-white"
+                                  fill="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                                </svg>
+                              ) : (
+                                <svg
+                                  className="w-8 h-8 text-white"
+                                  fill="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path d="M8 5v14l11-7z" />
+                                </svg>
+                              )}
+                            </motion.div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
 
                       {/* Content Overlay */}
                       <motion.div
-                        className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"
+                        className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none"
                         initial="hidden"
                         animate="visible"
                         exit="exit"
                         variants={contentVariants}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-6">
-                          {/* Student Info */}
                           <motion.div
                             className="mb-4"
                             variants={contentVariants}
-                            transition={{ delay: 0.2 }}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
                           >
                             <h6 className="text-2xl font-bold text-white mb-1">
                               {testimonial.name}
@@ -406,13 +576,15 @@ const StudentReels = () => {
                             </p>
                           </motion.div>
 
-                          {/* Achievement Badge */}
                           <motion.div
                             className="mb-4"
                             variants={contentVariants}
-                            transition={{ delay: 0.3 }}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                            transition={{ delay: 0.1 }}
                           >
-                            <span className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-400 rounded-full text-sm font-medium hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-300">
+                            <span className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-400 rounded-full text-sm font-medium">
                               <svg
                                 className="w-4 h-4 mr-2"
                                 fill="currentColor"
