@@ -254,11 +254,21 @@ const Courses = () => {
               {/* Price and CTA */}
               <div className="flex items-center justify-between border-t border-gray-100 pt-4 mt-auto">
                 <div>
-                  <div className="text-xl font-bold text-gray-900">
-                    {course.price}
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg line-through text-gray-400">
+                      {course.price}
+                    </span>
+                    <span className="text-xl font-bold text-gray-900">
+                      ₹30,000
+                    </span>
                   </div>
-                  <div className="text-xs text-gray-500">
-                    Discounts available
+                  <div className="flex items-center gap-1">
+                    <span className="text-xs text-green-600 font-medium">
+                      25% off
+                    </span>
+                    <span className="text-xs text-gray-500">
+                      • More discounts available
+                    </span>
                   </div>
                 </div>
                 <div className="flex gap-2">

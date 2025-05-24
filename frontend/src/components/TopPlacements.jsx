@@ -34,7 +34,7 @@ const TopPlacements = () => {
       company: "Saven Technologies",
       salary: "₹8 LPA",
       image: Dasthagiri,
-      logo: "https://placehold.co/200x200/2563eb/ffffff?text=ST",
+      logo: "https://saventech.com/wp-content/uploads/2024/07/Saven-Website-logo-2.png",
     },
     {
       id: 2,
@@ -43,7 +43,7 @@ const TopPlacements = () => {
       company: "TCS",
       salary: "₹7.5 LPA",
       image: Nikhil,
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/TCS_Symbol.svg/1200px-TCS_Symbol.svg.png",
+      logo: "https://upload.wikimedia.org/wikipedia/en/thumb/b/b1/Tata_Consultancy_Services.svg/250px-Tata_Consultancy_Services.svg.png",
     },
     {
       id: 3,
@@ -52,7 +52,7 @@ const TopPlacements = () => {
       company: "Unify",
       salary: "₹7.5 LPA",
       image: Navneeth,
-      logo: "https://placehold.co/200x200/2563eb/ffffff?text=UF",
+      logo: "https://media.licdn.com/dms/image/v2/D560BAQEHF-p9txVvDw/company-logo_200_200/company-logo_200_200/0/1708606546779/unifytech_logo?e=2147483647&v=beta&t=ydp-QL3wDOCP84ieMzblbTrH_-p-46wSNIamYWbesgQ",
     },
     {
       id: 4,
@@ -61,7 +61,7 @@ const TopPlacements = () => {
       company: "Msys Technologies",
       salary: "₹7 LPA",
       image: Vinay,
-      logo: "https://placehold.co/200x200/2563eb/ffffff?text=MT",
+      logo: "https://www.msystechnologies.com/wp-content/uploads/2020/01/MSys-Standard-Logo-1.png",
     },
     {
       id: 5,
@@ -70,7 +70,7 @@ const TopPlacements = () => {
       company: "Mobinis Msys Digital",
       salary: "₹5.5 LPA",
       image: Sachin,
-      logo: "https://placehold.co/200x200/2563eb/ffffff?text=MMD",
+      logo: "https://www.msystechnologies.com/wp-content/uploads/2020/01/MSys-Standard-Logo-1.png",
     },
     {
       id: 6,
@@ -84,7 +84,7 @@ const TopPlacements = () => {
     {
       id: 7,
       name: "Dileep",
-      position: "Testing",
+      position: "Testing Engineer",
       company: "Wipro",
       salary: "₹4 LPA",
       image: Dileep,
