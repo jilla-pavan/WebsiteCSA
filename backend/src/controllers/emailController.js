@@ -1,5 +1,5 @@
 import { createTransporter } from '../config/emailConfig.js';
-import { createAdminNotificationEmail, createUserConfirmationEmail } from '../config/emailTemplates.js';
+import { createAdminNotificationEmail, createUserConfirmationEmail, createMentorApplicationEmail } from '../config/emailTemplates.js';
 
 export const sendEmail = async (req, res) => {
   try {
@@ -28,6 +28,9 @@ export const sendEmail = async (req, res) => {
         break;
       case 'ADMIN_NOTIFICATION':
         emailContent = createAdminNotificationEmail(data);
+        break;
+      case 'MENTOR_APPLICATION':
+        emailContent = createMentorApplicationEmail(data);
         break;
       default:
         throw new Error(`Invalid email type: ${type}`);

@@ -159,4 +159,115 @@ CSA Team
 </html>
 `
   };
+};
+
+export const createMentorApplicationEmail = (applicationData) => {
+  const {
+    fullName,
+    email,
+    phone,
+    experience,
+    currentCompany,
+    designation,
+    expertise,
+    linkedinProfile,
+    resumeLink,
+    message,
+    applicationId,
+    submittedAt
+  } = applicationData;
+
+  const formattedSubmittedAt = submittedAt ? new Date(submittedAt).toLocaleString() : 'N/A';
+
+  return {
+    subject: `New Mentor Application 🎓`,
+    text: `
+New Mentor Application
+
+Application ID: ${applicationId}
+Name: ${fullName}
+Email: ${email}
+Phone: ${phone}
+Experience: ${experience} years
+Current Company: ${currentCompany}
+Designation: ${designation}
+Areas of Expertise: ${expertise}
+LinkedIn: ${linkedinProfile || 'Not provided'}
+Resume: ${resumeLink}
+Submitted At: ${formattedSubmittedAt}
+
+Message:
+${message}
+`,
+    html: `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #444; max-width: 500px; margin: 0 auto; padding: 20px;">
+  <div style="background: #fff; border: 1px solid #e1e1e1; border-radius: 5px; padding: 25px;">
+    <div style="border-left: 4px solid #FF6B00; padding-left: 15px; margin-bottom: 20px;">
+      <h2 style="margin: 0; color: #333; font-size: 20px;">New Mentor Application</h2>
+    </div>
+
+    <div style="margin-bottom: 25px;">
+      <p style="margin: 0 0 15px 0;">
+        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Application ID:</strong>
+        <span style="color: #333;">${applicationId}</span>
+      </p>
+      <p style="margin: 0 0 15px 0;">
+        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Name:</strong>
+        <span style="color: #333;">${fullName}</span>
+      </p>
+      <p style="margin: 0 0 15px 0;">
+        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Email:</strong>
+        <a href="mailto:${email}" style="color: #FF6B00; text-decoration: none;">${email}</a>
+      </p>
+      <p style="margin: 0 0 15px 0;">
+        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Phone:</strong>
+        <span style="color: #333;">${phone}</span>
+      </p>
+      <p style="margin: 0 0 15px 0;">
+        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Experience:</strong>
+        <span style="color: #333;">${experience} years</span>
+      </p>
+      <p style="margin: 0 0 15px 0;">
+        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Company:</strong>
+        <span style="color: #333;">${currentCompany}</span>
+      </p>
+      <p style="margin: 0 0 15px 0;">
+        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Designation:</strong>
+        <span style="color: #333;">${designation}</span>
+      </p>
+      <p style="margin: 0 0 15px 0;">
+        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Expertise:</strong>
+        <span style="color: #333;">${expertise}</span>
+      </p>
+      ${linkedinProfile ? `
+      <p style="margin: 0 0 15px 0;">
+        <strong style="color: #FF6B00; display: inline-block; width: 120px;">LinkedIn:</strong>
+        <a href="${linkedinProfile}" style="color: #FF6B00; text-decoration: none;">View Profile</a>
+      </p>
+      ` : ''}
+      <p style="margin: 0 0 15px 0;">
+        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Resume:</strong>
+        <a href="${resumeLink}" style="color: #FF6B00; text-decoration: none;">View Resume</a>
+      </p>
+      <p style="margin: 0 0 15px 0;">
+        <strong style="color: #FF6B00; display: inline-block; width: 120px;">Submitted At:</strong>
+        <span style="color: #333;">${formattedSubmittedAt}</span>
+      </p>
+    </div>
+
+    <div style="background-color: #f9f9f9; border-radius: 5px; padding: 15px; margin-top: 20px;">
+      <h3 style="color: #333; margin: 0 0 10px 0; font-size: 16px;">Message:</h3>
+      <p style="margin: 0; color: #666;">${message}</p>
+    </div>
+  </div>
+</body>
+</html>
+`
+  };
 }; 

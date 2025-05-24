@@ -8,6 +8,8 @@ import Footer from "./components/Footer";
 import "./styles/theme.css";
 import ScrollToTop from "./components/ScrollToTop";
 import FloatingWhatsAppButton from "./components/FloatingWhatsAppButton";
+import MentorApply from "./components/MentorApply";
+
 function App() {
   return (
     <Router>
@@ -19,6 +21,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/placements" element={<PlacementsPage />} />
             <Route path="/enroll" element={<EnrollPage />} />
+            <Route path="/mentor-apply" element={<MentorApply />} />
           </Routes>
         </main>
         <Footer />

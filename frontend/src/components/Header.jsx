@@ -91,6 +91,12 @@ function Header() {
         {/* Action Buttons (Desktop) */}
         <div className="hidden md:flex items-center gap-3 flex-shrink-0">
           <button
+            onClick={() => navigate("/mentor-apply")}
+            className="text-gray-700 font-bold hover:text-primary px-3 py-1.5 rounded-lg transition-all text-sm hover:bg-gray-50/80 tracking-wide border border-transparent hover:border-gray-200"
+          >
+            Apply as Mentor
+          </button>
+          <button
             onClick={() =>
               (window.location.href = "https://csa-dashboard.vercel.app/")
             }
@@ -167,6 +173,12 @@ function Header() {
               </li>
             ))}
             <li className="pt-3 space-y-2">
+              <button
+                onClick={() => navigate("/mentor-apply")}
+                className="w-full text-gray-700 font-bold hover:text-[#FF6B00] py-2.5 px-4 rounded-md transition-all duration-300 hover:bg-gray-50/80 border border-gray-200 tracking-wide"
+              >
+                Apply as Mentor
+              </button>
               <button
                 onClick={() =>
                   (window.location.href = "https://csa-dashboard.vercel.app/")
