@@ -333,7 +333,7 @@ const TopPlacements = () => {
         <div className="w-full max-w-xl mx-auto px-4 py-8">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 sm:mb-6">
             Start Your Tech <span className="text-primary">Career</span> Journey
-            Today
+            Today In Fullstack with AI
           </h1>
           <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 leading-relaxed">
             Join Career Sure Academy and gain the skills, knowledge, and
