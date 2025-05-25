@@ -131,29 +131,29 @@ const RoadmapSection = () => {
     <section className="bg-gradient-to-b from-white to-gray-50 mt-10 py-8 sm:py-12 lg:py-16">
       <div className="max-w-8xl mx-auto">
         {/* Learning Process Section */}
-        <div className="md:p-12 text-center bg-gray-900 text-white px-6 py-4">
-          <h2 className="text-4xl md:text-4xl font-bold mb-12 tracking-tight">
+        <div className="md:p-12 text-center bg-gray-900 text-white px-4 sm:px-6 py-8 sm:py-12">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-8 sm:mb-12 tracking-tight">
             Our Learning <span className="text-[#FF6B00]">Process</span>
           </h2>
           <div className="relative flex flex-row items-center justify-center">
-            <div className="w-full flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8 justify-center items-center">
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
               {learningProcessData.map((item, idx) => (
                 <div
                   key={item.title}
                   ref={(el) => (processRefs.current[idx] = el)}
-                  className="process-item opacity-0 translate-y-4 relative flex-1"
+                  className="process-item opacity-0 translate-y-4 relative"
                   style={{ "--delay": `${idx * 200}ms` }}
                 >
-                  <div className="bg-gray-800 p-6 hover:-translate-y-1 transition-all duration-300 h-full flex flex-col items-center relative z-10 rounded-xl">
+                  <div className="bg-gray-800/90 backdrop-blur-sm p-4 sm:p-6 hover:-translate-y-2 transition-all duration-300 h-full flex flex-col items-center relative z-10 rounded-xl border border-gray-700/50 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/10">
                     <div className="flex flex-col items-center mb-4">
-                      <div className="flex items-center justify-center w-14 h-14 rounded-full shadow-md bg-purple-600 text-white mb-3 text-2xl">
+                      <div className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full shadow-lg bg-gradient-to-br from-purple-600 to-purple-800 text-white mb-3 text-xl sm:text-2xl transform transition-transform duration-300 group-hover:scale-110">
                         {item.icon}
                       </div>
-                      <h3 className="text-lg font-semibold capitalize text-white mb-1">
+                      <h3 className="text-base sm:text-lg font-semibold capitalize text-white mb-2">
                         {item.title}
                       </h3>
                     </div>
-                    <p className="text-gray-300 text-sm leading-normal text-center">
+                    <p className="text-gray-300 text-sm sm:text-base leading-relaxed text-center">
                       {item.description}
                     </p>
                   </div>
@@ -204,7 +204,7 @@ const RoadmapSection = () => {
         .process-item {
           transition-property: opacity, transform, filter, color;
           transition-duration: 0.8s;
-          transition-timing-function: ease-out;
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
           will-change: transform, opacity, filter, color;
           opacity: 0.4;
           filter: blur(4px);
@@ -217,7 +217,7 @@ const RoadmapSection = () => {
         }
 
         .process-item.opacity-0 {
-          transform: translateY(20px) scale(1.2);
+          transform: translateY(20px) scale(1.1);
         }
 
         .roadmap-item.opacity-0 h3 {
