@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { sendEmail } from "../services/emailService";
-import mernSyllabusUrl from "/assets/related_PDFs/mern-syllabus.pdf?url";
-import javafullstackSyllabusUrl from "/assets/related_PDFs/java-full-stack-syllabus.pdf?url";
-import pythonfullstackSyllabusUrl from "/assets/related_PDFs/python-full-stack-syllabus.pdf?url";
-import BROCHURE_URL from "/assets/related_PDFs/csa-brochure.pdf?url";
+import {
+  JavaFullStack,
+  PythonFullStack,
+  MERN,
+  Borchure,
+} from "../assets/related_PDFs";
 
 // Remove hardcoded email and use environment variable
 const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL;
@@ -36,7 +38,12 @@ const educationLevels = [
 
 const statusOptions = ["Student", "Working Professional", "Fresher", "Other"];
 
-function QuoteForm({ onSubmitSuccess, downloadType, courseToDownload, postSubmitDownloadType }) {
+function QuoteForm({
+  onSubmitSuccess,
+  downloadType,
+  courseToDownload,
+  postSubmitDownloadType,
+}) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -78,14 +85,14 @@ function QuoteForm({ onSubmitSuccess, downloadType, courseToDownload, postSubmit
 
     if (type === "syllabus" && course) {
       const syllabusPaths = {
-        mern: mernSyllabusUrl,
-        java: javafullstackSyllabusUrl,
-        python: pythonfullstackSyllabusUrl,
+        mern: MERN,
+        java: JavaFullStack,
+        python: PythonFullStack,
       };
       downloadUrl = syllabusPaths[course.id];
       fileName = `${course.title}-Syllabus.pdf`;
     } else {
-      downloadUrl = BROCHURE_URL;
+      downloadUrl = Borchure;
       fileName = "CSA-Brochure.pdf";
     }
 
@@ -153,7 +160,10 @@ function QuoteForm({ onSubmitSuccess, downloadType, courseToDownload, postSubmit
 
         // Send detailed notification to admin only if admin email is configured
         if (ADMIN_EMAIL) {
-          console.log("Attempting to send admin notification email to:", ADMIN_EMAIL);
+          console.log(
+            "Attempting to send admin notification email to:",
+            ADMIN_EMAIL
+          );
           const adminEmailResult = await sendEmail({
             to: ADMIN_EMAIL,
             type: "ADMIN_NOTIFICATION",
@@ -195,11 +205,13 @@ function QuoteForm({ onSubmitSuccess, downloadType, courseToDownload, postSubmit
           // If no specific onSubmitSuccess callback is provided, perform the download based on props
           if (downloadType || courseToDownload) {
             handleDownload(downloadType, courseToDownload);
-          } else if (postSubmitDownloadType === 'brochure') {
-            handleDownload('brochure');
+          } else if (postSubmitDownloadType === "brochure") {
+            handleDownload("brochure");
           } else {
             // Optionally handle case where no specific action is defined
-            console.log("Form submitted successfully, no download or success action specified.");
+            console.log(
+              "Form submitted successfully, no download or success action specified."
+            );
           }
           setSubmitted(true);
         }

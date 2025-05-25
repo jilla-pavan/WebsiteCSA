@@ -1,5 +1,5 @@
 import React from "react";
-import CERTIFICATE from "/assets/related_Pics/sample-certificate.png";
+import { Certificate } from "../assets/related_Pics";
 
 function AboutUs() {
   return (
@@ -63,7 +63,7 @@ function AboutUs() {
               <div className="flex flex-col md:flex-row items-center gap-8">
                 <div className="w-full md:w-1/2">
                   <img
-                    src={CERTIFICATE}
+                    src={Certificate}
                     alt="Career Sure Academy Certificate"
                     className="w-full h-auto rounded-lg shadow-md"
                   />

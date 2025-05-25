@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import WhatsApp from "../assets/whatsApp-Icon.png";
 
 const FloatingWhatsAppButton = () => {
   const btnRef = useRef(null);
@@ -96,7 +97,7 @@ const FloatingWhatsAppButton = () => {
         >
           <span className="ping-effect" aria-hidden="true"></span>
           <img
-            src="/assets/whatsApp-Icon.png"
+            src={WhatsApp}
             alt="WhatsApp"
             className="w-7 h-7 object-contain relative z-10"
             draggable="false"

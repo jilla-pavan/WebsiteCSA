@@ -5,7 +5,7 @@ import {
   Rambabu,
   Jagadeesh,
   Teja,
-} from "../../public/assets/placements";
+} from "../assets/placements";
 
 export const Testimonial = () => {
   const testimonials = [

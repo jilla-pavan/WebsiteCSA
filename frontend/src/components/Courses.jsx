@@ -2,9 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import CourseDetailsModal from "./CourseDetailsModal";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
-import MERN from "/assets/related_Pics/mern.png";
-import JAVA from "/assets/related_Pics/java.png";
-import PYTHON from "/assets/related_Pics/python.png";
+import { Mern, Java, Python } from "../assets/related_Pics";
 import { useNavigate } from "react-router-dom";
 
 const Courses = () => {
@@ -164,11 +162,11 @@ const Courses = () => {
               <img
                 src={
                   course.id === "mern"
-                    ? MERN
+                    ? Mern
                     : course.id === "java"
-                    ? JAVA
+                    ? Java
                     : course.id === "python"
-                    ? PYTHON
+                    ? Python
                     : "https://cdn.pixabay.com/photo/2018/09/18/11/19/artificial-intelligence-3685928_1280.png"
                 }
                 alt={course.title}

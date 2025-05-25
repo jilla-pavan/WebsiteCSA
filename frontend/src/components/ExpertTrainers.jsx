@@ -1,14 +1,12 @@
 import React from "react";
-import aditya from "/assets/trainers/aditya.png?url";
-import ravi from "/assets/trainers/ravi.png?url";
-import vamshi from "/assets/trainers/vamshi.png?url";
+import { Aditya, Ravi, Vamshi } from "../assets/trainers";
 
 const trainers = [
   {
     name: "Aditya Dasari",
     role: "Senior Software Engineer",
     company: "Google",
-    image: aditya,
+    image: Aditya,
     logo: "https://cdn.cookielaw.org/logos/e284b633-79d3-4bca-a80b-44a064e50ed5/018fdf26-f19b-7589-94d3-5162bb5794f1/ab76e42b-078d-4600-85dd-3903270f08be/ic-mrc-logo.png",
     description:
       "MERN Stack expert with hands-on experience in building high-performance web applications.",
@@ -23,7 +21,7 @@ const trainers = [
     name: "Ravi Kumar",
     role: "Python Full Stack Developer",
     company: "Accenture",
-    image: ravi,
+    image: Ravi,
     logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/2560px-Accenture.svg.png",
     description:
       "Experienced Python Full Stack Developer with strong expertise in building scalable web applications. Skilled in both frontend and backend development",
@@ -38,7 +36,7 @@ const trainers = [
     name: "Vamshi",
     role: "Lead Engineer",
     company: "Infosys",
-    image: vamshi,
+    image: Vamshi,
     logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Infosys_logo.svg/1280px-Infosys_logo.svg.png",
     description:
       "Experienced Java Full Stack Developer with 5+ years of expertise in building enterprise-grade web applications.",

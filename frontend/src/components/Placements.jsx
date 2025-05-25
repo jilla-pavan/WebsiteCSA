@@ -13,9 +13,9 @@ import {
   Navneeth,
   Sachin,
   Dasthagiri,
-  Archana
-} from "../../public/assets/placements";
-import { Nova } from "../../public/assets/company_Logos";
+  Archana,
+} from "../assets/placements";
+import { Nova } from "../assets/company_Logos";
 
 function Placements() {
   const navigate = useNavigate();

@@ -45,9 +45,12 @@ const MentorApply = () => {
       };
 
       // Log the data being sent
-      console.log('Submitting application data:', applicationData);
+      console.log("Submitting application data:", applicationData);
 
-      const docRef = await addDoc(collection(db, "mentorApplications"), applicationData);
+      const docRef = await addDoc(
+        collection(db, "mentorApplications"),
+        applicationData
+      );
       console.log("Application submitted successfully with ID:", docRef.id);
 
       // Send email notification to admin
@@ -63,14 +66,19 @@ const MentorApply = () => {
         });
 
         if (!adminEmailResult.success) {
-          console.error("Failed to send admin notification:", adminEmailResult.error);
+          console.error(
+            "Failed to send admin notification:",
+            adminEmailResult.error
+          );
         } else {
           console.log("Admin notification email sent successfully.");
         }
       } else {
-        console.warn("Admin notification email not sent: VITE_ADMIN_EMAIL not configured");
+        console.warn(
+          "Admin notification email not sent: VITE_ADMIN_EMAIL not configured"
+        );
       }
-      
+
       setSubmitStatus("success");
       setFormData({
         fullName: "",
@@ -105,7 +113,7 @@ const MentorApply = () => {
         {/* Header Section */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Apply as a Mentor
+            Apply as a <span className="text-primary">Mentor</span>
           </h1>
           <p className="text-lg text-gray-600">
             Join our team of expert mentors and help shape the future of tech
@@ -173,10 +181,12 @@ const MentorApply = () => {
                   value={formData.phone}
                   onChange={(e) => {
                     // Only allow numbers and limit to 10 digits
-                    const value = e.target.value.replace(/\D/g, '').slice(0, 10);
-                    setFormData(prev => ({
+                    const value = e.target.value
+                      .replace(/\D/g, "")
+                      .slice(0, 10);
+                    setFormData((prev) => ({
                       ...prev,
-                      phone: value
+                      phone: value,
                     }));
                   }}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all"
@@ -341,8 +351,8 @@ const MentorApply = () => {
             {/* Status Messages */}
             {submitStatus === "success" && (
               <div className="mt-4 p-4 bg-green-50 text-green-700 rounded-lg">
-                Your application has been submitted successfully! We'll review it and
-                get back to you soon.
+                Your application has been submitted successfully! We'll review
+                it and get back to you soon.
               </div>
             )}
             {submitStatus === "error" && (
@@ -358,4 +368,4 @@ const MentorApply = () => {
   );
 };
 
-export default MentorApply; 
+export default MentorApply;

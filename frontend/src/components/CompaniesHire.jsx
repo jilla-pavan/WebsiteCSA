@@ -1,5 +1,5 @@
 import React from "react";
-import { Nova } from "../../public/assets/company_Logos";
+import { Nova } from "../assets/company_Logos";
 
 const CompaniesHire = () => {
   // First row of company logos

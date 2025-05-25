@@ -159,7 +159,7 @@ CSA Team
 </html>
 `
   };
-};
+}; 
 
 export const createMentorApplicationEmail = (applicationData) => {
   const {

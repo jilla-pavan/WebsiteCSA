@@ -14,8 +14,9 @@ import {
   Nikhil,
   Sachin,
   Vinay,
-} from "../../public/assets/placements";
-import { Nova } from "../../public/assets/company_Logos";
+  Archana
+} from "../assets/placements";
+import { Nova } from "../assets/company_Logos";
 
 const TopPlacements = () => {
   const [isLoaded, setIsLoaded] = useState(false);

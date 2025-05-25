@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import CHECKED from "/assets/icons/checked.png";
+import { Checked } from "../assets/icons";
 
 export const FAQs = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -99,7 +99,9 @@ export const FAQs = () => {
                 <span className="relative flex-shrink-0 w-4 h-4 sm:w-5 sm:h-5">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className={`absolute inset-0 w-4 h-4 sm:w-5 sm:h-5 transition-opacity duration-300 text-orange-500 ${openIndex === index ? 'opacity-0' : 'opacity-100'}`}
+                    className={`absolute inset-0 w-4 h-4 sm:w-5 sm:h-5 transition-opacity duration-300 text-orange-500 ${
+                      openIndex === index ? "opacity-0" : "opacity-100"
+                    }`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -113,7 +115,9 @@ export const FAQs = () => {
                   </svg>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className={`absolute inset-0 w-4 h-4 sm:w-5 sm:h-5 transition-opacity duration-300 text-orange-500 ${openIndex === index ? 'opacity-100' : 'opacity-0'}`}
+                    className={`absolute inset-0 w-4 h-4 sm:w-5 sm:h-5 transition-opacity duration-300 text-orange-500 ${
+                      openIndex === index ? "opacity-100" : "opacity-0"
+                    }`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -129,7 +133,11 @@ export const FAQs = () => {
               </summary>
               {/* Animated Content Area */}
               <div
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index ? 'max-h-screen opacity-100 delay-100' : 'max-h-0 opacity-0'}`}
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                  openIndex === index
+                    ? "max-h-screen opacity-100 delay-100"
+                    : "max-h-0 opacity-0"
+                }`}
               >
                 {/* Actual Content Wrapper */}
                 <div className="px-4 sm:px-6 pb-4 sm:pb-5 border-t border-gray-100 mt-1">
@@ -137,11 +145,11 @@ export const FAQs = () => {
                     {faq.answer.map((point, idx) => (
                       <li key={idx} className="flex items-start">
                         <img
-                          src={CHECKED}
+                          src={Checked}
                           alt="Checked"
                           className="w-3.5 h-3.5 sm:w-4 sm:h-4 mt-0.5 sm:mt-1 flex-shrink-0 mr-2 text-[#FF6B00]"
                         />
-                        <span>{point.replace('•', '').trim()}</span>
+                        <span>{point.replace("•", "").trim()}</span>
                       </li>
                     ))}
                   </ul>

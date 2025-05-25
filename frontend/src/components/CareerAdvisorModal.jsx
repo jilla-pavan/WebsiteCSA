@@ -1,8 +1,8 @@
 import React from "react";
-import whatsappIcon from "/assets/whatsApp-Icon.png";
+import whatsappIcon from "../assets/whatsApp-Icon.png";
 import { useNavigate } from "react-router-dom";
-import CHECKED from "/assets/icons/checked.png";
-import ADVISOR from "/assets/related_Pics/pasha.png";
+import { Checked } from "../assets/icons";
+import { Pasha } from "../assets/related_Pics";
 
 const CareerAdvisorModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ const CareerAdvisorModal = ({ isOpen, onClose }) => {
               <ul className="text-gray-700 space-y-2 md:space-y-3 mb-4 md:mb-6 mt-2 md:mt-3">
                 <li className="flex items-start gap-2 md:gap-3">
                   <img
-                    src={CHECKED}
+                    src={Checked}
                     className="w-4 h-4 flex-shrink-0 mt-1"
                     alt="Checked"
                   />
@@ -44,7 +44,7 @@ const CareerAdvisorModal = ({ isOpen, onClose }) => {
                 </li>
                 <li className="flex items-start gap-2 md:gap-3">
                   <img
-                    src={CHECKED}
+                    src={Checked}
                     className="w-4 h-4 flex-shrink-0 mt-1"
                     alt="Checked"
                   />
@@ -54,7 +54,7 @@ const CareerAdvisorModal = ({ isOpen, onClose }) => {
                 </li>
                 <li className="flex items-start gap-2 md:gap-3">
                   <img
-                    src={CHECKED}
+                    src={Checked}
                     className="w-4 h-4 flex-shrink-0 mt-1"
                     alt="Checked"
                   />
@@ -100,7 +100,7 @@ const CareerAdvisorModal = ({ isOpen, onClose }) => {
               <div className="relative w-full h-full flex justify-center items-center">
                 <div className="absolute inset-6  bg-[#FF6B00] opacity-20 rounded-full filter blur-xl w-3/4 h-3/4 md:w-full md:h-full mx-auto my-auto"></div>
                 <img
-                  src={ADVISOR}
+                  src={Pasha}
                   alt="Advisor Image"
                   className="w-auto h-[180px] md:w-full md:h-full object-contain relative z-10"
                 />
