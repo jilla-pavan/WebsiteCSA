@@ -142,24 +142,24 @@ const Courses = () => {
   ];
 
   return (
-    <div id="courses" className="mt-16 mb-16 relative px-6">
+    <div id="courses" className="mt-12 md:mt-16 mb-12 md:mb-16 relative px-4 sm:px-6 lg:px-8">
       {/* Section Header */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">
+      <div className="text-center mb-8 md:mb-12">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6">
           <span className="text-gray-900">Our </span>
           <span className="text-[#FF6B00]">Courses</span>
         </h1>
       </div>
 
       {/* Course Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {courses.map((course) => (
           <div
             key={course.id}
-            className="group bg-white rounded-xl overflow-hidden shadow-lg hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex flex-col h-full min-h-[480px]"
+            className="group bg-white rounded-xl overflow-hidden shadow-lg hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex flex-col h-full min-h-[420px] sm:min-h-[480px]"
           >
             {/* Course Image */}
-            <div className="relative h-44 flex items-center justify-center overflow-hidden bg-black">
+            <div className="relative h-36 sm:h-44 flex items-center justify-center overflow-hidden bg-black">
               <div className="absolute inset-0 from-gray-900/90 via-gray-900/50 to-transparent z-10"></div>
               <img
                 src={
@@ -172,12 +172,12 @@ const Courses = () => {
                     : "https://cdn.pixabay.com/photo/2018/09/18/11/19/artificial-intelligence-3685928_1280.png"
                 }
                 alt={course.title}
-                className="w-24 h-24 object-contain transform group-hover:scale-105 transition-transform duration-300"
+                className="w-20 h-20 sm:w-24 sm:h-24 object-contain transform group-hover:scale-105 transition-transform duration-300"
               />
               {/* Course Badge */}
-              <div className="absolute top-3 right-3">
+              <div className="absolute top-2 sm:top-3 right-2 sm:right-3">
                 <span
-                  className={`px-2.5 py-1 text-white text-xs font-semibold rounded-full backdrop-blur-sm bg-gradient-to-r
+                  className={`px-2 py-0.5 sm:px-2.5 sm:py-1 text-white text-xs font-semibold rounded-full backdrop-blur-sm bg-gradient-to-r
                 ${
                   course.id === "mern"
                     ? "from-orange-500 to-orange-600"
@@ -200,26 +200,26 @@ const Courses = () => {
             </div>
 
             {/* Course Content */}
-            <div className="p-4 flex flex-col flex-1 justify-between h-full">
+            <div className="p-3 sm:p-4 flex flex-col flex-1 justify-between h-full">
               <div>
                 {/* Title and Description */}
-                <div className="mb-3">
-                  <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-orange-500 transition-colors">
+                <div className="mb-2 sm:mb-3">
+                  <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1 group-hover:text-orange-500 transition-colors">
                     {course.title}
                   </h3>
-                  <p className="text-gray-600 text-sm line-clamp-2">
+                  <p className="text-sm text-gray-600 line-clamp-2">
                     {course.description}
                   </p>
                 </div>
 
                 {/* Course Score */}
-                <div className="mb-4">
-                  <div className="flex items-center gap-2">
+                <div className="mb-3 sm:mb-4">
+                  <div className="flex items-center gap-1 sm:gap-2">
                     <div className="flex items-center">
                       {[...Array(5)].map((_, i) => (
                         <svg
                           key={i}
-                          className={`w-4 h-4 ${
+                          className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${
                             i < Math.floor(course.score)
                               ? "text-yellow-400"
                               : i < Math.ceil(course.score)
@@ -233,18 +233,18 @@ const Courses = () => {
                         </svg>
                       ))}
                     </div>
-                    <span className="text-sm font-medium text-gray-700">
+                    <span className="text-xs sm:text-sm font-medium text-gray-700">
                       {course.score.toFixed(1)}/5
                     </span>
                   </div>
                 </div>
 
                 {/* Key Features */}
-                <div className="flex flex-wrap gap-1.5 mb-4">
+                <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-3 sm:mb-4">
                   {course.features.slice(0, 3).map((feature, index) => (
                     <span
                       key={index}
-                      className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium"
+                      className="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium"
                     >
                       {feature}
                     </span>
@@ -252,13 +252,13 @@ const Courses = () => {
                 </div>
               </div>
               {/* Price and CTA */}
-              <div className="flex items-center justify-between border-t border-gray-100 pt-4 mt-auto">
+              <div className="flex items-center justify-between border-t border-gray-100 pt-3 sm:pt-4 mt-auto">
                 <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg line-through text-gray-400">
+                  <div className="flex items-center gap-1 sm:gap-2">
+                    <span className="text-base sm:text-lg line-through text-gray-400">
                       {course.price}
                     </span>
-                    <span className="text-xl font-bold text-gray-900">
+                    <span className="text-lg sm:text-xl font-bold text-gray-900">
                       ₹30,000
                     </span>
                   </div>
@@ -271,13 +271,13 @@ const Courses = () => {
                     </span>
                   </div>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-1 sm:gap-2">
                   <button
                     onClick={() => handleDownloadSyllabus(course)}
-                    className="px-3 py-2 bg-gray-600 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-all duration-300 flex items-center gap-1"
+                    className="px-2 sm:px-3 py-1.5 sm:py-2 bg-gray-600 text-white text-xs sm:text-sm font-medium rounded-lg hover:bg-gray-700 transition-all duration-300 flex items-center gap-1"
                   >
                     <svg
-                      className="w-4 h-4"
+                      className="w-3.5 h-3.5 sm:w-4 sm:h-4"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -293,7 +293,7 @@ const Courses = () => {
                   </button>
                   <button
                     onClick={() => handleLearnMore(course)}
-                    className="px-4 py-2 bg-orange-500 text-white text-sm font-medium rounded-lg hover:bg-orange-600 transition-all duration-300"
+                    className="px-3 sm:px-4 py-1.5 sm:py-2 bg-orange-500 text-white text-xs sm:text-sm font-medium rounded-lg hover:bg-orange-600 transition-all duration-300"
                   >
                     Learn More
                   </button>
@@ -305,34 +305,34 @@ const Courses = () => {
       </div>
 
       {/* Course Statistics */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-16">
-        <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-6 text-center border border-gray-700/50 transform hover:scale-105 transition-all duration-300">
-          <div className="text-2xl md:text-3xl font-bold text-orange-400 mb-2">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mt-12 sm:mt-16">
+        <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-3 sm:p-4 md:p-6 text-center border border-gray-700/50 transform hover:scale-105 transition-all duration-300">
+          <div className="text-xl sm:text-2xl md:text-3xl font-bold text-orange-400 mb-1 sm:mb-2">
             15+
           </div>
-          <p className="text-gray-400 text-sm md:text-base">
+          <p className="text-gray-400 text-xs sm:text-sm md:text-base">
             Industry Projects
           </p>
         </div>
-        <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-6 text-center border border-gray-700/50 transform hover:scale-105 transition-all duration-300">
-          <div className="text-2xl md:text-3xl font-bold text-orange-400 mb-2">
+        <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-3 sm:p-4 md:p-6 text-center border border-gray-700/50 transform hover:scale-105 transition-all duration-300">
+          <div className="text-xl sm:text-2xl md:text-3xl font-bold text-orange-400 mb-1 sm:mb-2">
             100%
           </div>
-          <p className="text-gray-400 text-sm md:text-base">
+          <p className="text-gray-400 text-xs sm:text-sm md:text-base">
             Practical Learning
           </p>
         </div>
-        <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-6 text-center border border-gray-700/50 transform hover:scale-105 transition-all duration-300">
-          <div className="text-2xl md:text-3xl font-bold text-orange-400 mb-2">
+        <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-3 sm:p-4 md:p-6 text-center border border-gray-700/50 transform hover:scale-105 transition-all duration-300">
+          <div className="text-xl sm:text-2xl md:text-3xl font-bold text-orange-400 mb-1 sm:mb-2">
             24/7
           </div>
-          <p className="text-gray-400 text-sm md:text-base">Mentor Support</p>
+          <p className="text-gray-400 text-xs sm:text-sm md:text-base">Mentor Support</p>
         </div>
-        <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-6 text-center border border-gray-700/50 transform hover:scale-105 transition-all duration-300">
-          <div className="text-2xl md:text-3xl font-bold text-orange-400 mb-2">
+        <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-3 sm:p-4 md:p-6 text-center border border-gray-700/50 transform hover:scale-105 transition-all duration-300">
+          <div className="text-xl sm:text-2xl md:text-3xl font-bold text-orange-400 mb-1 sm:mb-2">
             1:1
           </div>
-          <p className="text-gray-400 text-sm md:text-base">Career Guidance</p>
+          <p className="text-gray-400 text-xs sm:text-sm md:text-base">Career Guidance</p>
         </div>
       </div>
 
